@@ -1,0 +1,11 @@
+<div>
+  <h1>{{this.authService.currentUser.username}}</h1>
+  <div>Description</div>
+  <div>
+    <h2>Appartient aux groupes</h2>
+    <div *ngFor="let group of this.groupsService.groups; let i = index">
+
+      <div><a routerLink="">{{group.name}}</a></div>
+    </div>
+  </div>
+</div>

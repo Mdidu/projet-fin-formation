@@ -1,0 +1,22 @@
+<div>
+  <h1>Rejoint nous</h1>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div>
+      Pseudo : <input type="text" formControlName="pseudo">
+    </div>
+
+    <div>
+      Mot de passe : <input type="password" formControlName="password">
+    </div>
+
+    <div>
+      Vérification du mot de passe : <input type="password" formControlName="checkedPassword">
+    </div>
+
+<!--    <div>-->
+<!--      Email : <input type="text" formControlName="email">-->
+<!--    </div>-->
+
+    <button type="submit" [disabled]="signupForm.invalid">Nous rejoindre</button>
+  </form>
+</div>
