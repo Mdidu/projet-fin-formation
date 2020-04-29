@@ -17,9 +17,6 @@ export class AuthService {
   }
 
   login(data) {
-    // const data = JSON.stringify(this.signinForm.value)
-    // const pseudo = JSON.stringify(username);
-    // const pwd = JSON.stringify(password);
 
     // Permet d'envoyer des données vers le serveur qui renvoie les infos de l'utilisateur au format json afin de pouvoir "déclarer?"
     // qu'il est connecté dans l'observable userSubject de type User
@@ -30,7 +27,7 @@ export class AuthService {
           // Doit rediriger vers l'accueil du site une fois co
           this.userSubject.next(res);
           this.currentUser = res;
-          console.log(res);
+          // console.log(res);
         },
         (error) => {
           console.log('error' + error);

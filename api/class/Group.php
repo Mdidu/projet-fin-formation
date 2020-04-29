@@ -243,6 +243,21 @@ class Group
     }
   }
 
+  public function getGroup($id) {
+    $this->setId($id);
+
+    $sql = $this->getDB()->prepare('SELECT * FROM groups WHERE id = :id');
+
+    $sql->bindValue(':id', $this->getId());
+
+    $sql->execute();
+
+    $row = $sql->fetch(PDO::FETCH_ASSOC);
+
+    $sql->closeCursor();
+    return $row;
+  }
+
   /**
    * @param $rankId int
    */

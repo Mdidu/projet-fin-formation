@@ -1,6 +1,6 @@
 export class Group {
   id: number;
-  title: string;
+  name: string;
   description: string;
   date: number;
   security: string;

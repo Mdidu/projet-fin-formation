@@ -10,6 +10,7 @@ import { PrivateMessageComponent } from './private-message-list/private-message/
 import { NewGroupComponent } from './groups/new-group/new-group.component';
 import {GroupListUserComponent} from "./groups/group-list-user/group-list-user.component";
 import {GroupListComponent} from "./groups/group-list/group-list.component";
+import {GroupsComponent} from "./groups/groups.component";
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'user/profile/:id', component: ProfileComponent},
   { path: 'private-message-list', component: PrivateMessageListComponent},
   { path: 'private-message-list/private-message', component: PrivateMessageComponent},
+  { path: 'groups/:id', component: GroupsComponent},
   { path: 'groups/new-group', component: NewGroupComponent}
 ];
 
