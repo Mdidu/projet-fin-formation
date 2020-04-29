@@ -1,0 +1,8 @@
+<div>
+  <h2>Tous les groupes</h2>
+  <div *ngFor="let group of this.groupsService.groups; let i = index">
+    <div><a routerLink="/groups/{{group.id}}">{{group.name}}</a></div>
+    <div>{{group.description}}</div>
+    <button>Rejoindre</button>
+  </div>
+</div>

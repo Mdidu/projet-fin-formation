@@ -1,0 +1,34 @@
+#zoneGroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 4%;
+  width: 100%;
+}
+#blocLeftGroup, #blocRightGroup {
+  width: 15%;
+}
+#blocCenterGroup {
+  width: 60%;
+  text-align: center;
+}
+
+#blocLeftGroup ul {
+  flex-direction: column;
+}
+#blocLeftGroup ul li {
+  margin-top: 2%;
+}
+#blocLeftGroup ul .liRed {
+  margin-top: 12%;
+}
+#red {
+  color: red;
+}
+
+.publication {
+  margin-top: 6%;
+  padding: 10px;
+  text-align: start;
+  border: black 6px solid;
+}

@@ -1,0 +1,29 @@
+<div id="zoneGroup">
+
+  <div id="blocLeft">
+    <ul>
+      <li><a routerLink="">Inviter dans le groupe</a></li>
+      <li><a routerLink="">Membres</a></li>
+      <li><a routerLink="">Evènements</a></li>
+      <li class="liRed"><a routerLink="" id="red">Quitter le groupe</a></li>
+    </ul>
+  </div>
+
+  <div id="blocCenter">
+    <h2>{{this.groupsService.groups.name}}</h2>
+    <div>{{this.groupsService.groups.description}}</div>
+
+    <div class="publication">
+      <div>Pseudo</div>
+      <div>Date de publication</div>
+      <br>
+
+      <div>Lorem ipsum dolor.</div>
+
+      <button>Voir les commentaires</button>
+    </div>
+  </div>
+
+  <div id="blocRight">
+  </div>
+</div>
