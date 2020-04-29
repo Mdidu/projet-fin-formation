@@ -10,9 +10,9 @@ if(!empty(isset($data['pseudo'])) && !empty(isset($data['password'])))
 
   // modifier les noms de variable
 //  $pseudo = $data['pseudo'];
-  $t = json_encode($pseudo);
-  echo $t;
-  return $t;
+  $json = json_encode($pseudo);
+  echo $json;
+  return $json;
 }
 
 //$pseudo = $_SESSION['pseudo'];

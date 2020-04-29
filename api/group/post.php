@@ -9,7 +9,7 @@ if(!empty(isset($data['name'])) && !empty(isset($data['descriptionGroup'])) &&
   $group = new Group();
   $group->addGroup($data['name'], $data['descriptionGroup'], $data['security'], $data['visibility'], $data['id']);
 
-  $t = json_encode($data);
-  echo $t;
-  return $t;
+  $json = json_encode($data);
+  echo $json;
+  return $json;
 }

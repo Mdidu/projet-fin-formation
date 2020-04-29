@@ -179,7 +179,19 @@ class Group
     return NULL;
   }
 
-  public function searchAllGroup($userId) {
+  public function searchAllGroup() {
+    $sql = $this->getDB()->prepare('SELECT * FROM groups');
+
+    $sql->execute();
+
+    $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql->closeCursor();
+
+    return $row;
+  }
+
+  public function searchAllGroupCurrentUser($userId) {
     $this->setUserId($userId);
 
     $sql = $this->getDb()->prepare('

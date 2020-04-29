@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.groupsService.getListGroups();
+    this.groupsService.getListUserGroups();
     // const groups = this.groupsService.groups;
 
     // console.log(this.groupsService.groups);

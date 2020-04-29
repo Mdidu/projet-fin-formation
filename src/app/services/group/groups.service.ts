@@ -15,10 +15,7 @@ export class GroupsService {
     this.groupsSubject = new Subject<Group>();
   }
 
-  getListGroups() {
-    // this.authService.currentUser.id
-    // console.log('http://localhost:80/api/list-group/get.php/' + this.authService.currentUser.id + '');
-    // TODO: Faire en sorte d'afficher la liste des groupes de l'utilisateur
+  getListUserGroups() {
     const data = this.authService.currentUser.id;
 
     return this.httpClient
@@ -32,5 +29,18 @@ export class GroupsService {
         (error) => {
           console.log('error' + error);
         });
+  }
+  getListAllGroups() {
+    return this.httpClient
+      .get<any>('http://localhost:80/projet-fin-formation/api/list-group/getAllGroup.php')
+      .subscribe(
+        (res) => {
+          this.groups = res;
+          console.log(res);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
   }
 }
