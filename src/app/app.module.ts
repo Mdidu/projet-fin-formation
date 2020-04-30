@@ -19,6 +19,8 @@ import { NavNoLogComponent } from './header/nav-no-log/nav-no-log.component';
 import { GroupListUserComponent } from './groups/group-list-user/group-list-user.component';
 import { GroupListComponent } from './groups/group-list/group-list.component';
 import { GroupsComponent } from './groups/groups.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { NewArticleComponent } from './articles/new-article/new-article.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { GroupsComponent } from './groups/groups.component';
     NavNoLogComponent,
     GroupListUserComponent,
     GroupListComponent,
-    GroupsComponent
+    GroupsComponent,
+    ArticlesComponent,
+    NewArticleComponent
   ],
   imports: [
     BrowserModule,

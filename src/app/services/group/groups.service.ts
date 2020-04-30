@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
-import {Group} from "../../models/group";
-import {HttpClient} from "@angular/common/http";
-import {AuthService} from "../auth.service";
-import {ActivatedRoute} from "@angular/router";
+import {Subject} from 'rxjs';
+import {Group} from '../../models/group';
+import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../auth.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,7 @@ export class GroupsService {
   }
   // récupère les informations du groupe que l'utilisateur visite
   getGroup(id) {
-    console.log(id);
+    // console.log(id);
 
     return this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/group/get.php?id=' + id )

@@ -1,10 +1,12 @@
 <?php
-require_once 'configGroup.php';
+require_once '../config/configGroup.php';
 
-$group = new Group();
+if(!empty(isset($_GET['id']))){
+  $group = new Group();
+  $data = $group->getGroup($_GET['id']);
 
-$data = $group->getGroup($_GET['id']);
+  $json = json_encode($data);
+  echo $json;
+  return $json;
+}
 
-$json = json_encode($data);
-echo $json;
-return $json;

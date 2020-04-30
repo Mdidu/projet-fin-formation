@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupsService} from "../services/group/groups.service";
 import {ActivatedRoute} from "@angular/router";
+import {ArticlesService} from "../services/article/articles.service";
 
 @Component({
   selector: 'app-groups',
@@ -9,9 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class GroupsComponent implements OnInit {
 
-  name: string;
-
-  constructor(public groupsService: GroupsService, private route: ActivatedRoute) { /*this.groupsService.getGroup();*/}
+  constructor(public groupsService: GroupsService, public articlesService: ArticlesService, private route: ActivatedRoute) { /*this.groupsService.getGroup();*/}
 
   ngOnInit() {
     // récupère l'id du groupe dans l'url et l'injecte dans l'objet groups de type Group du GroupsService

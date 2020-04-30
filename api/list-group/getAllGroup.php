@@ -1,5 +1,5 @@
 <?php
-require_once '../group/configGroup.php';
+require_once '../config/configGroup.php';
 
 $group = new Group();
 

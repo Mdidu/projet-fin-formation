@@ -1,5 +1,5 @@
 <?php
-require_once 'configGroup.php';
+require_once '../config/configGroup.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 

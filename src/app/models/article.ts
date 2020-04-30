@@ -1,5 +1,8 @@
-export class Group {
+export class Article {
   id: number;
-  title: string;
   content: string;
+  date: string;
+  author: string;
+  authorId: number;
+  groupId: number;
 }

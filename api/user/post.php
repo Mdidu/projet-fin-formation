@@ -1,6 +1,6 @@
 <?php
 
-require_once 'configUser.php';
+require_once '../config/configUser.php';
 
 // permet de retourner le json
 //$json = file_get_contents('php://input');
