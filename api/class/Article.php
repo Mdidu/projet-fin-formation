@@ -226,7 +226,7 @@ class Article
   /**
    * @param $id int
    */
-  public function deleteArticle($id)
+  public function removeArticle($id)
   {
 
     $this->setId($id);

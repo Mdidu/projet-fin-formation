@@ -48,6 +48,18 @@ export class ArticlesService {
         }
       );
   }
+  removeArticle(id) {
+    return this.httpClient
+      .delete<any>('http://localhost:80/projet-fin-formation/api/article/delete.php?id=' + id)
+      .subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
 
 // Créer un service date pour pouvoir générer les dates via cette méthode
   convertTimestamp(timestamp) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ArticlesService} from "../services/article/articles.service";
 import {GroupsService} from "../services/group/groups.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-articles',
@@ -13,13 +14,13 @@ export class ArticlesComponent implements OnInit {
   editForm: FormGroup;
   public edit: boolean;
 
-  constructor(private formBuilder: FormBuilder, private groupsService: GroupsService, public articlesService: ArticlesService) { }
+  constructor(private formBuilder: FormBuilder, public authService: AuthService, private groupsService: GroupsService, public articlesService: ArticlesService) { }
 
   ngOnInit() {
     this.articlesService.getArticles(this.groupsService.groups.id);
     // this.updateForm();
   }
-  updateForm(content, id) {
+  onUpdateForm(content, id) {
     // console.log(content);
     this.editForm = this.formBuilder.group({
       content: [content, Validators.required],
@@ -35,6 +36,13 @@ export class ArticlesComponent implements OnInit {
     const data = this.editForm.value;
 
     this.articlesService.updateArticle(data);
+    setTimeout(() => {
+      this.articlesService.getArticles(this.groupsService.groups.id);
+    }, 1000);
+  }
+
+  onRemoveArticle(id) {
+    this.articlesService.removeArticle(id);
     setTimeout(() => {
       this.articlesService.getArticles(this.groupsService.groups.id);
     }, 1000);

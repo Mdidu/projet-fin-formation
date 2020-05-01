@@ -8,8 +8,6 @@ if(!empty(isset($data['pseudo'])) && !empty(isset($data['password'])))
   $user = new User($data['pseudo']);
   $pseudo = $user->log($data['pseudo'], $data['password']);
 
-  // modifier les noms de variable
-//  $pseudo = $data['pseudo'];
   $json = json_encode($pseudo);
   echo $json;
   return $json;

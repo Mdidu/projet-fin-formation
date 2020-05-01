@@ -258,6 +258,23 @@ class Group
     return $row;
   }
 
+  public function getCurrentGroupUserRank($groupId, $userId) {
+    $this->setId($groupId);
+    $this->setUserId($userId);
+
+    $sql = $this->getDB()->prepare('SELECT rank_id FROM group_rank WHERE group_id = :group_id && user_id = :user_id');
+
+    $sql->bindValue(':group_id', $this->getId());
+    $sql->bindValue(':user_id', $this->getUserId());
+
+    $sql->execute();
+
+    $rankId = $sql->fetch(PDO::FETCH_ASSOC);
+
+    $sql->closeCursor();
+
+    return $rankId;
+  }
   /**
    * @param $rankId int
    */

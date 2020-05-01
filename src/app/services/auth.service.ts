@@ -28,13 +28,32 @@ export class AuthService {
           this.userSubject.next(res);
           this.currentUser = res;
           // console.log(res);
+          // console.log(this.currentUser);
         },
         (error) => {
           console.log('error' + error);
         }
       );
   }
-
+  updateCurrentUserRank(groupId) {
+    const userId = this.currentUser.id;
+    // this.currentUser.currentGroupRank = 5;
+// .get<any>('http://localhost:80/projet-fin-formation/api/group/getCurrentGroupUserRank.php?id=' + userId + 'groupId=' + groupId)
+    // modifier l'url
+    return this.httpClient
+      .get<any>('http://localhost:80/projet-fin-formation/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)/*
+      .get<any>('http://localhost:80/projet-fin-formation/api/group/getCurrentGroupUserRank.php?groupId=' + groupId)*/
+      .subscribe(
+        (res) => {
+          // Doit rediriger vers l'accueil du site une fois co
+          this.currentUser.currentGroupRank = res;
+          console.log(this.currentUser.currentGroupRank);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
   logout() {
   }
 }
