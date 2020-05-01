@@ -5,4 +5,5 @@ export class Article {
   author: string;
   authorId: number;
   groupId: number;
+  edit: boolean;
 }

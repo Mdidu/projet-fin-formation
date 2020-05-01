@@ -208,10 +208,10 @@ class Article
   /**
    * @param $content string
    */
-  public function updateArticle($content)
+  public function updateArticle($content, $id)
   {
     $this->setContent($content);
-    $this->setId($_POST['id']);
+    $this->setId($id);
 
     $sql = $this->getDB()->prepare("UPDATE article SET content = :content WHERE id = :id");
     $sql->bindValue(":content", $this->getContent());

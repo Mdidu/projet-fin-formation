@@ -25,6 +25,22 @@ export class ArticlesService {
       .subscribe(
         (res) => {
           this.articles = res;
+          this.articles.edit = false;
+          console.log(res);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  updateArticle(data) {
+    console.log(data);
+    return this.httpClient
+      .put<any>('http://localhost:80/projet-fin-formation/api/article/put.php', data)
+      .subscribe(
+        (res) => {
+          // this.articles = res;
+          // this.articles.edit = false;
           console.log(res);
         },
         (error) => {

@@ -1,0 +1,21 @@
+<div class="publication" *ngFor="let article of this.articlesService.articles; let i = index">
+  <div>{{article.author}}</div>
+  <div>{{this.articlesService.convertTimestamp(article.date)}}</div>
+  <br>
+
+  <div>{{article.content}}</div>
+<!--  <form>-->
+<!--    <button>Supprimer</button>-->
+<!--  </form>-->
+  <button *ngIf="!article.edit" (click)="article.edit = true; updateForm(article.content, article.id)">Modifier contenu</button>
+<!--  le article.edit = false permet lors de la soumission  de faire disparaître le formulaire -->
+  <form *ngIf="article.edit" [formGroup]="editForm" (ngSubmit)="article.edit = false;onEditSubmit()">
+    <input type="text" formControlName="content">
+<!--    <textarea formControlName="content" cols="30" rows="10">{{article.content}}</textarea>-->
+    <input type="hidden" formControlName="id">
+    <button type="submit" [disabled]="editForm.invalid">Modifier contenu</button>
+<!--        <button type="submit" [disabled]="editForm.invalid" (click)="article.edit = false">Modifier contenu</button>-->
+  </form>
+
+  <button>Voir les commentaires</button>
+</div>
