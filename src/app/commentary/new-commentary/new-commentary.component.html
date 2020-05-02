@@ -1,0 +1,10 @@
+<div id="createArticle">
+  <form [formGroup]="commentaryForm" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="content" placeholder="Exprimez-vous">
+<!--    <input type="hidden" formControlName="groupId">-->
+    <input type="hidden" formControlName="articleId">
+    <input type="hidden" formControlName="userId">
+
+    <button type="submit" [disabled]="commentaryForm.invalid">Publier</button>
+  </form>
+</div>

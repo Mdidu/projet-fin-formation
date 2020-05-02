@@ -61,6 +61,9 @@ export class ArticlesService {
       );
   }
 
+  resetArticlesForm(form) {
+    form.reset();
+  }
 // Créer un service date pour pouvoir générer les dates via cette méthode
   convertTimestamp(timestamp) {
     const timestampJS = timestamp * 1000;

@@ -21,6 +21,8 @@ import { GroupListComponent } from './groups/group-list/group-list.component';
 import { GroupsComponent } from './groups/groups.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { NewArticleComponent } from './articles/new-article/new-article.component';
+import { CommentaryComponent } from './commentary/commentary.component';
+import { NewCommentaryComponent } from './commentary/new-commentary/new-commentary.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { NewArticleComponent } from './articles/new-article/new-article.componen
     GroupListComponent,
     GroupsComponent,
     ArticlesComponent,
-    NewArticleComponent
+    NewArticleComponent,
+    CommentaryComponent,
+    NewCommentaryComponent
   ],
   imports: [
     BrowserModule,

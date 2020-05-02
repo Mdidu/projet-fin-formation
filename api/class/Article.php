@@ -14,10 +14,6 @@ class Article
    */
   private $content;
   /**
-   * @var string
-   */
-  private $date;
-  /**
    * @var int
    */
   private $timestamp;
@@ -48,14 +44,6 @@ class Article
   private function setContent($content)
   {
     $this->content = $content;
-  }
-
-  /**
-   * @param $timestamp int
-   */
-  private function setDate($timestamp)
-  {
-    $this->date = date('d/m/Y à H:i:s', $timestamp);
   }
 
   /**
@@ -108,14 +96,6 @@ class Article
   /**
    * @return int
    */
-  public function getDate()
-  {
-    return $this->date;
-  }
-
-  /**
-   * @return int
-   */
   public function getTimestamp()
   {
     return $this->timestamp;
@@ -146,7 +126,8 @@ class Article
 
   public function __construct()
   {
-    $this->timestamp = time();
+    $this->setTimestamp(time());
+//    $this->timestamp = time();
   }
 
   /**

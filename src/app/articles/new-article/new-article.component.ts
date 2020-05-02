@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {HttpClient} from "@angular/common/http";
 import {GroupsService} from "../../services/group/groups.service";
+import {ArticlesService} from "../../services/article/articles.service";
 
 @Component({
   selector: 'app-new-article',
@@ -13,7 +14,8 @@ export class NewArticleComponent implements OnInit {
 
   articleForm: FormGroup;
 
-  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, public authService: AuthService, public groupsService: GroupsService) { }
+  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, public authService: AuthService,
+              public articlesService: ArticlesService, public groupsService: GroupsService) { }
 
   ngOnInit() {
     this.articleForm = this.formBuilder.group({
@@ -29,8 +31,11 @@ export class NewArticleComponent implements OnInit {
     return this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/article/post.php', data)
       .subscribe(
-        (res) => {
-          console.log(res);
+        (/*res*/) => {
+          // console.log(this.groupsService.groups.id);
+          this.articlesService.getArticles(this.groupsService.groups.id);
+          this.articlesService.resetArticlesForm(this.articleForm.controls.content);
+          // console.log(res);
         },
         (error) => {
           console.log('error' + error);
