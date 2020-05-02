@@ -146,7 +146,7 @@ class Article
                 ORDER BY date DESC"
     );
 
-    $sql->bindValue('group_id', $this->getGroupId());
+    $sql->bindValue(':group_id', $this->getGroupId());
 
     $sql->execute();
 
@@ -182,8 +182,6 @@ class Article
     $sql->execute();
 
     $sql->closeCursor();
-
-//    header('location: ../public/views/sendArticle.php');
   }
 
   /**

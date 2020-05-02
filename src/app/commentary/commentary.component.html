@@ -1,1 +1,6 @@
-<p>commentary works!</p>
+<div class="publication" *ngFor="let commentary of this.commentaryService.commentarys; let i = index">
+  <div>{{commentary.author}}</div>
+  <div>{{this.articlesService.convertTimestamp(commentary.date)}}</div>
+  <br>
+  <div>{{commentary.content}}</div>
+</div>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CommentaryService} from "../services/commentary.service";
+import {ArticlesService} from "../services/article/articles.service";
 
 @Component({
   selector: 'app-commentary',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentaryComponent implements OnInit {
 
-  constructor() { }
+  @Input() articleId;
 
-  ngOnInit(): void {
+  constructor(private commentaryService: CommentaryService, public articlesService: ArticlesService) { }
+
+  ngOnInit() {
+    this.commentaryService.getCommentary(this.articleId);
   }
 
 }

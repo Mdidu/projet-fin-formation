@@ -122,6 +122,30 @@ class Commentary
 //    $this->timestamp = time();
   }
 
+  public function searchAllCommentary($articleId)
+  {
+
+    $this->setArticleId($articleId);
+
+    $sql = $this->getDB()->prepare(
+      "SELECT commentary.id AS id, content, date, pseudo AS author
+                FROM commentary
+                LEFT JOIN user ON commentary.user_id = user.id
+                WHERE commentary.article_id = :article_id
+                ORDER BY date DESC"
+    );
+
+    $sql->bindValue(':article_id', $this->getArticleId());
+
+    $sql->execute();
+
+    $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql->closeCursor();
+
+    return $rows;
+  }
+
   public function addCommentary($content, $articleId, $userId) {
     $this->setContent($content);
     $this->setArticleId($articleId);
