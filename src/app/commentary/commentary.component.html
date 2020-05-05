@@ -1,6 +1,18 @@
-<div class="publication" *ngFor="let commentary of this.commentaryService.commentarys; let i = index">
+<div class="publication" *ngFor="let commentary of this.commentaryService.commentaries; let i = index">
+
   <div>{{commentary.author}}</div>
-  <div>{{this.articlesService.convertTimestamp(commentary.date)}}</div>
+  <div>{{this.commentaryService.convertTimestamp(commentary.date)}}</div>
   <br>
   <div>{{commentary.content}}</div>
+
+  <button *ngIf="!commentary.edit" (click)="commentary.edit = true; this.onUpdateForm(commentary.content, commentary.id)">Modifier commentaire</button>
+
+  <form *ngIf="commentary.edit" [formGroup]="editForm" (ngSubmit)="commentary.edit = false; this.onEditSubmit()">
+    <input type="text" formControlName="content">
+    <input type="hidden" formControlName="id">
+    <button type="submit" [disabled]="editForm.invalid">Modifier contenu</button>
+  </form>
+
+  <button *ngIf="this.authService.currentUser.currentGroupRank == 1" (dblclick)="this.onRemoveCommentary(commentary.id)">Supprimer</button>
+
 </div>

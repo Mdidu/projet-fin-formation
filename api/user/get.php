@@ -12,12 +12,3 @@ if(!empty(isset($data['pseudo'])) && !empty(isset($data['password'])))
   echo $json;
   return $json;
 }
-
-//$pseudo = $_SESSION['pseudo'];
-//$data = json_encode($pseudo);
-//echo $data;
-//return $data;
-
-//$data = json_encode($data['pseudo']);
-//echo $data;
-//return $data;

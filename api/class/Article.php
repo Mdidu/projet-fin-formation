@@ -170,8 +170,6 @@ class Article
     $this->setGroupId($groupId);
     $this->setAuthorId($authorId);
 
-//    $this->setArticles($content);
-
     $sql = $this->getDB()->prepare("INSERT INTO article (content, date, group_id, user_id) VALUES (:content, :date, :group_id, :user_id)");
 
     $sql->bindValue(":content", $this->getContent());
@@ -198,8 +196,6 @@ class Article
 
     $sql->execute();
     $sql->closeCursor();
-
-//    header('location: ../public/views/sendArticle.php');
   }
 
   /**
@@ -216,8 +212,6 @@ class Article
 
     $sql->execute();
     $sql->closeCursor();
-
-//    header('location: ../public/views/sendArticle.php');
   }
 
   /**

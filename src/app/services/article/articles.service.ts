@@ -18,7 +18,6 @@ export class ArticlesService {
   }
 
   getArticles(id) {
-
     // console.log('http://localhost:80/projet-fin-formation/api/article/get.php?id=' + id);
     return this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/article/get.php?id=' + id)

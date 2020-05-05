@@ -3,6 +3,7 @@ import {ArticlesService} from "../services/article/articles.service";
 import {GroupsService} from "../services/group/groups.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
+import {CommentaryService} from "../services/commentary.service";
 
 @Component({
   selector: 'app-articles',
@@ -12,20 +13,21 @@ import {AuthService} from "../services/auth.service";
 export class ArticlesComponent implements OnInit {
 
   editForm: FormGroup;
+  // public test: boolean;
+  // public edit: boolean;
 
-  public edit: boolean;
-
-  constructor(private formBuilder: FormBuilder, public authService: AuthService, private groupsService: GroupsService, public articlesService: ArticlesService) { }
+  constructor(private formBuilder: FormBuilder, public authService: AuthService, private groupsService: GroupsService,
+              public articlesService: ArticlesService, public commentaryService: CommentaryService) {/* this.commentaryService.test = false;*/ }
 
   ngOnInit() {
     this.articlesService.getArticles(this.groupsService.groups.id);
     // this.updateForm();
   }
-  onUpdateForm(content, id) {
+  onUpdateForm(content, articleId) {
     // console.log(content);
     this.editForm = this.formBuilder.group({
       content: [content, Validators.required],
-      id: [id]
+      id: articleId
     });
   }
   onEditSubmit(/*e, id*/) {

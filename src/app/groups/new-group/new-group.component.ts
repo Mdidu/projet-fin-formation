@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../../services/auth.service';
 import { User } from '../../models/user';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-group',
@@ -10,11 +11,11 @@ import { User } from '../../models/user';
   styleUrls: ['./new-group.component.css']
 })
 export class NewGroupComponent implements OnInit {
+  public error: string;
   groupForm: FormGroup;
-   // public userId = this.authService.currentUser.id;
 
-  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient, public authService: AuthService) {
-    /*this.userId = this.authService.currentUser.id;*/
+  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient, public authService: AuthService, private router: Router) {
+    this.error = '';
   }
 
   ngOnInit() {
@@ -34,7 +35,14 @@ export class NewGroupComponent implements OnInit {
       .post<any>('http://localhost:80/projet-fin-formation/api/group/post.php', data)
       .subscribe(
         (res) => {
-          console.log(res);
+          if (res === false) {
+            this.error = 'Un groupe du même nom existe déjà !';
+          } else {
+            // console.log(res);
+            this.router.navigate(['groups/' + res]);
+          }
+
+
         },
         (error) => {
           console.log('error' + error);

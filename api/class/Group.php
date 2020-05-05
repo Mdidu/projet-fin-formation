@@ -240,7 +240,12 @@ class Group
       $sql->closeCursor();
 
       $this->assignmentRank(1, $this->getUserId());
+
+      $this->setId($this->searchGroupId($this->getName()));
+
+      return $this->getId();
     }
+    return false;
   }
 
   public function getGroup($id) {

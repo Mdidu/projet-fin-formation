@@ -7,8 +7,8 @@ if(!empty(isset($data['content'])) && !empty(isset($data['groupId'])) && !empty(
   $article = new Article();
   $article->addArticles($data['content'], $data['groupId'], $data['userId']);
 
-//  $json = json_encode($data);
-//  echo $json;
-//  return $json;
+  $json = json_encode(true);
+  echo $json;
+  return $json;
 }
 

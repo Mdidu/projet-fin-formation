@@ -103,14 +103,13 @@ class User
 
     $sql->execute();
 
-    $row = $sql->fetch(PDO::FETCH_ASSOC);
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+      if ($row['pseudo'] === $this->getPseudo()) {
+        $id = intval($row['id']);
+        $sql->closeCursor();
 
-    if($row['pseudo'] === $this->getPseudo())
-    {
-      $id = intval($row['id']);
-      $sql->closeCursor();
-
-      return $id;
+        return $id;
+      }
     }
 
     $sql->closeCursor();
@@ -136,7 +135,10 @@ class User
       $sql->execute();
 
       $sql->closeCursor();
+
+      return true;
     }
+    return false;
   }
 
   public function log($pseudo, $password){
@@ -159,5 +161,10 @@ class User
 
       return $_SESSION;
     }
+  }
+  public function logout() {
+    session_unset();
+
+    session_destroy();
   }
 }

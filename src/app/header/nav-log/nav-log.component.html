@@ -3,6 +3,6 @@
 <!--<li><a routerLink="groups/group-list">Tous les groupes</a></li>-->
 <li><a routerLink="users/{{this.authService.currentUser.id}}/groups">Vos groupes</a></li>
 <!--<li><a routerLink="groups/group-list-user/{{this.authService.currentUser.id}}">Vos groupes</a></li>-->
-<li><a routerLink="group/new-group">New group</a></li>
+<li><a routerLink="group/new-group">Nouveau groupe</a></li>
 <li><a routerLink="user/profile/{{this.authService.currentUser.id}}">Profil {{this.authService.currentUser.username}}</a></li>
-<li><a routerLink="">Logout</a></li>
+<li><a (click)="authService.logout()">Logout</a></li>

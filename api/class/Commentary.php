@@ -162,4 +162,29 @@ class Commentary
 
     $sql->closeCursor();
   }
+
+  public function updateCommentary($content, $id) {
+    $this->setContent($content);
+    $this->setId($id);
+
+    $sql = $this->getDB()->prepare("UPDATE commentary SET content = :content WHERE id = :id");
+    $sql->bindValue(":content", $this->getContent());
+    $sql->bindValue(":id", $this->getId());
+
+    $sql->execute();
+    $sql->closeCursor();
+  }
+
+  public function removeCommentary($id)
+  {
+
+    $this->setId($id);
+
+    $sql = $this->getDB()->prepare("DELETE FROM commentary WHERE id = :id");
+
+    $sql->bindValue(":id", $this->getId());
+
+    $sql->execute();
+    $sql->closeCursor();
+  }
 }

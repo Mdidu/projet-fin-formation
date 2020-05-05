@@ -14,5 +14,15 @@ if(!empty(isset($data['pseudo'])) && !empty(isset($data['password'])) &&
   !empty(isset($data['checkedPassword'])) && ($data['password'] == $data['checkedPassword']))
 {
   $user = new User($data['pseudo']);
-  $user->addUser(password_hash($data['password'], PASSWORD_DEFAULT));
+  $response = $user->addUser(password_hash($data['password'], PASSWORD_DEFAULT));
+
+  if($response === false){
+    $json = json_encode(true);
+    echo $json;
+    return $json;
+  }
+} else {
+  $json = json_encode(false);
+  echo $json;
+  return $json;
 }

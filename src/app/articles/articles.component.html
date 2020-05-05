@@ -18,9 +18,9 @@
 <!--    <button type="submit" [disabled]="editForm.invalid">Supprimer</button>-->
 <!--  </form>-->
 
-  <button>Voir les commentaires</button>
+  <button (click)="this.commentaryService.test = true; this.commentaryService.getCommentary(article.id)">Voir les commentaires</button>
 
-  <app-commentary [articleId]="article.id"></app-commentary>
+  <app-commentary *ngIf="this.commentaryService.test === true;" [articleId]="article.id"></app-commentary>
 
   <app-new-commentary [articleId]="article.id"></app-new-commentary>
 </div>

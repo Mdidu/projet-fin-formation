@@ -12,10 +12,13 @@ import {ArticlesService} from "../../services/article/articles.service";
 })
 export class NewArticleComponent implements OnInit {
 
+  public success: string;
   articleForm: FormGroup;
 
   constructor(private httpClient: HttpClient, private formBuilder: FormBuilder, public authService: AuthService,
-              public articlesService: ArticlesService, public groupsService: GroupsService) { }
+              public articlesService: ArticlesService, public groupsService: GroupsService) {
+    this.success = '';
+  }
 
   ngOnInit() {
     this.articleForm = this.formBuilder.group({
@@ -31,8 +34,11 @@ export class NewArticleComponent implements OnInit {
     return this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/article/post.php', data)
       .subscribe(
-        (/*res*/) => {
+        (res) => {
           // console.log(this.groupsService.groups.id);
+          if (res === true) {
+            this.success = 'Vous venez de publier dans le groupe !';
+          }
           this.articlesService.getArticles(this.groupsService.groups.id);
           this.articlesService.resetArticlesForm(this.articleForm.controls.content);
           // console.log(res);
