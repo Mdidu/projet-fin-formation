@@ -1,4 +1,4 @@
-<div class="publication" *ngFor="let commentary of this.commentaryService.commentaries; let i = index">
+<div class="publication" *ngFor="let commentary of this.comment; let i = index">
 
   <div>{{commentary.author}}</div>
   <div>{{this.commentaryService.convertTimestamp(commentary.date)}}</div>

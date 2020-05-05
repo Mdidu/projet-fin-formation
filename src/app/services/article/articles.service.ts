@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../auth.service';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Article} from '../../models/article';
 import {GroupsService} from '../group/groups.service';
 
@@ -12,9 +12,12 @@ export class ArticlesService {
 
   private articlesSubject: Subject<Article>;
   public articles: Article;
+  // private article: Observable<Article>;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private groupsService: GroupsService) {
     this.articlesSubject = new Subject<Article>();
+    // this.article = this.articlesSubject.asObservable();
+    // this.article.subscribe(value => this.articles = value);
   }
 
   getArticles(id) {
@@ -24,6 +27,7 @@ export class ArticlesService {
       .subscribe(
         (res) => {
           this.articles = res;
+          // this.articlesSubject.next(res);
           this.articles.edit = false;
           console.log(res);
         },

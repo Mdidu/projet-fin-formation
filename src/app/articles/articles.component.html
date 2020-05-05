@@ -1,4 +1,4 @@
-<div class="publication" *ngFor="let article of this.articlesService.articles; let i = index">
+<div class="publication" *ngFor="let article of this.articlesService.articles; let i = index" >
   <div>{{article.author}}</div>
   <div>{{this.articlesService.convertTimestamp(article.date)}}</div>
   <br>

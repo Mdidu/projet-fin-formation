@@ -11,20 +11,21 @@ import { NewGroupComponent } from './groups/new-group/new-group.component';
 import {GroupListUserComponent} from "./groups/group-list-user/group-list-user.component";
 import {GroupListComponent} from "./groups/group-list/group-list.component";
 import {GroupsComponent} from "./groups/groups.component";
+import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 
 
 const routes: Routes = [
-  { path: 'users/:id/groups', component: GroupListUserComponent},
+  { path: 'users/:id/groups', canActivate: [AuthGuardService], component: GroupListUserComponent},
   // { path: 'groups/group-list-user/:id', component: GroupListUserComponent},
-  { path: 'groups', component: GroupListComponent},
+  { path: 'groups', canActivate: [AuthGuardService], component: GroupListComponent},
   // { path: 'groups/group-list', component: GroupListComponent},
   { path: 'auth/signup', component: SignupComponent},
   { path: 'auth/signin', component: SigninComponent},
-  { path: 'user/profile/:id', component: ProfileComponent},
+  { path: 'user/profile/:id', canActivate: [AuthGuardService], component: ProfileComponent},
   // { path: 'private-message-list', component: PrivateMessageListComponent},
   // { path: 'private-message-list/private-message', component: PrivateMessageComponent},
-  { path: 'groups/:id', component: GroupsComponent},
-  { path: 'group/new-group', component: NewGroupComponent}
+  { path: 'groups/:id', canActivate: [AuthGuardService], component: GroupsComponent},
+  { path: 'group/new-group', canActivate: [AuthGuardService], component: NewGroupComponent}
 ];
 
 @NgModule({

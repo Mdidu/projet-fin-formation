@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Commentary} from '../models/commentary';
 
 @Injectable({
@@ -10,26 +10,24 @@ export class CommentaryService {
 
   private commentarySubject: Subject<Commentary>;
   public commentaries: Commentary;
+  // private comment: Observable<Commentary>;
   public test: boolean;
 
   constructor(private httpClient: HttpClient) {
     this.commentarySubject = new Subject<Commentary>();
+    // this.comment = this.commentarySubject.asObservable();
+    // this.comment.subscribe(value => this.commentaries = value);
     this.test = false;
   }
-
-  getCommentary(id) {
+affichComment(id) {
+  this.getCommentary(id)
+    .subscribe(value => this.commentaries = value);
+}
+// Return Observable<Commentary> car javascript est ASYNC et n'attend pas la méthode pour retourner la valeur qui prend un certains temps
+  // puis je souscrit dans la méthode affichComment -> cela permet de ne pas avoir les derniers commentaires pour tous les articles
+  getCommentary(id): Observable<Commentary> {
     return this.httpClient
-      .get<any>('http://localhost:80/projet-fin-formation/api/commentary/get.php?id=' + id)
-      .subscribe(
-        (res) => {
-          this.commentarySubject = res;
-          // this.articles.edit = false;
-          console.log(res);
-        },
-        (error) => {
-          console.log('error' + error);
-        }
-      );
+      .get<any>('http://localhost:80/projet-fin-formation/api/commentary/get.php?id=' + id) as Observable<Commentary>;
   }
   updateCommentary(data) {
     console.log(data);

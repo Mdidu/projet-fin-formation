@@ -10,17 +10,16 @@ import {Router} from '@angular/router';
 export class AuthService {
   // userSubject gérera des données de type User
   private userSubject: Subject<User>;
-  // public currentUser: User;
-  public currentUser: Observable<User>;
+  public currentUser: User;
+  private user: Observable<User>;
 
   constructor(private httpClient: HttpClient, private router: Router) {
     // propriétés permettant d'accéder à l'utilisateur connecté ?? pas sur
     this.userSubject = new Subject<User>();
-    // this.user = this.userSubject.asObservable();
-    this.currentUser = this.userSubject.asObservable();
-    // this.user = this.currentUser;
+    this.user = this.userSubject.asObservable();
 
-    // this.user.subscribe(x => this.currentUser = x);
+    // Permet de changer la valeur de currentUser via l'observable user lordque l'utilisateur se connecte ou déconnecte
+    this.user.subscribe(value => this.currentUser = value);
   }
 
   login(/*data*/pseudo, password) {
@@ -36,7 +35,6 @@ export class AuthService {
           // this.currentUser = res;
           localStorage.setItem('currentUser', JSON.stringify(res));
           this.userSubject.next(res);
-          console.log(this.currentUser);
 
           // console.log(res);
           // console.log(this.currentUser);
@@ -67,7 +65,7 @@ export class AuthService {
   }
   logout() {
     return this.httpClient
-      .get<any>('http://localhost:80/projet-fin-formation/api/user/getLogout.php?pseudo=' + this.currentUser)
+      .get<any>('http://localhost:80/projet-fin-formation/api/user/getLogout.php?pseudo=' + this.currentUser.username)
       .subscribe(
         (res) => {
           // this.currentUser = '';

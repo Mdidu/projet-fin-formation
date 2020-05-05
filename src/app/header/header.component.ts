@@ -9,12 +9,13 @@ import {AuthService} from '../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public currentUser: User;
+  // public currentUser: User;
 
   constructor(public authService: AuthService) {
     // Permet de souscrire à la variable observable 'currentUser' afin de pouvoir masquer ou afficher des éléments du menu
     //  de navigation si le user est co/deco
     // this.authService.currentUser
+
     //   .subscribe((x) => {
     //     this.currentUser = x;
     //     // console.log(x);

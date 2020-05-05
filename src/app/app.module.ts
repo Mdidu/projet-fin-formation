@@ -24,6 +24,13 @@ import { NewArticleComponent } from './articles/new-article/new-article.componen
 import { CommentaryComponent } from './commentary/commentary.component';
 import { NewCommentaryComponent } from './commentary/new-commentary/new-commentary.component';
 
+import {AuthService} from "./services/auth.service";
+import {GroupsService} from "./services/group/groups.service";
+import {ArticlesService} from "./services/article/articles.service";
+import {CommentaryService} from "./services/commentary.service";
+import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +58,13 @@ import { NewCommentaryComponent } from './commentary/new-commentary/new-commenta
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    GroupsService,
+    ArticlesService,
+    CommentaryService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

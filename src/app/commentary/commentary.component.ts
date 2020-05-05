@@ -4,6 +4,7 @@ import {ArticlesService} from "../services/article/articles.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {GroupsService} from "../services/group/groups.service";
+import {Commentary} from "../models/commentary";
 
 @Component({
   selector: 'app-commentary',
@@ -12,6 +13,7 @@ import {GroupsService} from "../services/group/groups.service";
 })
 export class CommentaryComponent implements OnInit {
 
+  public comment: Commentary;
   editForm: FormGroup;
   @Input() articleId;
   // @Input() commentary: any;
@@ -31,7 +33,8 @@ export class CommentaryComponent implements OnInit {
     // console.log(this.commentaryService.getCommentary(id));
 
     // this.articlesService.getArticles(this.groupsService.groups.id);
-    this.commentaryService.getCommentary(id);
+    this.commentaryService.getCommentary(id)
+      .subscribe(value => this.comment = value);
   }
   onUpdateForm(content, commentaryId) {
     // console.log(content);
