@@ -26,5 +26,6 @@ export class SigninComponent implements OnInit {
     // const data = this.signinForm.value;
 
     this.authService.login(this.signinForm.controls.pseudo.value, this.signinForm.controls.password.value);
+
   }
 }

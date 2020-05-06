@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+label, input, button {
+  margin-top: 5%;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+ul {
+  list-style-type: none;
+}
+#succes, #error {
+  font-size: 20px;
+  font-weight: bold;
+}
+#succes {
+  color: green;
+}
+#error {
+  color: red;
+}

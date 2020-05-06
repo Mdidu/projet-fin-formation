@@ -1,14 +1,13 @@
-<div>
+<main>
   <h1>Connecte toi</h1>
   <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-    <div>
-      Pseudo : <input type="text" formControlName="pseudo">
-    </div>
-
-    <div>
-      Mot de passe : <input type="password" formControlName="password">
-    </div>
-
+    <label> Pseudo (*) : </label>
+    <input type="text" formControlName="pseudo">
+    <!--<br>-->
+    <label> Mot de passe (*) : </label>
+    <input type="password" formControlName="password">
+    <!--<br>-->
     <button type="submit" [disabled]="signinForm.invalid">Connexion</button>
   </form>
-</div>
+  <div id="error" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
+</main>

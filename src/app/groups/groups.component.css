@@ -5,34 +5,23 @@
   margin-top: 4%;
   width: 100%;
 }
-#blocLeftGroup, #blocRightGroup {
+nav, #blocRightGroup {
   width: 15%;
 }
-#blocCenterGroup {
-  width: 60%;
+main {
+  width: 70%;
   text-align: center;
 }
 
-#blocLeftGroup ul {
+ul {
   flex-direction: column;
 }
-#blocLeftGroup ul li {
+ul li {
   margin-top: 2%;
 }
-#blocLeftGroup ul .liRed {
+#leave{
   margin-top: 12%;
 }
-#red {
+#leave > a {
   color: red;
 }
-
-.publication {
-  margin-top: 6%;
-  padding: 10px;
-  text-align: start;
-  border: black 6px solid;
-}
-/*#saisie input {*/
-/*  width: 75%;*/
-/*  height: 70px;*/
-/*}*/

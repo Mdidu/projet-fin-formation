@@ -1,5 +1,5 @@
 <?php
-require_once '../config/configHeader.php';
+require_once 'configHeader.php';
 
 session_start();
 

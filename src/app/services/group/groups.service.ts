@@ -86,6 +86,32 @@ export class GroupsService {
         }
       );
   }
+  joinGroup(groupId, userId) {
+    return this.group = this.httpClient
+      .post<any>('http://localhost:80/projet-fin-formation/api/joinGroup/post.php', {groupId, userId})
+      .subscribe(
+        () => {
+          this.authService.updateCurrentUserRank(groupId);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  leaveGroup(groupId, userId) {
+    console.log('http://localhost:80/projet-fin-formation/api/leaveGroup/delete.php?groupId=' + groupId + '&userId=' + userId);
+    return this.group = this.httpClient
+      .delete<any>('http://localhost:80/projet-fin-formation/api/leaveGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.authService.updateCurrentUserRank(groupId);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
   groupClean() {
     if (this.group) {
       this.group.unsubscribe();

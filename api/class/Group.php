@@ -218,6 +218,29 @@ class Group
   }
 
   /**
+   * @return bool
+   */
+  private function searchAlreadyMember() {
+    $sql = $this->getDb()->prepare('
+        SELECT *
+        FROM group_rank
+        WHERE group_id = :group_id && user_id = :user_id'
+    );
+    $sql->bindValue(':group_id', $this->getId());
+    $sql->bindValue(':user_id', $this->getUserId());
+
+    $sql->execute();
+
+    $row = $sql->fetch(PDO::FETCH_ASSOC);
+    if($row['user_id'] === $this->getUserId()) {
+      $sql->closeCursor();
+      return false;
+    }
+    $sql->closeCursor();
+    return true;
+  }
+
+  /**
    * @param $name string
    * @param $description string
    * @param $security string
@@ -258,6 +281,46 @@ class Group
   }
 
   /**
+   * @param $groupId int
+   * @param $userId int
+   */
+  public function joinGroup($groupId, $userId) {
+    $this->setId($groupId);
+    $this->setUserId($userId);
+    // 3 = rank user
+    $this->setRankUser(3);
+
+    if($this->searchAlreadyMember()) {
+      $sql = $this->getDB()->prepare('INSERT INTO group_rank (group_id, user_id, rank_id) VALUES (:group_id, :user_id, :rank_id)');
+
+      $sql->bindValue(':group_id', $this->getId());
+      $sql->bindValue(':user_id', $this->getUserId());
+      $sql->bindValue(':rank_id', $this->getRankUser());
+
+      $sql->execute();
+
+      $sql->closeCursor();
+    }
+  }
+  public function leaveGroup($groupId, $userId) {
+    $this->setId($groupId);
+    $this->setUserId($userId);
+
+    if(!$this->searchAlreadyMember()) {
+      $sql = $this->getDB()->prepare('DELETE FROM group_rank WHERE group_id = :group_id && user_id = :user_id');
+
+      $sql->bindValue(':group_id', $this->getId());
+      $sql->bindValue(':user_id', $this->getUserId());
+
+      $sql->execute();
+
+      $sql->closeCursor();
+      var_dump('yes');
+    }
+    var_dump('no');
+  }
+
+  /**
    * @param $id int
    * @return mixed
    */
@@ -293,7 +356,6 @@ class Group
     $sql->execute();
 
     $rankId = $sql->fetch(PDO::FETCH_ASSOC);
-
     $sql->closeCursor();
 
     return $rankId;

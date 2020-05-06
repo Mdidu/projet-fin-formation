@@ -1,24 +1,20 @@
-<div>
+<main>
   <h1>Rejoint nous</h1>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <div>
-      Pseudo : <input type="text" formControlName="pseudo">
-    </div>
+    <label> Pseudo (*) : </label>
+    <input type="text" formControlName="pseudo">
 
-    <div>
-      Mot de passe : <input type="password" formControlName="password">
-    </div>
+    <label> Mot de passe (*) : </label>
+    <input type="password" formControlName="password">
 
-    <div>
-      Vérification du mot de passe : <input type="password" formControlName="checkedPassword">
-    </div>
-
-<!--    <div>-->
-<!--      Email : <input type="text" formControlName="email">-->
-<!--    </div>-->
+    <label> Vérification du mot de passe (*) : </label>
+    <input type="password" formControlName="checkedPassword">
+    <!--    <div>-->
+    <!--      Email : <input type="text" formControlName="email">-->
+    <!--    </div>-->
 
     <button type="submit" [disabled]="signupForm.invalid">Nous rejoindre</button>
   </form>
 
-  <div *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
-</div>
+  <div id="error" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
+</main>

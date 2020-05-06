@@ -56,11 +56,15 @@ export class AuthService {
       .post<any>('http://localhost:80/projet-fin-formation/api/user/get.php', {pseudo, password})
       .subscribe(
         (res) => {
+          if (res === false) {
+            this.error = 'Identifiant incorrect !';
+          }
           // Doit rediriger vers l'accueil du site une fois co
           // this.userSubject.next(res);
           // this.currentUser = res;
           localStorage.setItem('currentUser', JSON.stringify(res));
           this.userSubject.next(res);
+          this.router.navigate(['groups']);
 
           // console.log(res);
           // console.log(this.currentUser);
@@ -74,7 +78,6 @@ export class AuthService {
   updateCurrentUserRank(groupId) {
     const userId = this.currentUser.id;
 
-    // modifier l'url
     return this.userSubscription = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)
       .subscribe(

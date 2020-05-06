@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GroupsService} from '../services/group/groups.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
   constructor(
     public groupsService: GroupsService,
     public authService: AuthService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     // récupère l'id du groupe dans l'url et l'injecte dans l'objet groups de type Group du GroupsService
@@ -25,6 +26,24 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
   }
 
+  onJoin() {
+    const groupId = this.groupsService.groups.id;
+    const userId = this.authService.currentUser.id;
+
+    this.groupsService.joinGroup(groupId, userId);
+    setTimeout(() => {
+      this.groupsService.getGroup(groupId);
+    }, 2000);
+  }
+  onLeave() {
+    const groupId = this.groupsService.groups.id;
+    const userId = this.authService.currentUser.id;
+
+    this.groupsService.leaveGroup(groupId, userId);
+    setTimeout(() => {
+      this.router.navigate(['groups']);
+    }, 2000);
+  }
   ngOnDestroy() {
     this.groupsService.groupClean();
   }

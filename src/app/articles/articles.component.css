@@ -1,0 +1,15 @@
+main {
+  width: 100%;
+}
+.publication {
+  width: 100%;
+  margin-top: 6%;
+  padding: 10px;
+  text-align: start;
+  border: black 6px solid;
+  border-radius: 6px;
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}

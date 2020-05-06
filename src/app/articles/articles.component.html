@@ -5,21 +5,23 @@
 
   <div>{{article.content}}</div>
 
-  <button *ngIf="!article.edit" (click)="article.edit = true; onUpdateForm(article.content, article.id)">Modifier contenu</button>
+  <div class="buttons">
+    <button *ngIf="!article.edit" (click)="article.edit = true; onUpdateForm(article.content, article.id)">Modifier</button>
 
-<!--  le article.edit = false permet lors de la soumission  de faire disparaître le formulaire -->
-  <form *ngIf="article.edit" [formGroup]="editForm" (ngSubmit)="article.edit = false; onEditSubmit()">
-    <input type="text" formControlName="content">
-    <input type="hidden" formControlName="id">
-    <button type="submit" [disabled]="editForm.invalid">Modifier contenu</button>
-  </form>
-  <button *ngIf="this.authService.currentUser.currentGroupRank == 1" (dblclick)="onRemoveArticle(article.id)">Supprimer</button>
-<!--  <form *ngIf="this.authService.currentUser.currentGroupRank === 1" [formGroup]="deleteForm" (ngSubmit)="onSubmit()">-->
-<!--    <button type="submit" [disabled]="editForm.invalid">Supprimer</button>-->
-<!--  </form>-->
+    <!--  le article.edit = false permet lors de la soumission  de faire disparaître le formulaire -->
+    <form *ngIf="article.edit" [formGroup]="editForm" (ngSubmit)="article.edit = false; onEditSubmit()">
+      <input type="text" formControlName="content">
+      <input type="hidden" formControlName="id">
+      <button type="submit" [disabled]="editForm.invalid">Modifier</button>
+    </form>
+    <button *ngIf="this.authService.currentUser.currentGroupRank == 1" (dblclick)="onRemoveArticle(article.id)">Supprimer</button>
+    <!--  <form *ngIf="this.authService.currentUser.currentGroupRank === 1" [formGroup]="deleteForm" (ngSubmit)="onSubmit()">-->
+    <!--    <button type="submit" [disabled]="editForm.invalid">Supprimer</button>-->
+    <!--  </form>-->
 
-  <button (click)="this.commentaryService.test = true; this.commentaryService.getCommentary(article.id)">Voir les commentaires</button>
+    <button (click)="this.commentaryService.test = true; this.commentaryService.getCommentary(article.id)">Voir les commentaires</button>
 
+  </div>
   <app-commentary *ngIf="this.commentaryService.test === true;" [articleId]="article.id"></app-commentary>
 
   <app-new-commentary [articleId]="article.id"></app-new-commentary>

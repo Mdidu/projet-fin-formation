@@ -145,7 +145,7 @@ class User
   /**
    * @param $pseudo string
    * @param $password string
-   * @return mixed
+   * @return bool | mixed
    */
   public function log($pseudo, $password){
     $this->setPseudo($pseudo);
@@ -167,6 +167,7 @@ class User
 
       return $_SESSION;
     }
+    return false;
   }
 
   public function logout() {

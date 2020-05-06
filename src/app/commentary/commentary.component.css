@@ -1,0 +1,9 @@
+.comment {
+  margin-bottom: 3%;
+  padding: 10px;
+  background: lightgray;
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}

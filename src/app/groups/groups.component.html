@@ -1,29 +1,28 @@
 <div id="zoneGroup">
 
-  <div id="blocLeft">
-    <ul>
+  <nav id="blocLeft">
+    <ul *ngIf="this.authService.currentUser.currentGroupRank > 0">
       <li><a routerLink="">Inviter dans le groupe</a></li>
       <li><a routerLink="">Membres</a></li>
       <li><a routerLink="">Evènements</a></li>
-      <li class="liRed"><a routerLink="" id="red">Quitter le groupe</a></li>
+      <li id="leave"><a (click)="onLeave()">Quitter le groupe</a></li>
     </ul>
-  </div>
+    <ul *ngIf="this.authService.currentUser.currentGroupRank == 0">
+      <li><a (click)="onJoin()">Rejoindre le groupe</a></li>
+    </ul>
+  </nav>
 
-  <div id="blocCenter">
+  <main id="blocCenter">
     <h2>{{this.groupsService.groups.name}}</h2>
     <div>{{this.groupsService.groups.description}}</div>
 
-    <app-new-article></app-new-article>
-
-<!--    <div id="saisie">-->
-<!--      <input type="text" placeholder="Exprimez-vous">-->
-<!--      <button>Publier</button>-->
-<!--    </div>-->
-
-    <app-articles></app-articles>
+    <app-new-article *ngIf="this.authService.currentUser.currentGroupRank > 0"></app-new-article>
 
 
-  </div>
+    <app-articles *ngIf="this.authService.currentUser.currentGroupRank > 0"></app-articles>
+
+
+  </main>
 
   <div id="blocRight">
   </div>

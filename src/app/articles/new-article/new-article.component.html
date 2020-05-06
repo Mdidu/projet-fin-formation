@@ -1,11 +1,11 @@
-<div id="createArticle">
-  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="content" placeholder="Exprimez-vous">
-    <input type="hidden" formControlName="groupId">
-    <input type="hidden" formControlName="userId">
+<form id="createArticle" [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+  <textarea formControlName="content" placeholder="Exprimez-vous" cols="30" rows="4"></textarea>
+<!--    <input type="text" formControlName="content" placeholder="Exprimez-vous">-->
+  <input type="hidden" formControlName="groupId">
+  <input type="hidden" formControlName="userId">
 
-    <button type="submit" [disabled]="articleForm.invalid">Publier</button>
-  </form>
+  <button type="submit" [disabled]="articleForm.invalid">Publier</button>
+</form>
 
-  <div *ngIf="this.articlesService.success !== ''">{{this.articlesService.success}}</div>
-</div>
+<div id="succes" *ngIf="this.articlesService.success !== ''">{{this.articlesService.success}}</div>
+

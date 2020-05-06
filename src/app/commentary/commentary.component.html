@@ -1,18 +1,20 @@
-<div class="publication" *ngFor="let commentary of this.comment; let i = index">
+<div class="comment" *ngFor="let commentary of this.comment; let i = index">
 
   <div>{{commentary.author}}</div>
   <div>{{this.commentaryService.convertTimestamp(commentary.date)}}</div>
   <br>
   <div>{{commentary.content}}</div>
 
-  <button *ngIf="!commentary.edit" (click)="commentary.edit = true; this.onUpdateForm(commentary.content, commentary.id)">Modifier commentaire</button>
+  <div class="buttons">
+    <button *ngIf="!commentary.edit" (click)="commentary.edit = true; this.onUpdateForm(commentary.content, commentary.id)">Modifier</button>
 
-  <form *ngIf="commentary.edit" [formGroup]="editForm" (ngSubmit)="commentary.edit = false; this.onEditSubmit()">
-    <input type="text" formControlName="content">
-    <input type="hidden" formControlName="id">
-    <button type="submit" [disabled]="editForm.invalid">Modifier contenu</button>
-  </form>
+    <form *ngIf="commentary.edit" [formGroup]="editForm" (ngSubmit)="commentary.edit = false; this.onEditSubmit()">
+      <input type="text" formControlName="content">
+      <input type="hidden" formControlName="id">
+      <button type="submit" [disabled]="editForm.invalid">Modifier</button>
+    </form>
 
-  <button *ngIf="this.authService.currentUser.currentGroupRank == 1" (dblclick)="this.onRemoveCommentary(commentary.id)">Supprimer</button>
+    <button *ngIf="this.authService.currentUser.currentGroupRank == 1" (dblclick)="this.onRemoveCommentary(commentary.id)">Supprimer</button>
 
+  </div>
 </div>
