@@ -8,10 +8,10 @@ import { ProfileComponent } from './user/profile/profile.component';
 // import { PrivateMessageListComponent } from './private-message-list/private-message-list.component';
 // import { PrivateMessageComponent } from './private-message-list/private-message/private-message.component';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
-import {GroupListUserComponent} from "./groups/group-list-user/group-list-user.component";
-import {GroupListComponent} from "./groups/group-list/group-list.component";
-import {GroupsComponent} from "./groups/groups.component";
-import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
+import {GroupListUserComponent} from './groups/group-list-user/group-list-user.component';
+import {GroupListComponent} from './groups/group-list/group-list.component';
+import {GroupsComponent} from './groups/groups.component';
+import {AuthGuardService} from './services/auth-guard/auth-guard.service';
 
 
 const routes: Routes = [

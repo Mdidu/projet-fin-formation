@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {Commentary} from '../models/commentary';
 
 @Injectable({
@@ -10,13 +10,15 @@ export class CommentaryService {
 
   private commentarySubject: Subject<Commentary>;
   public commentaries: Commentary;
-  // private comment: Observable<Commentary>;
+  public commentary: Subscription;
   public test: boolean;
+  public success: string;
 
   constructor(private httpClient: HttpClient) {
     this.commentarySubject = new Subject<Commentary>();
     // this.comment = this.commentarySubject.asObservable();
     // this.comment.subscribe(value => this.commentaries = value);
+    this.success = '';
     this.test = false;
   }
 affichComment(id) {
@@ -29,10 +31,28 @@ affichComment(id) {
     return this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/commentary/get.php?id=' + id) as Observable<Commentary>;
   }
+  addCommentary(data) {
+    return this.httpClient
+      .post<any>('http://localhost:80/projet-fin-formation/api/commentary/post.php', data)
+      .subscribe(
+        (res) => {
+          if (res === true) {
+            this.success = 'Vous venez de publier un commentaire !';
+          }
+          this.getCommentary(data.articleId);
+          // console.log(this.groupsService.groups.id);
+
+          // console.log(res);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
   updateCommentary(data) {
     console.log(data);
 
-    return this.httpClient
+    return this.commentary = this.httpClient
       .put<any>('http://localhost:80/projet-fin-formation/api/commentary/put.php', data)
       .subscribe(
         (res) => {
@@ -47,7 +67,7 @@ affichComment(id) {
   }
 
   removeCommentary(id) {
-    return this.httpClient
+    return this.commentary = this.httpClient
       .delete<any>('http://localhost:80/projet-fin-formation/api/commentary/delete.php?id=' + id)
       .subscribe(
         (res) => {
@@ -61,6 +81,12 @@ affichComment(id) {
 
   resetCommentaryForm(form) {
     form.reset();
+  }
+
+  commentaryClean() {
+    if (this.commentary) {
+      this.commentary.unsubscribe();
+    }
   }
 
   // Créer un service date pour pouvoir générer les dates via cette méthode

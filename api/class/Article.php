@@ -127,42 +127,12 @@ class Article
   public function __construct()
   {
     $this->setTimestamp(time());
-//    $this->timestamp = time();
-  }
-
-  /**
-   * @return array
-   */
-  public function searchAllArticles($groupId)
-  {
-
-    $this->setGroupId($groupId);
-
-    $sql = $this->getDB()->prepare(
-      "SELECT article.id AS id, content, date, pseudo AS author
-                FROM article
-                LEFT JOIN user ON article.user_id = user.id
-                WHERE article.group_id = :group_id
-                ORDER BY date DESC"
-    );
-
-    $sql->bindValue(':group_id', $this->getGroupId());
-
-    $sql->execute();
-
-    $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
-//    while($row = $sql->fetch(PDO::FETCH_ASSOC)){
-//      $date = $row['date'];
-//      $this->setDate(intval($date));
-//      $row['date'] = $this->getDate();
-//    }
-    $sql->closeCursor();
-
-    return $rows;
   }
 
   /**
    * @param $content string
+   * @param $groupId int
+   * @param $authorId int
    */
   public function addArticles($content, $groupId, $authorId)
   {
@@ -184,6 +154,7 @@ class Article
 
   /**
    * @param $content string
+   * @param $id int
    */
   public function updateArticle($content, $id)
   {
@@ -215,22 +186,29 @@ class Article
   }
 
   /**
-   * @param $id int
+   * @param $groupId int
+   * @return array
    */
-  public function getArticles($id)
+  public function getArticles($groupId)
   {
-//    $this->setGroupId($id);
-//
-//    $rows = $this->searchAllArticles();
-//
-//    return $rows;
-//    $this->setId($id);
-//    $rows = $this->search();
-//
-//    $this->setContent($rows[0]['article_content']);
-//    $this->setTimestamp($rows[0]['article_date']);
-//    $this->setAuthor($rows[0]['pseudo']);
+    $this->setGroupId($groupId);
 
-//    require_once "../views/getArticles.php";
+    $sql = $this->getDB()->prepare(
+      "SELECT article.id AS id, content, date, pseudo AS author
+                FROM article
+                LEFT JOIN user ON article.user_id = user.id
+                WHERE article.group_id = :group_id
+                ORDER BY date DESC"
+    );
+
+    $sql->bindValue(':group_id', $this->getGroupId());
+
+    $sql->execute();
+
+    $rows = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql->closeCursor();
+
+    return $rows;
   }
 }

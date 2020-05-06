@@ -34,5 +34,5 @@
 
     <button type="submit" [disabled]="groupForm.invalid">Créer</button>
   </form>
-  <div *ngIf="error !== ''">{{error}}</div>
+  <div *ngIf="this.groupsService.error !== ''">{{this.groupsService.error}}</div>
 </div>

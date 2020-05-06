@@ -1,65 +1,59 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CommentaryService} from "../services/commentary.service";
-import {ArticlesService} from "../services/article/articles.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../services/auth.service";
-import {GroupsService} from "../services/group/groups.service";
-import {Commentary} from "../models/commentary";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {CommentaryService} from '../services/commentary.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../services/auth.service';
+import {Commentary} from '../models/commentary';
 
 @Component({
   selector: 'app-commentary',
   templateUrl: './commentary.component.html',
   styleUrls: ['./commentary.component.css']
 })
-export class CommentaryComponent implements OnInit {
+export class CommentaryComponent implements OnInit, OnDestroy {
 
   public comment: Commentary;
   editForm: FormGroup;
   @Input() articleId;
-  // @Input() commentary: any;
 
-  constructor(private formBuilder: FormBuilder, public commentaryService: CommentaryService, public articlesService: ArticlesService,
-              public authService: AuthService, private groupsService: GroupsService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    public commentaryService: CommentaryService,
+    public authService: AuthService) { }
 
   ngOnInit() {
-    // this.commentaryService.getCommentary(this.articleId);
 
-    this.affichComment(this.articleId);
-
-    // this.commentaryService.getCommentary(this.articleId);
+    this.callGetCommentary(this.articleId);
   }
-  affichComment(id) {
+  callGetCommentary(id) {
     // console.log(id);
     // console.log(this.commentaryService.getCommentary(id));
-
-    // this.articlesService.getArticles(this.groupsService.groups.id);
-    this.commentaryService.getCommentary(id)
+    this.commentaryService.commentary = this.commentaryService.getCommentary(id)
       .subscribe(value => this.comment = value);
   }
   onUpdateForm(content, commentaryId) {
-    // console.log(content);
     this.editForm = this.formBuilder.group({
       content: [content, Validators.required],
       id: commentaryId
     });
   }
-  onEditSubmit(/*e, id*/) {
-    // console.log(e);
-    // faire en sorte de vraiment le récup depuis le form pour éliminer cette ligne !!
-    // this.editForm.value.id = id;
-
+  onEditSubmit() {
     // console.log(this.editForm.value);
     const data = this.editForm.value;
 
     this.commentaryService.updateCommentary(data);
     setTimeout(() => {
-      this.commentaryService.getCommentary(this.articleId);
+      this.commentaryService.commentary = this.commentaryService.getCommentary(this.articleId)
+        .subscribe(value => this.comment = value);
     }, 1000);
   }
   onRemoveCommentary(id) {
     this.commentaryService.removeCommentary(id);
     setTimeout(() => {
-      this.commentaryService.getCommentary(this.articleId);
+      this.commentaryService.commentary = this.commentaryService.getCommentary(this.articleId)
+        .subscribe(value => this.comment = value);
     }, 1000);
+  }
+  ngOnDestroy() {
+    this.commentaryService.commentaryClean();
   }
 }

@@ -179,6 +179,9 @@ class Group
     return NULL;
   }
 
+  /**
+   * @return array
+   */
   public function searchAllGroup() {
     $sql = $this->getDB()->prepare('SELECT * FROM groups');
 
@@ -191,6 +194,10 @@ class Group
     return $row;
   }
 
+  /**
+   * @param $userId int
+   * @return array
+   */
   public function searchAllGroupCurrentUser($userId) {
     $this->setUserId($userId);
 
@@ -209,12 +216,14 @@ class Group
     $sql->closeCursor();
     return $row;
   }
+
   /**
    * @param $name string
    * @param $description string
    * @param $security string
    * @param $visibility string
    * @param $userId int
+   * @return bool|int
    */
   public function addGroup($name, $description, $security, $visibility, $userId) {
     $this->setName($name);
@@ -248,6 +257,10 @@ class Group
     return false;
   }
 
+  /**
+   * @param $id int
+   * @return mixed
+   */
   public function getGroup($id) {
     $this->setId($id);
 
@@ -263,6 +276,11 @@ class Group
     return $row;
   }
 
+  /**
+   * @param $groupId int
+   * @param $userId int
+   * @return mixed
+   */
   public function getCurrentGroupUserRank($groupId, $userId) {
     $this->setId($groupId);
     $this->setUserId($userId);
@@ -280,8 +298,10 @@ class Group
 
     return $rankId;
   }
+
   /**
    * @param $rankId int
+   * @param $userId int
    */
   private function assignmentRank($rankId, $userId) {
     $this->setId($this->searchGroupId($this->getName()));

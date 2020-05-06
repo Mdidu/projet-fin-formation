@@ -1,26 +1,33 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {Group} from '../../models/group';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../auth.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupsService {
   private groupsSubject: Subject<Group>;
-  public groups: Group;
+  public groups: Group = new Group();
+  private group: Subscription;
+  public error: string;
 
-  constructor(private httpClient: HttpClient, private authService: AuthService, private route: ActivatedRoute) {
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.groupsSubject = new Subject<Group>();
+    this.error = '';
   }
 
   // récupère la liste des groupes auquel l'utilisateur appartient
   getListUserGroups() {
     const data = this.authService.currentUser.id;
 
-    return this.httpClient
+    return this.group = this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/list-group/get.php', data)
       .subscribe(
         (res) => {
@@ -34,7 +41,7 @@ export class GroupsService {
   }
   // récupère la liste de tous les groupes du site
   getListAllGroups() {
-    return this.httpClient
+    return this.group = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/list-group/getAllGroup.php')
       .subscribe(
         (res) => {
@@ -50,7 +57,7 @@ export class GroupsService {
   getGroup(id) {
     // console.log(id);
 
-    return this.httpClient
+    return this.group = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/group/get.php?id=' + id )
       .subscribe(
         (res) => {
@@ -61,5 +68,27 @@ export class GroupsService {
           console.log('error' + error);
         }
       );
+  }
+  addGroup(data) {
+    return this.group = this.httpClient
+      .post<any>('http://localhost:80/projet-fin-formation/api/group/post.php', data)
+      .subscribe(
+        (res) => {
+          if (res === false) {
+            this.error = 'Un groupe du même nom existe déjà !';
+          } else {
+            // console.log(res);
+            this.router.navigate(['groups/' + res]);
+          }
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  groupClean() {
+    if (this.group) {
+      this.group.unsubscribe();
+    }
   }
 }

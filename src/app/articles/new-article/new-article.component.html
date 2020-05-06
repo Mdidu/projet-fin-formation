@@ -7,5 +7,5 @@
     <button type="submit" [disabled]="articleForm.invalid">Publier</button>
   </form>
 
-  <div *ngIf="success !== ''">{{success}}</div>
+  <div *ngIf="this.articlesService.success !== ''">{{this.articlesService.success}}</div>
 </div>

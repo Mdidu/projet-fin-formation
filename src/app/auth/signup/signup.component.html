@@ -20,5 +20,5 @@
     <button type="submit" [disabled]="signupForm.invalid">Nous rejoindre</button>
   </form>
 
-  <div *ngIf="error !== ''">{{error}}</div>
+  <div *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
 </div>

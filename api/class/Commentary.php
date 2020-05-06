@@ -119,9 +119,12 @@ class Commentary
   public function __construct()
   {
     $this->setTimestamp(time());
-//    $this->timestamp = time();
   }
 
+  /**
+   * @param $articleId int
+   * @return array
+   */
   public function searchAllCommentary($articleId)
   {
 
@@ -146,6 +149,11 @@ class Commentary
     return $rows;
   }
 
+  /**
+   * @param $content string
+   * @param $articleId int
+   * @param $userId int
+   */
   public function addCommentary($content, $articleId, $userId) {
     $this->setContent($content);
     $this->setArticleId($articleId);
@@ -163,6 +171,10 @@ class Commentary
     $sql->closeCursor();
   }
 
+  /**
+   * @param $content string
+   * @param $id int
+   */
   public function updateCommentary($content, $id) {
     $this->setContent($content);
     $this->setId($id);
@@ -175,6 +187,9 @@ class Commentary
     $sql->closeCursor();
   }
 
+  /**
+   * @param $id int
+   */
   public function removeCommentary($id)
   {
 

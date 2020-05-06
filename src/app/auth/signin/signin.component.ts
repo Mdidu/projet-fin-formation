@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 export class SigninComponent implements OnInit {
 
   signinForm: FormGroup;
+
   constructor(private formBuilder: FormBuilder,
               public authService: AuthService) { }
 
@@ -22,10 +23,8 @@ export class SigninComponent implements OnInit {
 
   onSubmit() {
     // const data = JSON.stringify(this.signinForm.value);
-    const data = this.signinForm.value;
-    // const pseudo = this.signinForm.controls.pseudo.value;
-    // const password = this.signinForm.controls.password.value;
+    // const data = this.signinForm.value;
 
-    this.authService.login(/*data*/this.signinForm.controls.pseudo.value, this.signinForm.controls.password.value);
+    this.authService.login(this.signinForm.controls.pseudo.value, this.signinForm.controls.password.value);
   }
 }

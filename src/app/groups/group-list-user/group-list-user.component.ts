@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {AuthService} from "../../services/auth.service";
-import {GroupsService} from "../../services/group/groups.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {AuthService} from '../../services/auth.service';
+import {GroupsService} from '../../services/group/groups.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-group-list-user',
@@ -13,7 +12,10 @@ export class GroupListUserComponent implements OnInit {
 
   leaveGroupForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient, public authService: AuthService, public groupsService: GroupsService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    public authService: AuthService,
+    public groupsService: GroupsService) { }
 
   ngOnInit() {
     // faire en sorte d'obtenir me groupId qui actuellement vaut vide !!
