@@ -1,5 +1,5 @@
 <?php
-require_once '../config/configGroup.php';
+require_once __DIR__.'/../../config/configGroup.php';
 
 $group = new Group();
 

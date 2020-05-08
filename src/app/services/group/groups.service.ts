@@ -4,6 +4,7 @@ import {Group} from '../../models/group';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class GroupsService {
   private groupsSubject: Subject<Group>;
   public groups: Group = new Group();
+  public members: User = new User();
   private group: Subscription;
   public error: string;
 
@@ -24,14 +26,16 @@ export class GroupsService {
   }
 
   // récupère la liste des groupes auquel l'utilisateur appartient
+  // TODO : A MODIFIER ELLE FONCTIONNE PLUS et transformer le post en get
   getListUserGroups() {
     const data = this.authService.currentUser.id;
 
     return this.group = this.httpClient
-      .post<any>('http://localhost:80/projet-fin-formation/api/list-group/get.php', data)
+      // .post<any>('http://localhost:80/projet-fin-formation/api/group/list-group/get.php', data)
+      .get<any>('http://localhost:80/projet-fin-formation/api/group/list-group/get.php?id=' + data)
       .subscribe(
         (res) => {
-          this.groupsSubject.next(res);
+          // this.groupsSubject.next(res);
           this.groups = res;
           console.log(res);
         },
@@ -42,7 +46,7 @@ export class GroupsService {
   // récupère la liste de tous les groupes du site
   getListAllGroups() {
     return this.group = this.httpClient
-      .get<any>('http://localhost:80/projet-fin-formation/api/list-group/getAllGroup.php')
+      .get<any>('http://localhost:80/projet-fin-formation/api/group/list-group/getAllGroup.php')
       .subscribe(
         (res) => {
           this.groups = res;
@@ -69,6 +73,19 @@ export class GroupsService {
         }
       );
   }
+  getMembers(id) {
+    return this.group = this.httpClient
+      .get<any>('http://localhost:80/projet-fin-formation/api/group/getMembers.php?id=' + id )
+      .subscribe(
+        (res) => {
+          this.members = res;
+          console.log(res);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
   addGroup(data) {
     return this.group = this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/group/post.php', data)
@@ -88,7 +105,7 @@ export class GroupsService {
   }
   joinGroup(groupId, userId) {
     return this.group = this.httpClient
-      .post<any>('http://localhost:80/projet-fin-formation/api/joinGroup/post.php', {groupId, userId})
+      .post<any>('http://localhost:80/projet-fin-formation/api/group/joinGroup/post.php', {groupId, userId})
       .subscribe(
         () => {
           this.authService.updateCurrentUserRank(groupId);
@@ -98,10 +115,24 @@ export class GroupsService {
         }
       );
   }
-  leaveGroup(groupId, userId) {
-    console.log('http://localhost:80/projet-fin-formation/api/leaveGroup/delete.php?groupId=' + groupId + '&userId=' + userId);
+  applyGroup(groupId, userId) {
     return this.group = this.httpClient
-      .delete<any>('http://localhost:80/projet-fin-formation/api/leaveGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
+      .post<any>('http://localhost:80/projet-fin-formation/api/group/applyGroup/post.php', {groupId, userId})
+      .subscribe(
+        () => {
+          // TODO : afficher à l'utilisateur qu'il a bien postulé !
+
+          // this.authService.updateCurrentUserRank(groupId);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  leaveGroup(groupId, userId) {
+    // console.log('http://localhost:80/projet-fin-formation/api/group/leaveGroup/delete.php?groupId=' + groupId + '&userId=' + userId);
+    return this.group = this.httpClient
+      .delete<any>('http://localhost:80/projet-fin-formation/api/group/leaveGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
       .subscribe(
         (res) => {
           console.log(res);

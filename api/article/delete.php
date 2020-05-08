@@ -1,5 +1,5 @@
 <?php
-require_once '../config/configArticle.php';
+require_once __DIR__.'/../config/configArticle.php';
 
 if(!empty(isset($_GET['id']))){
   $article = new Article();

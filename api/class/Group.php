@@ -339,6 +339,17 @@ class Group
     return $row;
   }
 
+  public function getMembers($id) {
+    $this->setId($id);
+
+    $sql = $this->getDB()->prepare('SELECT pseudo AS username FROM group_rank LEFT JOIN user ON group_rank.user_id = user.id WHERE group_id = :group_id');
+    $sql->bindValue(':group_id', $this->getId());
+    $sql->execute();
+    $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $sql->closeCursor();
+
+    return $row;
+  }
   /**
    * @param $groupId int
    * @param $userId int

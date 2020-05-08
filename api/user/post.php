@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/configUser.php';
+require_once __DIR__.'/../config/configUser.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 

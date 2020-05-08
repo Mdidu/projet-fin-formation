@@ -1,0 +1,10 @@
+<div id="zoneMembers">
+  <app-menu></app-menu>
+
+  <main>
+    <h2>Candidature pour rejoindre le groupe</h2>
+    <div class="publication" *ngFor="let member of this.groupsService.members; let i = index" >
+      {{member.username}}
+    </div>
+  </main>
+</div>

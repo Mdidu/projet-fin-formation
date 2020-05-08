@@ -1,5 +1,6 @@
 <?php
 
+//namespace Mdidu\Api;
 
 class User
 {
@@ -151,7 +152,7 @@ class User
     $this->setPseudo($pseudo);
     $this->setPassword($password);
 
-    $sql = $this->getDB()->prepare('SELECT * FROM user WHERE pseudo = :pseudo');
+    $sql = $this->getDB()->prepare('SELECT id, pseudo AS username, password, rank_id FROM user WHERE pseudo = :pseudo');
 
     $sql->bindValue(':pseudo', $this->getPseudo());
 
@@ -160,12 +161,12 @@ class User
     $row = $sql->fetch(PDO::FETCH_ASSOC);
     $sql->closeCursor();
 
-    if($this->getPseudo() === $row['pseudo'] && password_verify($this->password, $row['password'])) {
-      $_SESSION['id'] = $row['id'];
-      $_SESSION['username'] = $this->getPseudo();
-      $_SESSION['rank'] = $row['rank_id'];
+    if($this->getPseudo() === $row['username'] && password_verify($this->password, $row['password'])) {
+//      $_SESSION['id'] = $row['id'];
+//      $_SESSION['username'] = $this->getPseudo();
+//      $_SESSION['rank'] = $row['rank_id'];
 
-      return $_SESSION;
+      return $row;
     }
     return false;
   }

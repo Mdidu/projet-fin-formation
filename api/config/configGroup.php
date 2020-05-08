@@ -1,7 +1,7 @@
 <?php
-require_once 'configHeader.php';
+require_once __DIR__.'/configHeader.php';
 
 session_start();
 
-require_once '../trait/Db.php';
-require_once '../class/Group.php';
+require_once __DIR__.'/../trait/Db.php';
+require_once __DIR__.'/../class/Group.php';

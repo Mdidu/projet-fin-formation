@@ -1,14 +1,8 @@
 <div>
   <h2>Tous vos groupes</h2>
-  <div *ngFor="let group of this.groupsService.groups; let i = index">
-
-    <div><a routerLink="/groups/{{group.id}}">{{group.name}}</a></div>
-    <div>{{group.description}}</div>
-    <form [formGroup]="leaveGroupForm" (ngSubmit)="onSubmit()">
-      <input type="hidden" formControlName="groupId">
-<!--      <input type="hidden" formControlName="groupId" [(ngModel)]="group.id">-->
-      <input type="hidden" formControlName="userId">
-      <button>Quitter le groupe</button>
-    </form>
-  </div>
+  <ul *ngFor="let group of this.groupsService.groups; let i = index">
+    <li class="name">{{group.name}}</li>
+    <li class="description">{{group.description}}</li>
+    <button routerLink="/groups/{{group.id}}">Visiter</button>
+  </ul>
 </div>

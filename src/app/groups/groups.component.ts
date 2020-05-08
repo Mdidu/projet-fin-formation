@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GroupsService} from '../services/group/groups.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
+import {MenuComponent} from "./menu/menu.component";
 
 @Component({
   selector: 'app-groups',
@@ -9,14 +10,23 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit, OnDestroy {
+  articles: boolean;
+  members: boolean;
+  invite: boolean;
+  apply: boolean;
+  // si l'on n'est pas sur la page listant les membres vaut false
+  // public members: boolean;
+  // public groupId: number;
 
   constructor(
+    // private menu: MenuComponent,
     public groupsService: GroupsService,
     public authService: AuthService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
+    this.articles = true;
     // récupère l'id du groupe dans l'url et l'injecte dans l'objet groups de type Group du GroupsService
     this.groupsService.groups.id = this.route.snapshot.params.id;
 
@@ -31,6 +41,16 @@ export class GroupsComponent implements OnInit, OnDestroy {
     const userId = this.authService.currentUser.id;
 
     this.groupsService.joinGroup(groupId, userId);
+    setTimeout(() => {
+      this.groupsService.getGroup(groupId);
+    }, 2000);
+  }
+  onApply() {
+    const groupId = this.groupsService.groups.id;
+    const userId = this.authService.currentUser.id;
+
+    this.groupsService.applyGroup(groupId, userId);
+
     setTimeout(() => {
       this.groupsService.getGroup(groupId);
     }, 2000);

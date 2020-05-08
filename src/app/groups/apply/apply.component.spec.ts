@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrivateMessageListComponent } from './private-message-list.component';
+import { ApplyComponent } from './apply.component';
 
-describe('PrivateMessageListComponent', () => {
-  let component: PrivateMessageListComponent;
-  let fixture: ComponentFixture<PrivateMessageListComponent>;
+describe('ApplyComponent', () => {
+  let component: ApplyComponent;
+  let fixture: ComponentFixture<ApplyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrivateMessageListComponent ]
+      declarations: [ ApplyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PrivateMessageListComponent);
+    fixture = TestBed.createComponent(ApplyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

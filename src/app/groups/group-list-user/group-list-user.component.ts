@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {GroupsService} from '../../services/group/groups.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -8,9 +8,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   templateUrl: './group-list-user.component.html',
   styleUrls: ['./group-list-user.component.css']
 })
-export class GroupListUserComponent implements OnInit {
-
-  leaveGroupForm: FormGroup;
+export class GroupListUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
@@ -18,15 +16,11 @@ export class GroupListUserComponent implements OnInit {
     public groupsService: GroupsService) { }
 
   ngOnInit() {
-    // faire en sorte d'obtenir me groupId qui actuellement vaut vide !!
-    this.leaveGroupForm = this.formBuilder.group({
-      groupId: '',
-      userId: this.authService.currentUser.id
-    });
     this.groupsService.getListUserGroups();
   }
 
-  onSubmit() {
+  ngOnDestroy() {
+    this.groupsService.groupClean();
   }
 
 }

@@ -1,5 +1,5 @@
 <?php
-require_once '../config/configCommentary.php';
+require_once __DIR__.'/../config/configCommentary.php';
 
 if(!empty(isset($_GET['id']))){
   $commentary = new Commentary();

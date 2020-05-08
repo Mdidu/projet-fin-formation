@@ -12,6 +12,9 @@ import {GroupListUserComponent} from './groups/group-list-user/group-list-user.c
 import {GroupListComponent} from './groups/group-list/group-list.component';
 import {GroupsComponent} from './groups/groups.component';
 import {AuthGuardService} from './services/auth-guard/auth-guard.service';
+import {MembersListComponent} from './groups/members-list/members-list.component';
+import {ApplyComponent} from "./groups/apply/apply.component";
+import {InviteComponent} from "./groups/invite/invite.component";
 
 
 const routes: Routes = [
@@ -21,10 +24,13 @@ const routes: Routes = [
   // { path: 'groups/group-list', component: GroupListComponent},
   { path: 'auth/signup', component: SignupComponent},
   { path: 'auth/signin', component: SigninComponent},
-  { path: 'user/profile/:id', canActivate: [AuthGuardService], component: ProfileComponent},
+  // { path: 'user/profile/:id', canActivate: [AuthGuardService], component: ProfileComponent},
   // { path: 'private-message-list', component: PrivateMessageListComponent},
   // { path: 'private-message-list/private-message', component: PrivateMessageComponent},
   { path: 'groups/:id', canActivate: [AuthGuardService], component: GroupsComponent},
+  { path: 'groups/:id/members', canActivate: [AuthGuardService], component: MembersListComponent},
+  { path: 'groups/:id/invite', canActivate: [AuthGuardService], component: InviteComponent},
+  { path: 'groups/:id/apply', canActivate: [AuthGuardService], component: ApplyComponent},
   { path: 'group/new-group', canActivate: [AuthGuardService], component: NewGroupComponent}
 ];
 

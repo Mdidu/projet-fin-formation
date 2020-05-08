@@ -12,8 +12,6 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
-import { PrivateMessageListComponent } from './private-message-list/private-message-list.component';
-import { PrivateMessageComponent } from './private-message-list/private-message/private-message.component';
 import { NavLogComponent } from './header/nav-log/nav-log.component';
 import { NavNoLogComponent } from './header/nav-no-log/nav-no-log.component';
 import { GroupListUserComponent } from './groups/group-list-user/group-list-user.component';
@@ -24,11 +22,16 @@ import { NewArticleComponent } from './articles/new-article/new-article.componen
 import { CommentaryComponent } from './commentary/commentary.component';
 import { NewCommentaryComponent } from './commentary/new-commentary/new-commentary.component';
 
-import {AuthService} from "./services/auth.service";
-import {GroupsService} from "./services/group/groups.service";
-import {ArticlesService} from "./services/article/articles.service";
-import {CommentaryService} from "./services/commentary.service";
-import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
+import {AuthService} from './services/auth.service';
+import {GroupsService} from './services/group/groups.service';
+import {ArticlesService} from './services/article/articles.service';
+import {CommentaryService} from './services/commentary.service';
+import {AuthGuardService} from './services/auth-guard/auth-guard.service';
+import { MembersListComponent } from './groups/members-list/members-list.component';
+import { MenuComponent } from './groups/menu/menu.component';
+import { EventComponent } from './event/event.component';
+import { InviteComponent } from './groups/invite/invite.component';
+import { ApplyComponent } from './groups/apply/apply.component';
 
 
 @NgModule({
@@ -40,8 +43,6 @@ import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
     SigninComponent,
     ProfileComponent,
     NewGroupComponent,
-    PrivateMessageListComponent,
-    PrivateMessageComponent,
     NavLogComponent,
     NavNoLogComponent,
     GroupListUserComponent,
@@ -50,7 +51,12 @@ import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
     ArticlesComponent,
     NewArticleComponent,
     CommentaryComponent,
-    NewCommentaryComponent
+    NewCommentaryComponent,
+    MembersListComponent,
+    MenuComponent,
+    EventComponent,
+    InviteComponent,
+    ApplyComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +65,7 @@ import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
     HttpClientModule
   ],
   providers: [
+    GroupsComponent,
     AuthService,
     GroupsService,
     ArticlesService,

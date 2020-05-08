@@ -1,0 +1,31 @@
+#zoneInvite {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 4%;
+  width: 100%;
+}
+main {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: center;*/
+  width: 70%;
+  align-items: center;
+}
+app-menu {
+  margin: 0;
+  width: 15%;
+  margin-right: 5%;
+}
+.publication {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  width: 30%;
+  margin-top: 2%;
+  padding: 10px;
+  border: black 2px solid;
+  border-radius: 6px;
+}

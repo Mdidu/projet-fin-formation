@@ -1,11 +1,11 @@
 #zoneGroup {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  /*justify-content: space-around;*/
   margin-top: 4%;
   width: 100%;
 }
-nav, #blocRightGroup {
+app-menu, #blocRightGroup {
   width: 15%;
 }
 main {
@@ -17,6 +17,8 @@ ul {
   flex-direction: column;
 }
 ul li {
+  margin-left: 0;
+  padding-left: 0;
   margin-top: 2%;
 }
 #leave{

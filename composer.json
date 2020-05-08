@@ -1,0 +1,19 @@
+{
+    "name": "mdidu/mangroup",
+    "require-dev": {
+        "phpunit/phpunit": "^7.5.9",
+        "phpunit/dbunit": "^4.0"
+    },
+    "authors": [
+        {
+            "name": "Mdidu",
+            "email": "alexandre.meddas@gmail.com"
+        }
+    ],
+  "autoload": {
+    "psr-4": {
+      "Mdidu\\Api\\": "api/"
+    }
+  },
+    "require": {}
+}
