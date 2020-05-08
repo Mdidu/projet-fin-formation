@@ -51,9 +51,9 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
     this.groupsService.applyGroup(groupId, userId);
 
-    setTimeout(() => {
-      this.groupsService.getGroup(groupId);
-    }, 2000);
+    // setTimeout(() => {
+    //   this.groupsService.getGroup(groupId);
+    // }, 2000);
   }
   onLeave() {
     const groupId = this.groupsService.groups.id;

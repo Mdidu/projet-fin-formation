@@ -112,7 +112,6 @@ class User
         return $id;
       }
     }
-
     $sql->closeCursor();
 
     return NULL;

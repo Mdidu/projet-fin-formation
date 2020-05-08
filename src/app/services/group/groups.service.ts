@@ -15,6 +15,7 @@ export class GroupsService {
   public members: User = new User();
   private group: Subscription;
   public error: string;
+  public success: string;
 
   constructor(
     private httpClient: HttpClient,
@@ -23,6 +24,7 @@ export class GroupsService {
     private router: Router) {
     this.groupsSubject = new Subject<Group>();
     this.error = '';
+    this.success = '';
   }
 
   // récupère la liste des groupes auquel l'utilisateur appartient
@@ -119,9 +121,14 @@ export class GroupsService {
     return this.group = this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/group/applyGroup/post.php', {groupId, userId})
       .subscribe(
-        () => {
+        (res) => {
+          console.log(res);
           // TODO : afficher à l'utilisateur qu'il a bien postulé !
-
+          if (res) {
+            this.success = 'Vous avez bien postulé pour rejoindre le groupe !';
+          } else if (!res) {
+            this.error = 'Vous avez déjà postulé ou avez reçu une invitation de la part de se groupe !';
+          }
           // this.authService.updateCurrentUserRank(groupId);
         },
         (error) => {

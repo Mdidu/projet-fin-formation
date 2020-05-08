@@ -302,6 +302,64 @@ class Group
       $sql->closeCursor();
     }
   }
+
+  /**
+   * @return int|null
+   */
+  public function searchApplyAndInviteId() {
+
+    $sql = $this->getDB()->prepare(
+      'SELECT * FROM apply WHERE group_id = :group_id AND user_id = :user_id
+                UNION
+                SELECT * FROM invite WHERE group_id = :group_id AND user_id = :user_id');
+
+    $sql->bindValue(':group_id', $this->getId());
+    $sql->bindValue(':user_id', $this->getUserId());
+
+    $sql->execute();
+
+    while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+      if ($row['group_id'] === $this->getId() && $row['user_id'] === $this->getUserId()) {
+        $id = intval($row['id']);
+        $sql->closeCursor();
+
+        return $id;
+      }
+    }
+    $sql->closeCursor();
+
+    return NULL;
+  }
+
+  /**
+   * @param $groupId int
+   * @param $userId int
+   * @return bool
+   */
+  public function applyGroup($groupId, $userId) {
+    $this->setId($groupId);
+    $this->setUserId($userId);
+
+    $applyId = $this->searchApplyAndInviteId();
+
+    if(!isset($applyId)) {
+      $sql = $this->getDB()->prepare('INSERT INTO apply (group_id, user_id) VALUES (:group_id, :user_id)');
+
+      $sql->bindValue(':group_id', $this->getId());
+      $sql->bindValue(':user_id', $this->getUserId());
+
+      $sql->execute();
+      $sql->closeCursor();
+
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * @param $groupId int
+   * @param $userId int
+   */
   public function leaveGroup($groupId, $userId) {
     $this->setId($groupId);
     $this->setUserId($userId);
@@ -315,9 +373,7 @@ class Group
       $sql->execute();
 
       $sql->closeCursor();
-      var_dump('yes');
     }
-    var_dump('no');
   }
 
   /**
@@ -339,6 +395,11 @@ class Group
     return $row;
   }
 
+  /**
+   * @param $id int
+   * @return array
+   *
+   */
   public function getMembers($id) {
     $this->setId($id);
 
