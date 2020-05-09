@@ -13,12 +13,14 @@ import {GroupListComponent} from './groups/group-list/group-list.component';
 import {GroupsComponent} from './groups/groups.component';
 import {AuthGuardService} from './services/auth-guard/auth-guard.service';
 import {MembersListComponent} from './groups/members-list/members-list.component';
-import {ApplyComponent} from "./groups/apply/apply.component";
-import {InviteComponent} from "./groups/invite/invite.component";
+import {ApplyComponent} from './groups/apply/apply.component';
+import {InviteComponent} from './groups/invite/invite.component';
+import {NotificationComponent} from './notification/notification.component';
 
 
 const routes: Routes = [
   { path: 'users/:id/groups', canActivate: [AuthGuardService], component: GroupListUserComponent},
+  { path: 'users/:id/notification', canActivate: [AuthGuardService], component: NotificationComponent},
   // { path: 'groups/group-list-user/:id', component: GroupListUserComponent},
   { path: 'groups', canActivate: [AuthGuardService], component: GroupListComponent},
   // { path: 'groups/group-list', component: GroupListComponent},

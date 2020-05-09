@@ -88,6 +88,19 @@ export class GroupsService {
         }
       );
   }
+  getApply(groupId) {
+    return this.group = this.httpClient
+      .get<any>('http://localhost:80/projet-fin-formation/api/group/applyGroup/get.php?groupId=' + groupId)
+      .subscribe(
+        (res) => {
+          this.members = res;
+          console.log(res);
+        },
+        (error) => {
+          console.log('error' + error);
+    }
+      );
+  }
   addGroup(data) {
     return this.group = this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/group/post.php', data)
@@ -123,7 +136,6 @@ export class GroupsService {
       .subscribe(
         (res) => {
           console.log(res);
-          // TODO : afficher à l'utilisateur qu'il a bien postulé !
           if (res) {
             this.success = 'Vous avez bien postulé pour rejoindre le groupe !';
           } else if (!res) {
@@ -144,6 +156,30 @@ export class GroupsService {
         (res) => {
           console.log(res);
           this.authService.updateCurrentUserRank(groupId);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  acceptApply(groupId, userId) {
+    return this.group = this.httpClient
+      .post<any>('http://localhost:80/projet-fin-formation/api/group/applyGroup/postAccept.php', {groupId, userId})
+      .subscribe(() => {
+          console.log('yes ');
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  rejectApply(groupId, userId) {
+    // devra détruire la ligne dans la table apply et ajouter dans la futur table event pour informer l'utilisateur?
+    return this.group = this.httpClient
+      .delete<any>('http://localhost:80/projet-fin-formation/api/group/applyGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
+      .subscribe(
+        () => {
+          console.log('yes ');
         },
         (error) => {
           console.log('error' + error);

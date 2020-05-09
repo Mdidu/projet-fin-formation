@@ -355,6 +355,23 @@ class Group
     }
     return false;
   }
+  /**
+   * @param $groupId int
+   * @param $userId int
+   */
+  public function deleteApply($groupId, $userId) {
+    $this->setId($groupId);
+    $this->setUserId($userId);
+
+    $sql = $this->getDB()->prepare('DELETE FROM apply WHERE group_id = :group_id && user_id = :user_id');
+
+    $sql->bindValue(':group_id', $this->getId());
+    $sql->bindValue(':user_id', $this->getUserId());
+
+    $sql->execute();
+
+    $sql->closeCursor();
+  }
 
   /**
    * @param $groupId int
@@ -407,6 +424,29 @@ class Group
     $sql->bindValue(':group_id', $this->getId());
     $sql->execute();
     $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $sql->closeCursor();
+
+    return $row;
+  }
+
+  /**
+   * @param $groupId int
+   * @return array
+   */
+  public function getApply($groupId) {
+    $this->setId($groupId);
+
+    $sql = $this->getDB()->prepare('
+                SELECT group_id, user_id, user.pseudo AS username, user.id AS id
+                FROM apply
+                LEFT JOIN user ON apply.user_id = user.id
+                WHERE group_id = :group_id');
+
+    $sql->bindValue(':group_id', $this->getId());
+    $sql->execute();
+
+    $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
     $sql->closeCursor();
 
     return $row;

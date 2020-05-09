@@ -29,9 +29,9 @@ import {CommentaryService} from './services/commentary.service';
 import {AuthGuardService} from './services/auth-guard/auth-guard.service';
 import { MembersListComponent } from './groups/members-list/members-list.component';
 import { MenuComponent } from './groups/menu/menu.component';
-import { EventComponent } from './event/event.component';
 import { InviteComponent } from './groups/invite/invite.component';
 import { ApplyComponent } from './groups/apply/apply.component';
+import { NotificationComponent } from './notification/notification.component';
 
 
 @NgModule({
@@ -54,9 +54,9 @@ import { ApplyComponent } from './groups/apply/apply.component';
     NewCommentaryComponent,
     MembersListComponent,
     MenuComponent,
-    EventComponent,
     InviteComponent,
-    ApplyComponent
+    ApplyComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
