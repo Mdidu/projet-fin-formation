@@ -4,9 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 // import { GroupListComponent } from './group-list/group-list.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { ProfileComponent } from './user/profile/profile.component';
-// import { PrivateMessageListComponent } from './private-message-list/private-message-list.component';
-// import { PrivateMessageComponent } from './private-message-list/private-message/private-message.component';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
 import {GroupListUserComponent} from './groups/group-list-user/group-list-user.component';
 import {GroupListComponent} from './groups/group-list/group-list.component';
@@ -16,19 +13,16 @@ import {MembersListComponent} from './groups/members-list/members-list.component
 import {ApplyComponent} from './groups/apply/apply.component';
 import {InviteComponent} from './groups/invite/invite.component';
 import {NotificationComponent} from './notification/notification.component';
+import {InvitationsComponent} from './invitations/invitations.component';
 
 
 const routes: Routes = [
-  { path: 'users/:id/groups', canActivate: [AuthGuardService], component: GroupListUserComponent},
-  { path: 'users/:id/notification', canActivate: [AuthGuardService], component: NotificationComponent},
-  // { path: 'groups/group-list-user/:id', component: GroupListUserComponent},
-  { path: 'groups', canActivate: [AuthGuardService], component: GroupListComponent},
-  // { path: 'groups/group-list', component: GroupListComponent},
   { path: 'auth/signup', component: SignupComponent},
   { path: 'auth/signin', component: SigninComponent},
-  // { path: 'user/profile/:id', canActivate: [AuthGuardService], component: ProfileComponent},
-  // { path: 'private-message-list', component: PrivateMessageListComponent},
-  // { path: 'private-message-list/private-message', component: PrivateMessageComponent},
+  { path: 'users/:id/groups', canActivate: [AuthGuardService], component: GroupListUserComponent},
+  { path: 'users/:id/invitations', canActivate: [AuthGuardService], component: InvitationsComponent},
+  { path: 'users/:id/notifications', canActivate: [AuthGuardService], component: NotificationComponent},
+  { path: 'groups', canActivate: [AuthGuardService], component: GroupListComponent},
   { path: 'groups/:id', canActivate: [AuthGuardService], component: GroupsComponent},
   { path: 'groups/:id/members', canActivate: [AuthGuardService], component: MembersListComponent},
   { path: 'groups/:id/invite', canActivate: [AuthGuardService], component: InviteComponent},

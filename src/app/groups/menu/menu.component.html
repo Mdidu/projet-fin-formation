@@ -20,8 +20,12 @@
     <li id="leave"><a (click)="this.groupsComponent.onLeave()">Quitter le groupe</a></li>
 
   </ul>
-  <div *ngIf="this.groupsService.error !== ''">{{this.groupsService.error}}</div>
-  <div *ngIf="this.groupsService.success !== ''">{{this.groupsService.success}}</div>
+  <div *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
+    {{this.groupsService.error}}
+  </div>
+  <div *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
+    {{this.groupsService.success}}
+  </div>
 
   <ul *ngIf="this.authService.currentUser.currentGroupRank == 0">
 

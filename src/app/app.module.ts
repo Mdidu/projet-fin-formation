@@ -32,6 +32,7 @@ import { MenuComponent } from './groups/menu/menu.component';
 import { InviteComponent } from './groups/invite/invite.component';
 import { ApplyComponent } from './groups/apply/apply.component';
 import { NotificationComponent } from './notification/notification.component';
+import { InvitationsComponent } from './invitations/invitations.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { NotificationComponent } from './notification/notification.component';
     MenuComponent,
     InviteComponent,
     ApplyComponent,
-    NotificationComponent
+    NotificationComponent,
+    InvitationsComponent
   ],
   imports: [
     BrowserModule,

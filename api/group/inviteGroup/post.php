@@ -12,16 +12,10 @@ if(!empty(isset($data['pseudo'])) && !empty(isset($data['groupId']))) {
     $group = new Group();
     $response = $group->addInviteGroup($data['groupId'], $id);
 
-    $json = json_encode($response);
-    echo $json;
-    return $json;
+    return $response;
   } else {
-    $json = json_encode(false);
-    echo $json;
-    return $json;
+    return false;
   }
 } else {
-  $json = json_encode(false);
-  echo $json;
-  return $json;
+  return false;
 }

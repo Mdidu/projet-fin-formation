@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {GroupsService} from "../../services/group/groups.service";
 import {ActivatedRoute} from "@angular/router";
@@ -9,7 +9,7 @@ import {GroupsComponent} from "../groups.component";
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
   groupId: number;
 
@@ -24,6 +24,9 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  ngOnDestroy(): void {
+    this.groupsService.error = '';
+    this.groupsService.success = '';
+  }
 
 }

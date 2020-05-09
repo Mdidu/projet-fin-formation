@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GroupsService} from '../services/group/groups.service';
 import {ActivatedRoute} from '@angular/router';
 import {NotificationService} from "../services/notification/notification.service";
@@ -8,12 +8,12 @@ import {NotificationService} from "../services/notification/notification.service
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css']
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent implements OnInit, OnDestroy {
 
   userId: number;
 
   constructor(
-    public groupsService: GroupsService,
+    // public groupsService: GroupsService,
     private notificationService: NotificationService,
     private route: ActivatedRoute
   ) {
@@ -21,26 +21,12 @@ export class NotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.listNotification();
-    this.listInvite();
+    this.listNotification();
   }
   listNotification() {
     this.notificationService.getNotification(this.userId);
   }
-  listInvite() {
-    this.groupsService.getInvite(this.userId);
+  ngOnDestroy() {
+    this.notificationService.notificationClean();
   }
-  onAccept(groupId) {
-    this.groupsService.acceptInvite(groupId, this.userId);
-    setTimeout(() => {
-      this.listInvite();
-    }, 1500);
-  }
-  onReject(groupId) {
-    this.groupsService.rejectInvite(groupId, this.userId);
-    setTimeout(() => {
-      this.listInvite();
-    }, 1500);
-  }
-
 }

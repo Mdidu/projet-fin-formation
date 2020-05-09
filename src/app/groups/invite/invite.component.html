@@ -3,12 +3,20 @@
 
   <main>
     <h2>Inviter de nouveaux membres</h2>
+
     <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
       <label> Pseudo (*) : </label>
       <input type="text" formControlName="pseudo">
 
-      <button type="submit" [disabled]="inviteForm.invalid">Connexion</button>
+      <button type="submit" [disabled]="inviteForm.invalid">Inviter</button>
     </form>
-<!--    <div id="error" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>-->
+
+    <div *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
+      {{this.groupsService.error}}
+    </div>
+
+    <div *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
+      {{this.groupsService.success}}
+    </div>
   </main>
 </div>

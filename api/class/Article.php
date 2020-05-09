@@ -194,7 +194,7 @@ class Article
     $this->setGroupId($groupId);
 
     $sql = $this->getDB()->prepare(
-      "SELECT article.id AS id, content, date, pseudo AS author
+      "SELECT article.id AS id, content, date, pseudo AS author, user.id AS authorId
                 FROM article
                 LEFT JOIN user ON article.user_id = user.id
                 WHERE article.group_id = :group_id

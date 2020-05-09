@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../../services/auth.service';
 import {GroupsService} from '../../services/group/groups.service';
 import {CommentaryService} from '../../services/commentary.service';
+import {Commentary} from "../../models/commentary";
+import {ArticlesService} from "../../services/article/articles.service";
 
 @Component({
   selector: 'app-new-commentary',
@@ -12,6 +14,7 @@ import {CommentaryService} from '../../services/commentary.service';
 })
 export class NewCommentaryComponent implements OnInit, OnDestroy {
 
+  private comment: Commentary;
   commentaryForm: FormGroup;
   @Input() articleId;
 
@@ -19,6 +22,7 @@ export class NewCommentaryComponent implements OnInit, OnDestroy {
     private httpClient: HttpClient,
     private formBuilder: FormBuilder,
     public authService: AuthService,
+    public articlesServices: ArticlesService,
     public groupsService: GroupsService,
     private commentaryService: CommentaryService) { }
 
@@ -36,8 +40,11 @@ export class NewCommentaryComponent implements OnInit, OnDestroy {
     this.commentaryService.addCommentary(data);
 
     this.commentaryService.resetCommentaryForm(this.commentaryForm.controls.content);
+
+    this.articlesServices.getArticles(this.groupsService.groups.id);
   }
   ngOnDestroy() {
     this.commentaryService.commentaryClean();
+    this.articlesServices.articleClean();
   }
 }

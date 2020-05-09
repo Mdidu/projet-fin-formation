@@ -15,6 +15,4 @@ if(!empty(isset($data['groupId'])) && !empty(isset($data['userId']))) {
   echo $json;
   return $json;
 }
-// TODO : RESTE a faire pour le système invitation /candidature :
-// todo: réception des invitations / acceptation ou rejet des demandes
-// todo + notification à l'utilisateur pour les candidatures / Suppression des lignes dans invite (database) si rejet ou accepter
+// TODO : RESTE a faire pour le système invitation /candidature : notification à l'utilisateur pour les candidatures

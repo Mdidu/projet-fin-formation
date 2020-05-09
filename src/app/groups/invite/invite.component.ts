@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GroupsComponent} from '../groups.component';
 import {AuthService} from '../../services/auth.service';
 import {GroupsService} from '../../services/group/groups.service';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-invite',
   templateUrl: './invite.component.html',
   styleUrls: ['./invite.component.css']
 })
-export class InviteComponent implements OnInit {
+export class InviteComponent implements OnInit, OnDestroy {
 
   inviteForm: FormGroup;
 
@@ -32,5 +32,9 @@ export class InviteComponent implements OnInit {
     const groupId = this.route.snapshot.params.id;
     this.groupsService.sendInvite(pseudo, groupId);
   }
-
+  ngOnDestroy() {
+    this.groupsService.error = '';
+    this.groupsService.success = '';
+    this.groupsService.groupClean();
+  }
 }

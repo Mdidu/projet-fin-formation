@@ -385,7 +385,6 @@ class Group
 
     $inviteId = $this->searchApplyAndInviteId();
 
-    var_dump($inviteId);
     if(!isset($inviteId)) {
       $sql = $this->getDB()->prepare('INSERT INTO invite (group_id, user_id) VALUES (:group_id, :user_id)');
 
@@ -504,7 +503,7 @@ class Group
     $this->setUserId($userId);
 
     $sql = $this->getDB()->prepare('
-                SELECT group_id, user_id, name, description, security, visibility
+                SELECT group_id AS id, user_id, name, description, security, visibility
                 FROM invite
                 LEFT JOIN groups ON invite.group_id = groups.id
                 WHERE user_id = :user_id');

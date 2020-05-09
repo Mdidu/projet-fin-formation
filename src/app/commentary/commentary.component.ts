@@ -11,7 +11,7 @@ import {Commentary} from '../models/commentary';
 })
 export class CommentaryComponent implements OnInit, OnDestroy {
 
-  public comment: Commentary;
+  private comment: Commentary;
   editForm: FormGroup;
   @Input() articleId;
 

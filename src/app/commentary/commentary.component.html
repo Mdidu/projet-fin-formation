@@ -6,7 +6,13 @@
   <div>{{commentary.content}}</div>
 
   <div class="buttons">
-    <button *ngIf="!commentary.edit" (click)="commentary.edit = true; this.onUpdateForm(commentary.content, commentary.id)">Modifier</button>
+    <button *ngIf="!commentary.edit &&
+            (this.authService.currentUser.currentGroupRank === 1 ||
+            this.authService.currentUser.currentGroupRank === 2 ||
+            this.authService.currentUser.id === commentary.authorId)"
+            (click)="commentary.edit = true; this.onUpdateForm(commentary.content, commentary.id)">
+      Modifier
+    </button>
 
     <form *ngIf="commentary.edit" [formGroup]="editForm" (ngSubmit)="commentary.edit = false; this.onEditSubmit()">
       <input type="text" formControlName="content">
@@ -14,7 +20,12 @@
       <button type="submit" [disabled]="editForm.invalid">Modifier</button>
     </form>
 
-    <button *ngIf="this.authService.currentUser.currentGroupRank == 1" (dblclick)="this.onRemoveCommentary(commentary.id)">Supprimer</button>
+    <button *ngIf="this.authService.currentUser.currentGroupRank === 1 ||
+            this.authService.currentUser.currentGroupRank === 2 ||
+            this.authService.currentUser.id === commentary.authorId"
+            (dblclick)="this.onRemoveCommentary(commentary.id)">
+      Supprimer
+    </button>
 
   </div>
 </div>

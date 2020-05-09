@@ -11,7 +11,6 @@ export class CommentaryService {
   private commentarySubject: Subject<Commentary>;
   public commentaries: Commentary;
   public commentary: Subscription;
-  public test: boolean;
   public success: string;
 
   constructor(private httpClient: HttpClient) {
@@ -19,7 +18,6 @@ export class CommentaryService {
     // this.comment = this.commentarySubject.asObservable();
     // this.comment.subscribe(value => this.commentaries = value);
     this.success = '';
-    this.test = false;
   }
 affichComment(id) {
   this.getCommentary(id)
@@ -45,7 +43,7 @@ affichComment(id) {
           // console.log(res);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -61,7 +59,7 @@ affichComment(id) {
           console.log(res);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -74,7 +72,7 @@ affichComment(id) {
           console.log(res);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }

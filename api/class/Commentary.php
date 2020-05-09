@@ -131,7 +131,7 @@ class Commentary
     $this->setArticleId($articleId);
 
     $sql = $this->getDB()->prepare(
-      "SELECT commentary.id AS id, content, date, pseudo AS author
+      "SELECT commentary.id AS id, content, date, pseudo AS author, user.id AS authorId
                 FROM commentary
                 LEFT JOIN user ON commentary.user_id = user.id
                 WHERE commentary.article_id = :article_id

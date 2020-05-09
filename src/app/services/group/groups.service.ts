@@ -42,7 +42,7 @@ export class GroupsService {
           console.log(res);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         });
   }
   // récupère la liste de tous les groupes du site
@@ -55,7 +55,7 @@ export class GroupsService {
           console.log(res);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -71,7 +71,7 @@ export class GroupsService {
           // console.log(res);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -84,7 +84,7 @@ export class GroupsService {
           console.log(res);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -97,7 +97,7 @@ export class GroupsService {
           console.log(res);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
       }
     );
   }
@@ -114,7 +114,7 @@ export class GroupsService {
           }
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -126,7 +126,7 @@ export class GroupsService {
           this.authService.updateCurrentUserRank(groupId);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -137,14 +137,16 @@ export class GroupsService {
         (res) => {
           console.log(res);
           if (res) {
+            this.error = '';
             this.success = 'Vous avez bien postulé pour rejoindre le groupe !';
           } else {
+            this.success = '';
             this.error = 'Vous avez déjà postulé ou avez reçu une invitation de la part de se groupe !';
           }
           // this.authService.updateCurrentUserRank(groupId);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -158,7 +160,7 @@ export class GroupsService {
           this.authService.updateCurrentUserRank(groupId);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -169,7 +171,7 @@ export class GroupsService {
           console.log('yes ');
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -182,7 +184,7 @@ export class GroupsService {
           console.log('yes ');
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -191,28 +193,27 @@ export class GroupsService {
       .post<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/post.php', {pseudo, groupId})
       .subscribe((res) => {
           if (res) {
+            this.error = '';
             this.success = "L'invitation à bien été envoyé !";
           } else {
+            this.success = '';
             this.error = "L'invitation n'a pas pu être envoyé !";
           }
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
   getInvite(userId) {
-    // console.log('http://localhost:80/projet-fin-formation/api/group/inviteGroup/get.php?userId=' + userId);
     return this.group = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/get.php?userId=' + userId)
       .subscribe(
         (res) => {
           this.groups = res;
-          console.log('res ' + res);
-          console.log('group ' + this.groups);
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
@@ -223,11 +224,12 @@ export class GroupsService {
           console.log('yes ');
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }
   rejectInvite(groupId, userId) {
+    // console.log('http://localhost:80/projet-fin-formation/api/group/inviteGroup/delete.php?groupId=' + groupId + '&userId=' + userId);
     // devra détruire la ligne dans la table apply et ajouter dans la futur table event pour informer l'utilisateur?
     return this.group = this.httpClient
       .delete<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
@@ -236,7 +238,7 @@ export class GroupsService {
           console.log('yes ');
         },
         (error) => {
-          console.log('error' + error);
+          console.log('error' + error.message);
         }
       );
   }

@@ -33,6 +33,7 @@ export class NewGroupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.groupsService.error = '';
     this.groupsService.groupClean();
   }
 }

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {GroupsComponent} from "../groups.component";
-import {GroupsService} from "../../services/group/groups.service";
-import {AuthService} from "../../services/auth.service";
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {GroupsComponent} from '../groups.component';
+import {GroupsService} from '../../services/group/groups.service';
+import {AuthService} from '../../services/auth.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-apply',
   templateUrl: './apply.component.html',
   styleUrls: ['./apply.component.css']
 })
-export class ApplyComponent implements OnInit {
+export class ApplyComponent implements OnInit, OnDestroy {
 
   groupId: number;
 
@@ -42,6 +42,9 @@ export class ApplyComponent implements OnInit {
       this.listApply();
     }, 1500);
     // console.log(userId);
+  }
+  ngOnDestroy() {
+    this.groupsService.groupClean();
   }
 
 }
