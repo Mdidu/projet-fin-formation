@@ -1,10 +1,14 @@
 <div id="zoneInvite">
   <app-menu></app-menu>
 
-  <!--  <main>-->
-  <h2>Inviter de nouveaux membres</h2>
-  <!--    <div class="publication" *ngFor="let member of this.groupsService.members; let i = index" >-->
-  <!--      {{member.username}}-->
-  <!--    </div>-->
-  <!--  </main>-->
+  <main>
+    <h2>Inviter de nouveaux membres</h2>
+    <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
+      <label> Pseudo (*) : </label>
+      <input type="text" formControlName="pseudo">
+
+      <button type="submit" [disabled]="inviteForm.invalid">Connexion</button>
+    </form>
+<!--    <div id="error" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>-->
+  </main>
 </div>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {GroupsComponent} from "../groups.component";
-import {AuthService} from "../../services/auth.service";
-import {GroupsService} from "../../services/group/groups.service";
+import {GroupsComponent} from '../groups.component';
+import {AuthService} from '../../services/auth.service';
+import {GroupsService} from '../../services/group/groups.service';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-invite',
@@ -10,13 +12,25 @@ import {GroupsService} from "../../services/group/groups.service";
 })
 export class InviteComponent implements OnInit {
 
+  inviteForm: FormGroup;
+
   constructor(
+    private formBuilder: FormBuilder,
     private groupsComponent: GroupsComponent,
     public authService: AuthService,
-    public groupsService: GroupsService) { }
+    public groupsService: GroupsService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.groupsComponent.invite = true;
+    this.inviteForm = this.formBuilder.group({
+      pseudo: ['', Validators.required]
+    });
+  }
+  onSubmit() {
+    const pseudo = this.inviteForm.controls.pseudo.value;
+    const groupId = this.route.snapshot.params.id;
+    this.groupsService.sendInvite(pseudo, groupId);
   }
 
 }

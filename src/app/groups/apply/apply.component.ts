@@ -12,6 +12,7 @@ import {ActivatedRoute} from "@angular/router";
 export class ApplyComponent implements OnInit {
 
   groupId: number;
+
   constructor(
     private groupsComponent: GroupsComponent,
     public authService: AuthService,

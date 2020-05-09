@@ -94,12 +94,10 @@ class User
   }
 
   /**
-   * @param $pseudo string
    * @return int|null
    */
-  private function searchUserId($pseudo)
+  public function searchUserId()
   {
-    $this->setPseudo($pseudo);
     $sql = $this->getDB()->prepare('SELECT id, pseudo FROM user');
 
     $sql->execute();
@@ -123,7 +121,7 @@ class User
    */
   public function addUser($password)
   {
-    $this->setId($this->searchUserId($this->getPseudo()));
+    $this->setId($this->searchUserId());
     $this->setPassword($password);
 
     if(!isset($this->id)) {

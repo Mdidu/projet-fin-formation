@@ -16,16 +16,18 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.signinForm = this.formBuilder.group({
-      pseudo: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      pseudo: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   onSubmit() {
     // const data = JSON.stringify(this.signinForm.value);
     // const data = this.signinForm.value;
+    const pseudo = this.signinForm.controls.pseudo.value;
+    const password = this.signinForm.controls.password.value;
 
-    this.authService.login(this.signinForm.controls.pseudo.value, this.signinForm.controls.password.value);
+    this.authService.login(pseudo, password);
 
   }
 }

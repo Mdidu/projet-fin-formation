@@ -319,7 +319,8 @@ class Group
     $sql->execute();
 
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-      if ($row['group_id'] === $this->getId() && $row['user_id'] === $this->getUserId()) {
+//      var_dump($row);
+      if ($row['group_id'] == $this->getId() && $row['user_id'] == $this->getUserId()) {
         $id = intval($row['id']);
         $sql->closeCursor();
 
@@ -336,7 +337,7 @@ class Group
    * @param $userId int
    * @return bool
    */
-  public function applyGroup($groupId, $userId) {
+  public function addApplyGroup($groupId, $userId) {
     $this->setId($groupId);
     $this->setUserId($userId);
 
@@ -364,6 +365,50 @@ class Group
     $this->setUserId($userId);
 
     $sql = $this->getDB()->prepare('DELETE FROM apply WHERE group_id = :group_id && user_id = :user_id');
+
+    $sql->bindValue(':group_id', $this->getId());
+    $sql->bindValue(':user_id', $this->getUserId());
+
+    $sql->execute();
+
+    $sql->closeCursor();
+  }
+
+  /**
+   * @param $groupId int
+   * @param $userId int
+   * @return bool
+   */
+  public function addInviteGroup($groupId, $userId) {
+    $this->setId($groupId);
+    $this->setUserId($userId);
+
+    $inviteId = $this->searchApplyAndInviteId();
+
+    var_dump($inviteId);
+    if(!isset($inviteId)) {
+      $sql = $this->getDB()->prepare('INSERT INTO invite (group_id, user_id) VALUES (:group_id, :user_id)');
+
+      $sql->bindValue(':group_id', $this->getId());
+      $sql->bindValue(':user_id', $this->getUserId());
+
+      $sql->execute();
+      $sql->closeCursor();
+
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * @param $groupId int
+   * @param $userId int
+   */
+  public function deleteInvite($groupId, $userId) {
+    $this->setId($groupId);
+    $this->setUserId($userId);
+
+    $sql = $this->getDB()->prepare('DELETE FROM invite WHERE group_id = :group_id && user_id = :user_id');
 
     $sql->bindValue(':group_id', $this->getId());
     $sql->bindValue(':user_id', $this->getUserId());
@@ -443,6 +488,28 @@ class Group
                 WHERE group_id = :group_id');
 
     $sql->bindValue(':group_id', $this->getId());
+    $sql->execute();
+
+    $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql->closeCursor();
+
+    return $row;
+  }
+  /**
+   * @param $userId int
+   * @return array
+   */
+  public function getInvite($userId) {
+    $this->setUserId($userId);
+
+    $sql = $this->getDB()->prepare('
+                SELECT group_id, user_id, name, description, security, visibility
+                FROM invite
+                LEFT JOIN groups ON invite.group_id = groups.id
+                WHERE user_id = :user_id');
+
+    $sql->bindValue(':user_id', $this->getUserId());
     $sql->execute();
 
     $row = $sql->fetchAll(PDO::FETCH_ASSOC);

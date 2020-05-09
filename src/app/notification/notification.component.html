@@ -1,1 +1,11 @@
-<p>notification works!</p>
+<main>
+  <h2>Invitation à rejoindre des groupes</h2>
+  <div class="publication" *ngFor="let group of this.groupsService.groups; let i = index" >
+    <div>{{group.name}}</div>
+    <div>{{group.description}}</div>
+    <div>{{group.security}}</div>
+    <div>{{group.visibility}}</div>
+    <button (click)="onAccept(group.id)">Accepter</button>
+    <button (click)="onReject(group.id)">Rejeter</button>
+  </div>
+</main>

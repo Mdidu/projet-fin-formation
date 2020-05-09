@@ -98,8 +98,8 @@ export class GroupsService {
         },
         (error) => {
           console.log('error' + error);
-    }
-      );
+      }
+    );
   }
   addGroup(data) {
     return this.group = this.httpClient
@@ -138,7 +138,7 @@ export class GroupsService {
           console.log(res);
           if (res) {
             this.success = 'Vous avez bien postulé pour rejoindre le groupe !';
-          } else if (!res) {
+          } else {
             this.error = 'Vous avez déjà postulé ou avez reçu une invitation de la part de se groupe !';
           }
           // this.authService.updateCurrentUserRank(groupId);
@@ -177,6 +177,60 @@ export class GroupsService {
     // devra détruire la ligne dans la table apply et ajouter dans la futur table event pour informer l'utilisateur?
     return this.group = this.httpClient
       .delete<any>('http://localhost:80/projet-fin-formation/api/group/applyGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
+      .subscribe(
+        () => {
+          console.log('yes ');
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  sendInvite(pseudo, groupId) {
+    return this.group = this.httpClient
+      .post<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/post.php', {pseudo, groupId})
+      .subscribe((res) => {
+          if (res) {
+            this.success = "L'invitation à bien été envoyé !";
+          } else {
+            this.error = "L'invitation n'a pas pu être envoyé !";
+          }
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  getInvite(userId) {
+    // console.log('http://localhost:80/projet-fin-formation/api/group/inviteGroup/get.php?userId=' + userId);
+    return this.group = this.httpClient
+      .get<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/get.php?userId=' + userId)
+      .subscribe(
+        (res) => {
+          this.groups = res;
+          console.log('res ' + res);
+          console.log('group ' + this.groups);
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  acceptInvite(groupId, userId) {
+    return this.group = this.httpClient
+      .post<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/postAccept.php', {groupId, userId})
+      .subscribe(() => {
+          console.log('yes ');
+        },
+        (error) => {
+          console.log('error' + error);
+        }
+      );
+  }
+  rejectInvite(groupId, userId) {
+    // devra détruire la ligne dans la table apply et ajouter dans la futur table event pour informer l'utilisateur?
+    return this.group = this.httpClient
+      .delete<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
       .subscribe(
         () => {
           console.log('yes ');
