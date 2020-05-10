@@ -183,7 +183,7 @@ class Group
    * @return array
    */
   public function searchAllGroup() {
-    $sql = $this->getDB()->prepare('SELECT * FROM groups');
+    $sql = $this->getDB()->prepare("SELECT * FROM groups WHERE visibility = 'visible'");
 
     $sql->execute();
 
@@ -280,6 +280,54 @@ class Group
     return false;
   }
 
+  /**
+   * @param $groupId int
+   * @param $name string
+   */
+  public function updateName($groupId, $name) {
+    $this->setId($groupId);
+    $this->setName($name);
+
+    $sql = $this->getDB()->prepare('UPDATE groups SET name = :name WHERE id = :id');
+    $sql->bindValue(':name', $this->getName());
+    $sql->bindValue(':id', $this->getId());
+    $sql->execute();
+    $sql->closeCursor();
+  }
+  /**
+   * @param $groupId int
+   * @param $description string
+   */
+  public function updateDescription($groupId, $description) {
+    $this->setId($groupId);
+    $this->setDescription($description);
+
+    $sql = $this->getDB()->prepare('UPDATE groups SET description = :description WHERE id = :id');
+    $sql->bindValue(':description', $this->getDescription());
+    $sql->bindValue(':id', $this->getId());
+    $sql->execute();
+    $sql->closeCursor();
+  }
+  public function updateUserRank($rankId, $groupId, $userId) {
+    $this->setRankUser($rankId);
+    $this->setId($groupId);
+    $this->setUserId($userId);
+
+    $sql = $this->getDB()->prepare('
+                UPDATE group_rank
+                SET rank_id = :rank_id
+                WHERE group_id = :group_id AND user_id = :user_id');
+
+    $sql->bindValue(':rank_id', $this->getRankUser());
+    $sql->bindValue(':group_id', $this->getId());
+    $sql->bindValue(':user_id', $this->getUserId());
+
+    $sql->execute();
+
+    $sql->closeCursor();
+
+    return true;
+  }
   /**
    * @param $groupId int
    * @param $userId int
@@ -464,7 +512,11 @@ class Group
   public function getMembers($id) {
     $this->setId($id);
 
-    $sql = $this->getDB()->prepare('SELECT pseudo AS username FROM group_rank LEFT JOIN user ON group_rank.user_id = user.id WHERE group_id = :group_id');
+    $sql = $this->getDB()->prepare('
+                SELECT user.id AS id, pseudo AS username
+                FROM group_rank
+                LEFT JOIN user ON group_rank.user_id = user.id
+                WHERE group_id = :group_id');
     $sql->bindValue(':group_id', $this->getId());
     $sql->execute();
     $row = $sql->fetchAll(PDO::FETCH_ASSOC);

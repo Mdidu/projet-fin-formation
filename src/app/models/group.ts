@@ -5,4 +5,5 @@ export class Group {
   date: number;
   security: string;
   visibility: string;
+  display: boolean;
 }

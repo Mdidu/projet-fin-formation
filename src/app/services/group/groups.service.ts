@@ -242,6 +242,52 @@ export class GroupsService {
         }
       );
   }
+  updateNameGroup(groupId, content) {
+
+    console.log(groupId + content);
+    return this.group = this.httpClient
+      .put<any>('http://localhost:80/projet-fin-formation/api/group/updateName.php', {groupId, content})
+      .subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log('error' + error.message);
+        }
+      );
+  }
+  updateDescriptionGroup(groupId, content) {
+    console.log(groupId + content);
+    return this.group = this.httpClient
+      .put<any>('http://localhost:80/projet-fin-formation/api/group/updateDescription.php', {groupId, content})
+      .subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log('error' + error.message);
+        }
+      );
+  }
+  updateRankUser(rankId, groupId, userId){
+      return this.group = this.httpClient
+          .put<any>('http://localhost:80/projet-fin-formation/api/group/members/put.php', {rankId, groupId, userId})
+          .subscribe(
+              (res) => {
+                  console.log(res);
+                  if (res) {
+                      this.error = '';
+                      this.success = "Vous avez bien changé le rang de l'utilisateur !";
+                  } else {
+                      this.success = '';
+                      this.error = "Vous n'avez pas changé le rang de l'utilisateur !";
+                  }
+              },
+              (error) => {
+                  console.log('error' + error.message);
+              }
+          );
+  }
   groupClean() {
     if (this.group) {
       this.group.unsubscribe();

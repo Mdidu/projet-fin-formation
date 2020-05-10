@@ -3,8 +3,33 @@
   <app-menu></app-menu>
 
   <main id="blocCenter">
+
     <h2>{{this.groupsService.groups.name}}</h2>
+
+    <button *ngIf="this.authService.currentUser.currentGroupRank === 1 &&
+                   !this.editName"
+            (click)="onUpdateNameGroupForm(this.groupsService.groups.name)">
+      Modifier le nom du groupe
+    </button>
+
+    <form *ngIf="this.editName" [formGroup]="updateNameGroupForm" (ngSubmit)="onUpdateNameGroup()">
+      <input type="text" formControlName="name">
+
+      <button (click)="onUpdateNameGroup()" [disabled]="updateNameGroupForm.invalid">Modifier le nom du groupe</button>
+    </form>
+
     <div>{{this.groupsService.groups.description}}</div>
+    <button *ngIf="this.authService.currentUser.currentGroupRank === 1 &&
+                   !this.editDescription"
+            (click)="onUpdateDescriptionGroupForm(this.groupsService.groups.description)">
+      Modifier le nom du groupe
+    </button>
+    <form *ngIf="this.editDescription" [formGroup]="updateDescriptionGroupForm" (ngSubmit)="onUpdateDescriptionGroup()">
+<!--      <input type="text" formControlName="description">-->
+      <textarea formControlName="description" cols="30" rows="10"></textarea>
+
+      <button (click)="onUpdateDescriptionGroup()" [disabled]="updateDescriptionGroupForm.invalid">Modifier le nom du groupe</button>
+      </form>
 
     <app-new-article *ngIf="this.authService.currentUser.currentGroupRank > 0 || this.groupsService.groups.security === 'public'"></app-new-article>
 

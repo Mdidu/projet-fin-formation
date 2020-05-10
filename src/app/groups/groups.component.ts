@@ -3,6 +3,7 @@ import {GroupsService} from '../services/group/groups.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {MenuComponent} from "./menu/menu.component";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-groups',
@@ -14,16 +15,24 @@ export class GroupsComponent implements OnInit, OnDestroy {
   members: boolean;
   invite: boolean;
   apply: boolean;
-  // si l'on n'est pas sur la page listant les membres vaut false
-  // public members: boolean;
-  // public groupId: number;
+  editName: boolean;
+  editDescription: boolean;
+
+  groupId: number;
+  userId: number;
+
+  updateNameGroupForm: FormGroup;
+  updateDescriptionGroupForm: FormGroup;
 
   constructor(
-    // private menu: MenuComponent,
     public groupsService: GroupsService,
     public authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private formBuilder: FormBuilder) {
+    this.editName = false;
+    this.editDescription = false;
+  }
 
   ngOnInit() {
     this.articles = true;
@@ -31,37 +40,67 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.groupsService.groups.id = this.route.snapshot.params.id;
 
     this.authService.updateCurrentUserRank(this.groupsService.groups.id);
+
     // appel la méthode getGroup afin d'afficher les informations du groupe que l'utilisateur visite
     this.groupsService.getGroup(this.groupsService.groups.id);
 
+    this.groupId = this.groupsService.groups.id;
+    this.userId = this.authService.currentUser.id;
   }
-
+  onUpdateNameGroupForm(content) {
+    this.updateNameGroupForm = this.formBuilder.group({
+      name: [content, Validators.required]
+    });
+    this.editName = true;
+  }
+  onUpdateDescriptionGroupForm(content) {
+    this.updateDescriptionGroupForm = this.formBuilder.group({
+      description: [content, Validators.required]
+    });
+    this.editDescription = true;
+  }
   onJoin() {
-    const groupId = this.groupsService.groups.id;
-    const userId = this.authService.currentUser.id;
+    // const groupId = this.groupsService.groups.id;
+    // const userId = this.authService.currentUser.id;
 
-    this.groupsService.joinGroup(groupId, userId);
+    this.groupsService.joinGroup(this.groupId, this.userId);
     setTimeout(() => {
-      this.groupsService.getGroup(groupId);
+      this.groupsService.getGroup(this.groupId);
     }, 2000);
   }
   onApply() {
-    const groupId = this.groupsService.groups.id;
-    const userId = this.authService.currentUser.id;
+    // const groupId = this.groupsService.groups.id;
+    // const userId = this.authService.currentUser.id;
 
-    this.groupsService.applyGroup(groupId, userId);
+    this.groupsService.applyGroup(this.groupId, this.userId);
 
     // setTimeout(() => {
     //   this.groupsService.getGroup(groupId);
     // }, 2000);
   }
   onLeave() {
-    const groupId = this.groupsService.groups.id;
-    const userId = this.authService.currentUser.id;
+    // const groupId = this.groupsService.groups.id;
+    // const userId = this.authService.currentUser.id;
 
-    this.groupsService.leaveGroup(groupId, userId);
+    this.groupsService.leaveGroup(this.groupId, this.userId);
     setTimeout(() => {
       this.router.navigate(['groups']);
+    }, 2000);
+  }
+  onUpdateNameGroup() {
+    const data = this.updateNameGroupForm.controls.name.value;
+    this.groupsService.updateNameGroup(this.groupId, data);
+    this.editName = false;
+    setTimeout(() => {
+      this.groupsService.getGroup(this.groupId);
+    }, 2000);
+  }
+  onUpdateDescriptionGroup() {
+    const data = this.updateDescriptionGroupForm.controls.description.value;
+    this.groupsService.updateDescriptionGroup(this.groupId, data);
+    this.editDescription = false;
+    setTimeout(() => {
+      this.groupsService.getGroup(this.groupId);
     }, 2000);
   }
   ngOnDestroy() {

@@ -9,7 +9,9 @@
       <a routerLink="/groups/{{groupId}}/invite">Inviter dans le groupe</a>
     </li>
 
-    <li [ngClass]="{'focus': this.groupsComponent.apply === true }">
+    <li *ngIf="this.authService.currentUser.currentGroupRank === 1 ||
+              this.authService.currentUser.currentGroupRank === 2"
+        [ngClass]="{'focus': this.groupsComponent.apply === true }">
       <a routerLink="/groups/{{groupId}}/apply">Candidatures</a>
     </li>
 
