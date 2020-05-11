@@ -1,6 +1,10 @@
 <header>
   <h1>ManGroup</h1>
   <nav>
+    <h3 *ngIf="this.authService.currentUser">
+      Bienvenue, {{this.authService.currentUser.username}} !
+    </h3>
+
     <ul>
       <!--    Si l'utilisateur n'est pas connecté affiche le contenu du component navNoLog -->
       <app-nav-no-log *ngIf="!this.authService.currentUser"></app-nav-no-log>

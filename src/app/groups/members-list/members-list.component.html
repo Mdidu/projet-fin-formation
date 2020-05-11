@@ -3,11 +3,11 @@
 <main>
   <h2>Liste des membres du groupe</h2>
 
-  <div *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
+  <div class="error" *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
     {{this.groupsService.error}}
   </div>
 
-  <div *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
+  <div class="success" *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
     {{this.groupsService.success}}
   </div>
 

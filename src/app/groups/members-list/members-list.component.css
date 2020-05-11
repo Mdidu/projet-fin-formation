@@ -15,3 +15,8 @@ main {
   border: black 2px solid;
   border-radius: 6px;
 }
+@media (max-width: 961px) {
+  .publication {
+    width: 70%;
+  }
+}

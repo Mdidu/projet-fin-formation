@@ -21,8 +21,6 @@ app-groups, app-apply, app-invite, app-members-list {
   width: 100%;
 }
 app-menu {
-  /*Permet de prendre 100% de sa taille maximal potentiel*/
-  /*display: contents;*/
   width: 25%;
   background-color: #ccd6d5;
 }
@@ -64,8 +62,41 @@ button {
 .success, .succesAddArticle {
   color: green;
   font-size: 20px;
+  animation-name: success;
+  animation-duration: 2s;
 }
 .error, #errorRegister, #errorLog {
   color: red;
   font-size: 20px;
+  animation-name: error;
+  animation-duration: 2s;
+}
+@keyframes success {
+  from {
+    font-size: 1px;
+  }
+  to {
+    font-size: 20px;
+  }
+}
+@keyframes error {
+  from {
+    font-size: 1px;
+  }
+  to {
+    font-size: 20px;
+  }
+}
+@media (max-width: 961px) {
+  app-groups, app-apply, app-invite, app-members-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  app-groups h2, app-apply h2, app-invite h2, app-members-list h2 {
+    text-align: center;
+  }
+  app-menu {
+    width: 100%;
+  }
 }

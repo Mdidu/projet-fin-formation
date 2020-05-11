@@ -23,4 +23,5 @@ li, button {
 }
 .description, .security {
   font-size: 18px;
+  padding: 5px;
 }

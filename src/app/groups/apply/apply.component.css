@@ -22,4 +22,8 @@ button {
   display: flex;
   flex-direction: row;
 }
-
+@media (max-width: 961px) {
+  .publication {
+    width: 70%;
+  }
+}

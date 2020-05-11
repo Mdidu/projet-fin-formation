@@ -9,10 +9,21 @@ h1 {
   padding-top: 5px;
   text-align: center;
 }
+h3 {
+  text-align: center;
+}
 app-nav-no-log, app-nav-log {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   font-size: 16px;
   padding-bottom: 5px;
+}
+@media (max-width: 961px) {
+  ul {
+    margin-bottom: 0;
+  }
+  app-nav-log {
+    flex-wrap: wrap;
+  }
 }

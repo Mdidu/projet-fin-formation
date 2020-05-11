@@ -33,6 +33,8 @@ import { InviteComponent } from './groups/invite/invite.component';
 import { ApplyComponent } from './groups/apply/apply.component';
 import { NotificationComponent } from './notification/notification.component';
 import { InvitationsComponent } from './invitations/invitations.component';
+import { HomeComponent } from './home/home.component';
+import { FourohfourComponent } from './fourohfour/fourohfour.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { InvitationsComponent } from './invitations/invitations.component';
     InviteComponent,
     ApplyComponent,
     NotificationComponent,
-    InvitationsComponent
+    InvitationsComponent,
+    HomeComponent,
+    FourohfourComponent
   ],
   imports: [
     BrowserModule,
