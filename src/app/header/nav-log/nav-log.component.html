@@ -1,8 +1,8 @@
-<li><a routerLink="">Groupes récents</a></li>
-<li><a routerLink="groups">Tous les groupes</a></li>
-<li><a routerLink="users/{{this.authService.currentUser.id}}/groups">Vos groupes</a></li>
-<li><a routerLink="group/new-group">Créer un groupe</a></li>
-<li><a routerLink="users/{{this.authService.currentUser.id}}/invitations">Invitations</a></li>
-<li><a routerLink="users/{{this.authService.currentUser.id}}/notifications">Notifications</a></li>
-<li>Bienvenue, {{this.authService.currentUser.username}} !</li>
-<li><a (click)="authService.logout()">Logout</a></li>
+<!--<li> routerLink="">Groupes récents</li>-->
+<li routerLink="groups">Tous les groupes</li>
+<li routerLink="users/{{this.authService.currentUser.id}}/groups">Vos groupes</li>
+<li routerLink="group/new-group">Créer un groupe</li>
+<li routerLink="users/{{this.authService.currentUser.id}}/invitations">Invitations</li>
+<!--<li> routerLink="users/{{this.authService.currentUser.id}}/notifications">Notifications</li>-->
+<li id="welcomeUser">Bienvenue, {{this.authService.currentUser.username}} !</li>
+<li (click)="authService.logout()">Déconnexion</li>

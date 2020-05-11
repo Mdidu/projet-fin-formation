@@ -1,42 +1,44 @@
 <nav id="blocLeft">
   <ul *ngIf="this.authService.currentUser.currentGroupRank > 0">
 
-    <li [ngClass]="{'focus': this.groupsComponent.articles === true }">
-      <a routerLink="/groups/{{groupId}}">Article</a>
+    <li [ngClass]="{'focus': this.groupsComponent.articles === true }"
+      routerLink="/groups/{{groupId}}">
+      Article
     </li>
 
-    <li [ngClass]="{'focus': this.groupsComponent.invite === true }">
-      <a routerLink="/groups/{{groupId}}/invite">Inviter dans le groupe</a>
+    <li [ngClass]="{'focus': this.groupsComponent.invite === true}"
+      routerLink="/groups/{{groupId}}/invite">
+      Inviter
     </li>
 
     <li *ngIf="this.authService.currentUser.currentGroupRank === 1 ||
               this.authService.currentUser.currentGroupRank === 2"
-        [ngClass]="{'focus': this.groupsComponent.apply === true }">
-      <a routerLink="/groups/{{groupId}}/apply">Candidatures</a>
+        [ngClass]="{'focus': this.groupsComponent.apply === true }"
+      routerLink="/groups/{{groupId}}/apply">
+      Candidatures
     </li>
 
-    <li [ngClass]="{'focus': this.groupsComponent.members === true }">
-      <a routerLink="/groups/{{groupId}}/members">Membres</a>
+    <li [ngClass]="{'focus': this.groupsComponent.members === true }"
+      routerLink="/groups/{{groupId}}/members">
+      Membres
     </li>
 
-    <li id="leave"><a (click)="this.groupsComponent.onLeave()">Quitter le groupe</a></li>
+    <li id="leave" (click)="this.groupsComponent.onLeave()">
+      Quitter
+    </li>
 
   </ul>
-  <div *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
-    {{this.groupsService.error}}
-  </div>
-  <div *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
-    {{this.groupsService.success}}
-  </div>
 
   <ul *ngIf="this.authService.currentUser.currentGroupRank == 0">
 
-    <li *ngIf="this.groupsService.groups.security === 'public'">
-      <a (click)="this.groupsComponent.onJoin()">Rejoindre le groupe</a>
+    <li *ngIf="this.groupsService.groups.security === 'public'"
+      (click)="this.groupsComponent.onJoin()">
+      Rejoindre
     </li>
 
-    <li *ngIf="this.groupsService.groups.security === 'privé'">
-      <a (click)="this.groupsComponent.onApply()">Demande d'adhésion</a>
+    <li *ngIf="this.groupsService.groups.security === 'privé'"
+      (click)="this.groupsComponent.onApply()">
+      Postuler
     </li>
   </ul>
 </nav>

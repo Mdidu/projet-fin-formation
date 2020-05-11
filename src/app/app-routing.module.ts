@@ -14,6 +14,8 @@ import {ApplyComponent} from './groups/apply/apply.component';
 import {InviteComponent} from './groups/invite/invite.component';
 import {NotificationComponent} from './notification/notification.component';
 import {InvitationsComponent} from './invitations/invitations.component';
+import {HomeComponent} from './home/home.component';
+import {FourohfourComponent} from './fourohfour/fourohfour.component';
 
 
 const routes: Routes = [
@@ -27,7 +29,10 @@ const routes: Routes = [
   { path: 'groups/:id/members', canActivate: [AuthGuardService], component: MembersListComponent},
   { path: 'groups/:id/invite', canActivate: [AuthGuardService], component: InviteComponent},
   { path: 'groups/:id/apply', canActivate: [AuthGuardService], component: ApplyComponent},
-  { path: 'group/new-group', canActivate: [AuthGuardService], component: NewGroupComponent}
+  { path: 'group/new-group', canActivate: [AuthGuardService], component: NewGroupComponent},
+  { path: '', component: HomeComponent},
+  { path: 'not-found', component: FourohfourComponent},
+  { path: '**', redirectTo: 'not-found'},
 ];
 
 @NgModule({

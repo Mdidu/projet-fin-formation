@@ -44,6 +44,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
     // console.log(userId);
   }
   ngOnDestroy() {
+    this.groupsComponent.apply = false;
     this.groupsService.groupClean();
   }
 

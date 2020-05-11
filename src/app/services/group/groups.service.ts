@@ -143,7 +143,6 @@ export class GroupsService {
             this.success = '';
             this.error = 'Vous avez déjà postulé ou avez reçu une invitation de la part de se groupe !';
           }
-          // this.authService.updateCurrentUserRank(groupId);
         },
         (error) => {
           console.log('error' + error.message);

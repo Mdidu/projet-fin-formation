@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
 
   signinForm: FormGroup;
 
@@ -28,6 +28,8 @@ export class SigninComponent implements OnInit {
     const password = this.signinForm.controls.password.value;
 
     this.authService.login(pseudo, password);
-
+  }
+  ngOnDestroy() {
+    this.authService.error = '';
   }
 }

@@ -1,29 +1,29 @@
-#zoneGroup {
-  display: flex;
-  flex-direction: row;
-  /*justify-content: space-around;*/
-  margin-top: 4%;
-  width: 100%;
-}
-app-menu, #blocRightGroup {
-  width: 15%;
-}
 main {
   width: 70%;
   text-align: center;
 }
-
 ul {
   flex-direction: column;
 }
 ul li {
   margin-left: 0;
   padding-left: 0;
-  margin-top: 2%;
+}
+app-menu {
+  padding-top: 2%;
 }
 #leave{
   margin-top: 12%;
 }
-#leave > a {
-  color: red;
+.name {
+  padding-top: 2%;
+}
+.name, .description {
+  margin-bottom: 2.5%;
+}
+.name button, .description button {
+  margin-top: 1%;
+}
+.description div {
+  margin-bottom: 2%;
 }

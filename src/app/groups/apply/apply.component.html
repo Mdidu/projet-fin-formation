@@ -1,12 +1,12 @@
-<div id="zoneApply">
-  <app-menu></app-menu>
+<app-menu></app-menu>
 
-  <main>
-    <h2>Candidature pour rejoindre le groupe</h2>
-    <div class="publication" *ngFor="let member of this.groupsService.members; let i = index" >
-      {{member.username}}
+<main>
+  <h2>Candidature pour rejoindre le groupe</h2>
+  <div class="publication" *ngFor="let member of this.groupsService.members; let i = index" >
+    {{member.username}}
+    <div class="rowButton">
       <button (click)="onAccept(member.id)">Accepter</button>
       <button (click)="onReject(member.id)">Rejeter</button>
     </div>
-  </main>
-</div>
+  </div>
+</main>

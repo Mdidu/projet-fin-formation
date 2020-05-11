@@ -1,22 +1,20 @@
-<div id="zoneInvite">
-  <app-menu></app-menu>
+<app-menu></app-menu>
 
-  <main>
-    <h2>Inviter de nouveaux membres</h2>
+<main>
+  <h2>Inviter de nouveaux membres</h2>
 
-    <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
-      <label> Pseudo (*) : </label>
-      <input type="text" formControlName="pseudo">
+  <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
+    <label> Pseudo (*) : </label>
+    <input type="text" formControlName="pseudo">
 
-      <button type="submit" [disabled]="inviteForm.invalid">Inviter</button>
-    </form>
+    <button type="submit" [disabled]="inviteForm.invalid">Inviter</button>
+  </form>
 
-    <div *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
-      {{this.groupsService.error}}
-    </div>
+  <div *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
+    {{this.groupsService.error}}
+  </div>
 
-    <div *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
-      {{this.groupsService.success}}
-    </div>
-  </main>
-</div>
+  <div *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
+    {{this.groupsService.success}}
+  </div>
+</main>

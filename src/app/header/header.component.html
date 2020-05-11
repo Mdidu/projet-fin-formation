@@ -1,9 +1,13 @@
-<nav>
-  <ul>
-    <!--    Si l'utilisateur n'est pas connecté affiche le contenu du component navNoLog -->
-    <app-nav-no-log *ngIf="!this.authService.currentUser"></app-nav-no-log>
-    <!--    Si l'utilisateur est connecté affiche le contenu du component navLog et
-    passe le currentUser au component navLog en le stockant dans currentLogUser via le property binding -->
-    <app-nav-log *ngIf="this.authService.currentUser"></app-nav-log>
-  </ul>
-</nav>
+<header>
+  <h1>ManGroup</h1>
+  <nav>
+    <ul>
+      <!--    Si l'utilisateur n'est pas connecté affiche le contenu du component navNoLog -->
+      <app-nav-no-log *ngIf="!this.authService.currentUser"></app-nav-no-log>
+      <!--    Si l'utilisateur est connecté affiche le contenu du component navLog et
+      passe le currentUser au component navLog en le stockant dans currentLogUser via le property binding -->
+      <app-nav-log *ngIf="this.authService.currentUser"></app-nav-log>
+    </ul>
+  </nav>
+</header>
+

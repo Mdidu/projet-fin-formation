@@ -1,0 +1,8 @@
+.publication div {
+  margin-top: 2%;
+}
+.rowButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

@@ -15,4 +15,3 @@ if(!empty(isset($data['groupId'])) && !empty(isset($data['userId']))) {
   echo $json;
   return $json;
 }
-// TODO : RESTE a faire pour le système invitation /candidature : notification à l'utilisateur pour les candidatures

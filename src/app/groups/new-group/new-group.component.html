@@ -1,4 +1,4 @@
-<main id="pageCreateGroup">
+<main>
   <h1>Créer votre groupe</h1>
   <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
     <label>Nom du groupe (*) : </label>
@@ -6,17 +6,14 @@
 
     <label>Description du groupe (*) : </label>
     <textarea formControlName="descriptionGroup" cols="30" rows="10"></textarea>
-<!--    <input type="text" formControlName="descriptionGroup">-->
 
     <label>Confidentalité du groupe (*) : </label>
     <select formControlName="security">
       <option [ngValue]="'public'" selected>
         Public
-        <!--                Tous le monde peut rejoindre-->
       </option>
       <option [ngValue]="'private'">
         Privé
-        <!--                Seul ceux qui ont postulé ou été invité peuvent rejoindre-->
       </option>
     </select>
 
@@ -24,16 +21,15 @@
     <select formControlName="visibility">
       <option [ngValue]="'visible'" selected>
         Visible
-        <!--                Apparait dans la liste des groupes-->
       </option>
       <option [ngValue]="'invisible'">
         Invisible
-        <!--                N'apparait pas dans la liste des groupe-->
       </option>
     </select>
     <input type="hidden" formControlName="id">
 
     <button type="submit" [disabled]="groupForm.invalid">Créer</button>
   </form>
-  <div *ngIf="this.groupsService.error !== ''">{{this.groupsService.error}}</div>
+
+  <div class="error" *ngIf="this.groupsService.error !== ''">{{this.groupsService.error}}</div>
 </main>

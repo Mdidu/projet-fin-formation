@@ -60,8 +60,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.editDescription = true;
   }
   onJoin() {
-    // const groupId = this.groupsService.groups.id;
-    // const userId = this.authService.currentUser.id;
 
     this.groupsService.joinGroup(this.groupId, this.userId);
     setTimeout(() => {
@@ -69,18 +67,10 @@ export class GroupsComponent implements OnInit, OnDestroy {
     }, 2000);
   }
   onApply() {
-    // const groupId = this.groupsService.groups.id;
-    // const userId = this.authService.currentUser.id;
 
     this.groupsService.applyGroup(this.groupId, this.userId);
-
-    // setTimeout(() => {
-    //   this.groupsService.getGroup(groupId);
-    // }, 2000);
   }
   onLeave() {
-    // const groupId = this.groupsService.groups.id;
-    // const userId = this.authService.currentUser.id;
 
     this.groupsService.leaveGroup(this.groupId, this.userId);
     setTimeout(() => {
@@ -104,6 +94,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
     }, 2000);
   }
   ngOnDestroy() {
+    this.articles = false;
     this.groupsService.groupClean();
   }
 }

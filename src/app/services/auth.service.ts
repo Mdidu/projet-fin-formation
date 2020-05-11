@@ -101,7 +101,7 @@ export class AuthService {
           this.userSubject.next(null);
           // console.log(res);
           this.authClean();
-          this.router.navigate(['auth/signin']);
+          this.router.navigate(['']);
         }
       );
   }

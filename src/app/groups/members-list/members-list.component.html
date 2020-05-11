@@ -1,40 +1,38 @@
-<div id="zoneMembers">
-  <app-menu></app-menu>
+<app-menu></app-menu>
 
-  <main>
-    <h2>Liste des membres du groupe</h2>
+<main>
+  <h2>Liste des membres du groupe</h2>
 
-    <div *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
-      {{this.groupsService.error}}
-    </div>
+  <div *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
+    {{this.groupsService.error}}
+  </div>
 
-    <div *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
-      {{this.groupsService.success}}
-    </div>
+  <div *ngIf="this.groupsService.success !== '' && this.groupsService.error === ''">
+    {{this.groupsService.success}}
+  </div>
 
-    <div class="publication" *ngFor="let member of this.groupsService.members; let i = index" >
-      <div>{{member.username}}</div>
-      <button *ngIf="!member.display &&
-                   this.authService.currentUser.currentGroupRank === 1"
-              (click)="member.display = true;initForm(member.id)">Modifier le rang</button>
+  <div class="publication" *ngFor="let member of this.groupsService.members; let i = index" >
+    <div>{{member.username}}</div>
+    <button *ngIf="!member.display &&
+                 this.authService.currentUser.currentGroupRank === 1"
+            (click)="member.display = true;initForm(member.id)">Modifier le rang</button>
 
-      <form *ngIf="member.display"
-            [formGroup]="userRankForm"
-            (ngSubmit)="member.display = false;onSubmit()">
+    <form *ngIf="member.display"
+          [formGroup]="userRankForm"
+          (ngSubmit)="member.display = false;onSubmit()">
 
-        <label for="rankId">Choisir un nouveau rang !</label>
+      <label for="rankId">Choisir un nouveau rang !</label>
 
-        <select formControlName="rankId" id="rankId">
-          <option value="3">Utilisateur</option>
-          <option value="2">Modérateur</option>
-          <option value="1">Administrateur</option>
-        </select>
+      <select formControlName="rankId" id="rankId">
+        <option value="3">Utilisateur</option>
+        <option value="2">Modérateur</option>
+        <option value="1">Administrateur</option>
+      </select>
 
-        <input type="hidden" formControlName="userId">
+      <input type="hidden" formControlName="userId">
 
-        <button [disabled]="userRankForm.invalid">Modifier le rang</button>
+      <button [disabled]="userRankForm.invalid">Modifier le rang</button>
 
-      </form>
-    </div>
-  </main>
-</div>
+    </form>
+  </div>
+</main>

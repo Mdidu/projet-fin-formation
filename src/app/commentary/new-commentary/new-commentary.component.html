@@ -1,7 +1,5 @@
-<form id="createCommentary" [formGroup]="commentaryForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="commentaryForm" (ngSubmit)="onSubmit()">
   <textarea formControlName="content" placeholder="Exprimez-vous" cols="40" rows="4"></textarea>
-<!--    <input type="text" formControlName="content" placeholder="Exprimez-vous">-->
-<!--    <input type="hidden" formControlName="groupId">-->
   <input type="hidden" formControlName="articleId">
   <input type="hidden" formControlName="userId">
 

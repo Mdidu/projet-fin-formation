@@ -35,6 +35,7 @@ export class InviteComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.groupsService.error = '';
     this.groupsService.success = '';
+    this.groupsComponent.invite = false;
     this.groupsService.groupClean();
   }
 }

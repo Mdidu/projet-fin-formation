@@ -9,12 +9,9 @@
 
     <label> Vérification du mot de passe (*) : </label>
     <input type="password" formControlName="checkedPassword">
-    <!--    <div>-->
-    <!--      Email : <input type="text" formControlName="email">-->
-    <!--    </div>-->
 
     <button type="submit" [disabled]="signupForm.invalid">Nous rejoindre</button>
   </form>
 
-  <div id="error" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
+  <div id="errorRegister" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
 </main>

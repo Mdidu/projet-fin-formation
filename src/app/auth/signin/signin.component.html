@@ -3,11 +3,11 @@
   <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
     <label> Pseudo (*) : </label>
     <input type="text" formControlName="pseudo">
-    <!--<br>-->
+
     <label> Mot de passe (*) : </label>
     <input type="password" formControlName="password">
-    <!--<br>-->
+
     <button type="submit" [disabled]="signinForm.invalid">Connexion</button>
   </form>
-  <div id="error" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
+  <div id="errorLog" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
 </main>

@@ -43,6 +43,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
     // this.groupsService.updateUserRank();
   }
   ngOnDestroy() {
+    this.groupsComponent.members = false;
     this.groupsService.groupClean();
   }
 

@@ -4,12 +4,18 @@ main {
 .publication {
   width: 100%;
   margin-top: 6%;
+  margin-bottom: 3%;
+  margin-left: 2%;
   padding: 10px;
   text-align: start;
-  border: black 6px solid;
+  border: black 3px solid;
   border-radius: 6px;
 }
 .buttons {
   display: flex;
   justify-content: space-around;
+}
+.comment {
+  text-align: center;
+  margin: 2%;
 }
