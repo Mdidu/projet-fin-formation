@@ -2,6 +2,9 @@ main {
   width: 70%;
   align-items: center;
 }
+h2 {
+  margin-top: 5%;
+}
 .publication {
   display: flex;
   flex-direction: column;

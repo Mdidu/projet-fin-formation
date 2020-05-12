@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GroupsService} from '../services/group/groups.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../services/auth.service';
-import {MenuComponent} from "./menu/menu.component";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from '../services/auth/auth.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-groups',

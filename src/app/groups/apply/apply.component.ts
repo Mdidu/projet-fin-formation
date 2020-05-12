@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GroupsComponent} from '../groups.component';
 import {GroupsService} from '../../services/group/groups.service';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -28,7 +28,6 @@ export class ApplyComponent implements OnInit, OnDestroy {
   listApply() {
     this.groupsService.getApply(this.groupId);
   }
-  // TODO: reste l'envoi d'une notification comme quoi l'utilisateur à bien été accepté ou refusé
   onAccept(userId) {
     this.groupsService.acceptApply(this.groupId, userId);
     setTimeout(() => {

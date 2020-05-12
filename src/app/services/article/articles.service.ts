@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AuthService} from '../auth.service';
-import {Observable, Subject, Subscription} from 'rxjs';
+import {AuthService} from '../auth/auth.service';
+import {Subject, Subscription} from 'rxjs';
 import {Article} from '../../models/article';
 import {GroupsService} from '../group/groups.service';
 
@@ -12,7 +12,7 @@ export class ArticlesService {
 
   private articlesSubject: Subject<Article>;
   public articles: Article;
-  private article: Subscription;
+  private articleSubscription: Subscription;
   public success: string;
 
   constructor(
@@ -21,18 +21,15 @@ export class ArticlesService {
     private groupsService: GroupsService) {
     this.articlesSubject = new Subject<Article>();
     this.success = '';
-    // this.article = this.articlesSubject.asObservable();
-    // this.article.subscribe(value => this.articles = value);
   }
 
   getArticles(id) {
     // console.log('http://localhost:80/projet-fin-formation/api/article/get.php?id=' + id);
-    return this.article = this.httpClient
+    return this.articleSubscription = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/article/get.php?id=' + id)
       .subscribe(
         (res) => {
           this.articles = res;
-          // this.articlesSubject.next(res);
           this.articles.edit = false;
           console.log(res);
         },
@@ -42,11 +39,10 @@ export class ArticlesService {
       );
   }
   addArticle(data) {
-    return this.article = this.httpClient
+    return this.articleSubscription = this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/article/post.php', data)
       .subscribe(
         (res) => {
-          // console.log(this.groupsService.groups.id);
           if (res === true) {
             this.success = 'Vous venez de publier dans le groupe !';
           }
@@ -60,13 +56,11 @@ export class ArticlesService {
   }
   updateArticle(data) {
     console.log(data);
-    return this.article = this.httpClient
+    return this.articleSubscription = this.httpClient
       .put<any>('http://localhost:80/projet-fin-formation/api/article/put.php', data)
       .subscribe(
-        (res) => {
-          // this.articles = res;
-          // this.articles.edit = false;
-          console.log(res);
+        () => {
+          console.log('yes');
         },
         (error) => {
           console.log('error' + error);
@@ -74,11 +68,11 @@ export class ArticlesService {
       );
   }
   removeArticle(id) {
-    return this.article = this.httpClient
+    return this.articleSubscription = this.httpClient
       .delete<any>('http://localhost:80/projet-fin-formation/api/article/delete.php?id=' + id)
       .subscribe(
-        (res) => {
-          console.log(res);
+        () => {
+          console.log('yes');
         },
         (error) => {
           console.log('error' + error);
@@ -90,14 +84,8 @@ export class ArticlesService {
     form.reset();
   }
   articleClean() {
-    if (this.article) {
-      this.article.unsubscribe();
+    if (this.articleSubscription) {
+      this.articleSubscription.unsubscribe();
     }
-  }
-// Créer un service date pour pouvoir générer les dates via cette méthode
-  convertTimestamp(timestamp) {
-    const timestampJS = timestamp * 1000;
-    const e = new Date(timestampJS);
-    return e.toLocaleString('fr');
   }
 }

@@ -1,11 +1,10 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {GroupsService} from '../../services/group/groups.service';
-import {CommentaryService} from '../../services/commentary.service';
-import {Commentary} from "../../models/commentary";
-import {ArticlesService} from "../../services/article/articles.service";
+import {CommentaryService} from '../../services/commentary/commentary.service';
+import {ArticlesService} from '../../services/article/articles.service';
 
 @Component({
   selector: 'app-new-commentary',
@@ -14,7 +13,6 @@ import {ArticlesService} from "../../services/article/articles.service";
 })
 export class NewCommentaryComponent implements OnInit, OnDestroy {
 
-  private comment: Commentary;
   commentaryForm: FormGroup;
   @Input() articleId;
 

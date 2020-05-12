@@ -1,7 +1,7 @@
 <div class="comment" *ngFor="let commentary of this.comment; let i = index">
 
   <div>{{commentary.author}}</div>
-  <div>{{this.commentaryService.convertTimestamp(commentary.date)}}</div>
+  <div>{{this.dateService.convertTimestamp(commentary.date)}}</div>
   <br>
   <div>{{commentary.content}}</div>
 

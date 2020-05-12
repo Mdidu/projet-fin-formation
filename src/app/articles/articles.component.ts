@@ -2,8 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ArticlesService} from '../services/article/articles.service';
 import {GroupsService} from '../services/group/groups.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../services/auth.service';
-import {CommentaryService} from '../services/commentary.service';
+import {AuthService} from '../services/auth/auth.service';
+import {CommentaryService} from '../services/commentary/commentary.service';
+import {DateService} from '../services/date/date.service';
 
 @Component({
   selector: 'app-articles',
@@ -19,11 +20,13 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private groupsService: GroupsService,
     public articlesService: ArticlesService,
-    public commentaryService: CommentaryService) { }
+    public commentaryService: CommentaryService,
+    public dateService: DateService) {
+    this.commentaryService.success = '';
+  }
 
   ngOnInit() {
     this.articlesService.getArticles(this.groupsService.groups.id);
-    // this.updateForm();
   }
   onUpdateForm(content, articleId) {
     this.editForm = this.formBuilder.group({
@@ -48,6 +51,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     }, 1000);
   }
   ngOnDestroy() {
+    this.commentaryService.success = '';
     this.articlesService.articleClean();
   }
 }

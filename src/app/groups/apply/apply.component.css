@@ -5,6 +5,9 @@ main {
 button {
   margin: 2%;
 }
+h2 {
+  margin-top: 5%;
+}
 .publication {
   display: flex;
   flex-direction: column;

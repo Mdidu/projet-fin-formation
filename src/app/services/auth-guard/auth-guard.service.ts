@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../auth/auth.service';
 
 // Injectable sert à injecter un service dans un autre service !
 @Injectable({

@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {GroupsService} from '../../services/group/groups.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-group-list-user',
@@ -11,7 +10,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class GroupListUserComponent implements OnInit, OnDestroy {
 
   constructor(
-    private formBuilder: FormBuilder,
     public authService: AuthService,
     public groupsService: GroupsService) { }
 

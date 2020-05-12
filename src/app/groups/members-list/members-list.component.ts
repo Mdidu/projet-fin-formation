@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {GroupsService} from "../../services/group/groups.service";
-import {MenuComponent} from "../menu/menu.component";
-import {GroupsComponent} from "../groups.component";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
+import {ActivatedRoute} from '@angular/router';
+import {GroupsService} from '../../services/group/groups.service';
+import {GroupsComponent} from '../groups.component';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-members-list',
@@ -13,7 +12,6 @@ import {AuthService} from "../../services/auth.service";
 })
 export class MembersListComponent implements OnInit, OnDestroy {
 
-  // public test: boolean;
   userRankForm: FormGroup;
   public groupId: number;
 
@@ -40,11 +38,9 @@ export class MembersListComponent implements OnInit, OnDestroy {
     const rankId = this.userRankForm.controls.rankId.value;
     const userId = this.userRankForm.controls.userId.value;
     this.groupsService.updateRankUser(rankId, this.groupId, userId);
-    // this.groupsService.updateUserRank();
   }
   ngOnDestroy() {
     this.groupsComponent.members = false;
     this.groupsService.groupClean();
   }
-
 }

@@ -10,7 +10,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { ProfileComponent } from './user/profile/profile.component';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
 import { NavLogComponent } from './header/nav-log/nav-log.component';
 import { NavNoLogComponent } from './header/nav-no-log/nav-no-log.component';
@@ -21,12 +20,6 @@ import { ArticlesComponent } from './articles/articles.component';
 import { NewArticleComponent } from './articles/new-article/new-article.component';
 import { CommentaryComponent } from './commentary/commentary.component';
 import { NewCommentaryComponent } from './commentary/new-commentary/new-commentary.component';
-
-import {AuthService} from './services/auth.service';
-import {GroupsService} from './services/group/groups.service';
-import {ArticlesService} from './services/article/articles.service';
-import {CommentaryService} from './services/commentary.service';
-import {AuthGuardService} from './services/auth-guard/auth-guard.service';
 import { MembersListComponent } from './groups/members-list/members-list.component';
 import { MenuComponent } from './groups/menu/menu.component';
 import { InviteComponent } from './groups/invite/invite.component';
@@ -36,6 +29,13 @@ import { InvitationsComponent } from './invitations/invitations.component';
 import { HomeComponent } from './home/home.component';
 import { FourohfourComponent } from './fourohfour/fourohfour.component';
 
+import {CommentaryService} from './services/commentary/commentary.service';
+import {AuthService} from './services/auth/auth.service';
+import {DateService} from './services/date/date.service';
+import {GroupsService} from './services/group/groups.service';
+import {ArticlesService} from './services/article/articles.service';
+import {AuthGuardService} from './services/auth-guard/auth-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +44,6 @@ import { FourohfourComponent } from './fourohfour/fourohfour.component';
     FooterComponent,
     SignupComponent,
     SigninComponent,
-    ProfileComponent,
     NewGroupComponent,
     NavLogComponent,
     NavNoLogComponent,
@@ -76,7 +75,8 @@ import { FourohfourComponent } from './fourohfour/fourohfour.component';
     GroupsService,
     ArticlesService,
     CommentaryService,
-    AuthGuardService
+    AuthGuardService,
+    DateService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CommentaryService} from '../services/commentary.service';
+import {CommentaryService} from '../services/commentary/commentary.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../services/auth.service';
+import {AuthService} from '../services/auth/auth.service';
 import {Commentary} from '../models/commentary';
+import {DateService} from '../services/date/date.service';
 
 @Component({
   selector: 'app-commentary',
@@ -18,16 +19,16 @@ export class CommentaryComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     public commentaryService: CommentaryService,
-    public authService: AuthService) { }
+    public authService: AuthService,
+    public dateService: DateService) { }
 
   ngOnInit() {
 
     this.callGetCommentary(this.articleId);
   }
   callGetCommentary(id) {
-    // console.log(id);
     // console.log(this.commentaryService.getCommentary(id));
-    this.commentaryService.commentary = this.commentaryService.getCommentary(id)
+    this.commentaryService.commentarySubscription = this.commentaryService.getCommentary(id)
       .subscribe(value => this.comment = value);
   }
   onUpdateForm(content, commentaryId) {
@@ -37,19 +38,18 @@ export class CommentaryComponent implements OnInit, OnDestroy {
     });
   }
   onEditSubmit() {
-    // console.log(this.editForm.value);
     const data = this.editForm.value;
 
     this.commentaryService.updateCommentary(data);
     setTimeout(() => {
-      this.commentaryService.commentary = this.commentaryService.getCommentary(this.articleId)
+      this.commentaryService.commentarySubscription = this.commentaryService.getCommentary(this.articleId)
         .subscribe(value => this.comment = value);
     }, 1000);
   }
   onRemoveCommentary(id) {
     this.commentaryService.removeCommentary(id);
     setTimeout(() => {
-      this.commentaryService.commentary = this.commentaryService.getCommentary(this.articleId)
+      this.commentaryService.commentarySubscription = this.commentaryService.getCommentary(this.articleId)
         .subscribe(value => this.comment = value);
     }, 1000);
   }

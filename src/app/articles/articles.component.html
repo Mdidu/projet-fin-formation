@@ -1,6 +1,6 @@
 <div class="publication" *ngFor="let article of this.articlesService.articles; let i = index" >
   <div>{{article.author}}</div>
-  <div>{{this.articlesService.convertTimestamp(article.date)}}</div>
+  <div>{{this.dateService.convertTimestamp(article.date)}}</div>
   <br>
 
   <div>{{article.content}}</div>
@@ -34,6 +34,10 @@
   </div>
 
   <div class="comment">Commentaires</div>
+
+  <div class="success" *ngIf="this.commentaryService.success !== ''">
+    {{this.commentaryService.success}}
+  </div>
 
   <app-commentary [articleId]="article.id"></app-commentary>
 

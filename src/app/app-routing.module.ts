@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// import { GroupListComponent } from './group-list/group-list.component';
+import {HomeComponent} from './home/home.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { NewGroupComponent } from './groups/new-group/new-group.component';
 import {GroupListUserComponent} from './groups/group-list-user/group-list-user.component';
+import {InvitationsComponent} from './invitations/invitations.component';
+import {NotificationComponent} from './notification/notification.component';
+import { NewGroupComponent } from './groups/new-group/new-group.component';
 import {GroupListComponent} from './groups/group-list/group-list.component';
 import {GroupsComponent} from './groups/groups.component';
-import {AuthGuardService} from './services/auth-guard/auth-guard.service';
 import {MembersListComponent} from './groups/members-list/members-list.component';
 import {ApplyComponent} from './groups/apply/apply.component';
 import {InviteComponent} from './groups/invite/invite.component';
-import {NotificationComponent} from './notification/notification.component';
-import {InvitationsComponent} from './invitations/invitations.component';
-import {HomeComponent} from './home/home.component';
 import {FourohfourComponent} from './fourohfour/fourohfour.component';
 
+import {AuthGuardService} from './services/auth-guard/auth-guard.service';
 
 const routes: Routes = [
   { path: 'auth/signup', component: SignupComponent},

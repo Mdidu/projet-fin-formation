@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
-import {GroupsService} from "../../services/group/groups.service";
-import {ActivatedRoute} from "@angular/router";
-import {GroupsComponent} from "../groups.component";
+import {AuthService} from '../../services/auth/auth.service';
+import {GroupsService} from '../../services/group/groups.service';
+import {ActivatedRoute} from '@angular/router';
+import {GroupsComponent} from '../groups.component';
 
 @Component({
   selector: 'app-menu',
@@ -22,9 +22,9 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.groupId = this.route.snapshot.params.id;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.groupsService.error = '';
     this.groupsService.success = '';
   }

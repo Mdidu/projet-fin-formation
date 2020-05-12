@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {Observable, Subject, Subscription} from 'rxjs';
-import { User } from '../models/user';
+import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {Observable, Subject, Subscription} from 'rxjs';
+
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // userSubject gérera des données de type User
+// userSubject gérera des données de type User
   private userSubject: Subject<User>;
   public currentUser: User;
   private user: Observable<User>;
@@ -67,7 +68,6 @@ export class AuthService {
           this.router.navigate(['groups']);
 
           // console.log(res);
-          // console.log(this.currentUser);
         },
         (error) => {
           console.log('error' + error);
@@ -82,9 +82,8 @@ export class AuthService {
       .get<any>('http://localhost:80/projet-fin-formation/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)
       .subscribe(
         (res) => {
-          // Doit rediriger vers l'accueil du site une fois co
           this.currentUser.currentGroupRank = res;
-          console.log(this.currentUser.currentGroupRank);
+          // console.log(this.currentUser.currentGroupRank);
         },
         (error) => {
           console.log('error' + error);
@@ -95,8 +94,7 @@ export class AuthService {
     return this.userSubscription = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/user/getLogout.php?pseudo=' + this.currentUser.username)
       .subscribe(
-        (res) => {
-          // this.currentUser = '';
+        () => {
           localStorage.removeItem('currentUser');
           this.userSubject.next(null);
           // console.log(res);
