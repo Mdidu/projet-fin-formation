@@ -11,32 +11,29 @@ ul li {
   box-shadow: 1px 1px 1px black;
 }
 /*TODO: modifier pour finir le menu hamburger*/
-/*#burgerMenu {*/
-/*  display: none;*/
-/*  appearance:none;*/
-/*  -moz-appearance:none;*/
-/*  -webkit-appearance:none;*/
-/*  color:inherit;*/
-/*  cursor:pointer;*/
-/*  font-family:'Material Icons';*/
-/*  font-size:30px;*/
-/*  line-height:50px;*/
-/*  margin:0;*/
-/*  padding:0;*/
-/*  position:absolute;*/
-/*  text-align:center;*/
-/*  top:0;*/
-/*  right:10px;*/
-/*  width:50px;*/
-/*}*/
-/*#burgerMenu:before*/
-/*{*/
-/*  content:'menu';*/
-/*}*/
-/*#burgerMenu:checked:before*/
-/*{*/
-/*  content:'close';*/
-/*}*/
+#burgerMenu {
+  display: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  color: black;
+  cursor: pointer;
+  font-family: 'Material Icons';
+  font-size: 30px;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  padding-left: 4%;
+  width: 50px;
+}
+#burgerMenu:before
+{
+  content: 'menu';
+}
+#burgerMenu:checked:before
+{
+  content: 'close';
+}
 @media (max-width: 961px) {
   nav {
     display: none;
