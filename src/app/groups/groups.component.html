@@ -32,6 +32,27 @@
     </form>
   </div>
 
+  <button *ngIf="this.authService.currentUser.currentGroupRank === 1 &&
+                this.groupsService.groups.security === 'privé'"
+          (click)="onUpdateGroupSecurity('public')">
+    Rendre le groupe public
+  </button>
+  <button *ngIf="this.authService.currentUser.currentGroupRank === 1 &&
+                  this.groupsService.groups.security === 'public'"
+          (click)="onUpdateGroupSecurity('privé')">
+    Rendre le groupe privé
+  </button>
+  <button *ngIf="this.authService.currentUser.currentGroupRank === 1 &&
+                this.groupsService.groups.visibility === 'invisible'"
+          (click)="onUpdateGroupVisibility('visible')">
+    Rendre le groupe visible
+  </button>
+  <button *ngIf="this.authService.currentUser.currentGroupRank === 1 &&
+                  this.groupsService.groups.visibility === 'visible'"
+          (click)="onUpdateGroupVisibility('invisible')">
+    Rendre le groupe invisible
+  </button>
+
   <div class="error" *ngIf="this.groupsService.error !== '' && this.groupsService.success === ''">
     {{this.groupsService.error}}
   </div>

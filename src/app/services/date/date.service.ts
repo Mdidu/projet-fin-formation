@@ -7,7 +7,7 @@ export class DateService {
 
   constructor() { }
 
-  // convertie le timestamp en date pour pouvoir l'afficher
+  // convert timestamp in date
   convertTimestamp(timestamp) {
     const timestampJS = timestamp * 1000;
     const e = new Date(timestampJS);

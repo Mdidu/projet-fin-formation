@@ -10,7 +10,6 @@ ul li {
   border: 1px solid black;
   box-shadow: 1px 1px 1px black;
 }
-/*TODO: modifier pour finir le menu hamburger*/
 #burgerMenu {
   display: none;
   appearance: none;

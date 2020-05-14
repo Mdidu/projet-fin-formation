@@ -9,7 +9,7 @@ import {User} from '../../models/user';
   providedIn: 'root'
 })
 export class AuthService {
-// userSubject gérera des données de type User
+
   private userSubject: Subject<User>;
   public currentUser: User;
   private user: Observable<User>;
@@ -19,11 +19,11 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private router: Router) {
-    // propriétés permettant d'accéder à l'utilisateur connecté ?? pas sur
+    // propriétés permettant d'accéder à l'utilisateur connecté  / property allowing access to auth user
     this.userSubject = new Subject<User>();
     this.user = this.userSubject.asObservable();
 
-    // Permet de changer la valeur de currentUser via l'observable user lordque l'utilisateur se connecte ou déconnecte
+    // Permet de changer la valeur de currentUser via l'observable user lorsque l'utilisateur se connecte ou déconnecte
     this.user.subscribe(value => this.currentUser = value);
     this.error = '';
   }
@@ -51,8 +51,6 @@ export class AuthService {
   }
   login(pseudo, password) {
 
-    // Permet d'envoyer des données vers le serveur qui renvoie les infos de l'utilisateur au format json afin de pouvoir "déclarer?"
-    // qu'il est connecté dans l'observable userSubject de type User
     return this.userSubscription = this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/user/get.php', {pseudo, password})
       .subscribe(
@@ -60,9 +58,6 @@ export class AuthService {
           if (res === false) {
             this.error = 'Identifiant incorrect !';
           }
-          // Doit rediriger vers l'accueil du site une fois co
-          // this.userSubject.next(res);
-          // this.currentUser = res;
           localStorage.setItem('currentUser', JSON.stringify(res));
           this.userSubject.next(res);
           this.router.navigate(['groups']);
@@ -75,6 +70,7 @@ export class AuthService {
       );
   }
 
+  // update the user's rank for user's rank of current group visiting
   updateCurrentUserRank(groupId) {
     const userId = this.currentUser.id;
 
@@ -103,6 +99,7 @@ export class AuthService {
         }
       );
   }
+  // Unsubscribe to user subscription
   authClean() {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();

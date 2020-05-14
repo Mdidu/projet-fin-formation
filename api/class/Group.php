@@ -159,7 +159,6 @@ class Group
    */
   private function searchGroupId($name)
   {
-    //vraiment obligatoire? TODO: tester si cela fonctionne sans la ligne
     $this->setName($name);
     $sql = $this->getDB()->prepare('SELECT id, name FROM groups');
 
@@ -308,6 +307,40 @@ class Group
     $sql->execute();
     $sql->closeCursor();
   }
+  /**
+   * @param $groupId int
+   * @param $security string
+   */
+  public function updateSecurity($groupId, $security) {
+    $this->setId($groupId);
+    $this->setSecurity($security);
+
+    $sql = $this->getDB()->prepare('UPDATE groups SET security = :security WHERE id = :id');
+    $sql->bindValue(':security', $this->getSecurity());
+    $sql->bindValue(':id', $this->getId());
+    $sql->execute();
+    $sql->closeCursor();
+  }
+  /**
+   * @param $groupId int
+   * @param $visibility string
+   */
+  public function updateVisibility($groupId, $visibility) {
+    $this->setId($groupId);
+    $this->setVisibility($visibility);
+
+    $sql = $this->getDB()->prepare('UPDATE groups SET visibility = :visibility WHERE id = :id');
+    $sql->bindValue(':visibility', $this->getVisibility());
+    $sql->bindValue(':id', $this->getId());
+    $sql->execute();
+    $sql->closeCursor();
+  }
+  /**
+   * @param $rankId int
+   * @param $groupId int
+   * @param $userId int
+   * @return bool
+   */
   public function updateUserRank($rankId, $groupId, $userId) {
     $this->setRankUser($rankId);
     $this->setId($groupId);
@@ -570,6 +603,7 @@ class Group
     return $row;
   }
   /**
+   * Search the user's rank in the groupe he is visiting.
    * @param $groupId int
    * @param $userId int
    * @return mixed

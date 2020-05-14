@@ -10,6 +10,7 @@ if(!empty(isset($data['pseudo'])) && !empty(isset($data['password'])) &&
   $user = new User($data['pseudo']);
   $response = $user->addUser(password_hash($data['password'], PASSWORD_DEFAULT));
 
+  // if user not create : return true for indicate that username is already in use !
   if($response === false){
     $json = json_encode(true);
     echo $json;

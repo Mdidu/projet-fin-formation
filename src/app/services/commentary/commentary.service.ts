@@ -18,8 +18,9 @@ export class CommentaryService {
     this.commentarySubject = new Subject<Commentary>();
     this.success = '';
   }
-// Return Observable<Commentary> car javascript est ASYNC et n'attend pas la méthode pour retourner la valeur qui prend un certains temps
-  // puis je souscrit dans la méthode affichComment -> cela permet de ne pas avoir les derniers commentaires pour tous les articles
+/* Return Observable<Commentary> car javascript est ASYNC et n'attend pas la méthode pour retourner la valeur qui prend un certains temps
+   puis je souscrit dans la méthode affichComment -> cela permet de ne pas avoir les derniers commentaires pour tous les articles */
+  //  return Observable<Commentary> because javascript is ASYNC and else only the last coments were displayed
   getCommentary(id): Observable<Commentary> {
     return this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/commentary/get.php?id=' + id) as Observable<Commentary>;
@@ -68,7 +69,7 @@ export class CommentaryService {
   resetCommentaryForm(form) {
     form.reset();
   }
-
+  // Unsubscribe to commentary subscription
   commentaryClean() {
     if (this.commentarySubscription) {
       this.commentarySubscription.unsubscribe();

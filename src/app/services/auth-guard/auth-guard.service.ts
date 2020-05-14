@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {Observable} from 'rxjs';
 import {AuthService} from '../auth/auth.service';
 
-// Injectable sert à injecter un service dans un autre service !
+// used to inject a service into other service
 @Injectable({
   providedIn: 'root'
 })

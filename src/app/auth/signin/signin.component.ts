@@ -22,8 +22,6 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // const data = JSON.stringify(this.signinForm.value);
-    // const data = this.signinForm.value;
     const pseudo = this.signinForm.controls.pseudo.value;
     const password = this.signinForm.controls.password.value;
 

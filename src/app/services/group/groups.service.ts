@@ -11,8 +11,8 @@ import {User} from '../../models/user';
 })
 export class GroupsService {
   private groupsSubject: Subject<Group>;
-  public groups: Group = new Group();
-  public members: User = new User();
+  public groups: Group;
+  public members: User;
   private groupSubscription: Subscription;
   public error: string;
   public success: string;
@@ -23,12 +23,13 @@ export class GroupsService {
     private route: ActivatedRoute,
     private router: Router) {
     this.groupsSubject = new Subject<Group>();
+    this.groups = new Group();
+    this.members = new User();
     this.error = '';
     this.success = '';
   }
 
-  // récupère la liste des groupes auquel l'utilisateur appartient
-  // TODO : A MODIFIER ELLE FONCTIONNE PLUS et transformer le post en get
+  // retrieve user's groups list for displaying
   getListUserGroups() {
     const data = this.authService.currentUser.id;
 
@@ -43,7 +44,7 @@ export class GroupsService {
           console.log('error' + error.message);
         });
   }
-  // récupère la liste de tous les groupes du site
+  // retrieve all group list for displaying
   getListAllGroups() {
     return this.groupSubscription = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/group/list-group/getAllGroup.php')
@@ -57,7 +58,7 @@ export class GroupsService {
         }
       );
   }
-  // récupère les informations du groupe que l'utilisateur visite
+  // retrieve information of visiting group for displaying
   getGroup(id) {
     // console.log(id);
 
@@ -72,6 +73,7 @@ export class GroupsService {
         }
       );
   }
+  // retrieve member's list of group for displaying
   getMembers(id) {
     return this.groupSubscription = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/group/getMembers.php?id=' + id )
@@ -85,6 +87,7 @@ export class GroupsService {
         }
       );
   }
+  // retrieve apply list of group for displaying
   getApply(groupId) {
     return this.groupSubscription = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/group/applyGroup/get.php?groupId=' + groupId)
@@ -262,6 +265,32 @@ export class GroupsService {
         }
       );
   }
+  // Makes the group private or public
+  updateGroupSecurity(groupId, security) {
+    return this.groupSubscription = this.httpClient
+      .put<any>('http://localhost:80/projet-fin-formation/api/group/updateSecurity.php', {groupId, security})
+      .subscribe(
+        () => {
+          console.log('yes');
+        },
+        (error) => {
+          console.log('error' + error.message);
+        }
+      );
+  }
+  // Makes the groupe visible or invisible
+  updateGroupVisibility(groupId, visibility) {
+    return this.groupSubscription = this.httpClient
+      .put<any>('http://localhost:80/projet-fin-formation/api/group/updateVisibility.php', {groupId, visibility})
+      .subscribe(
+        () => {
+          console.log('yes');
+        },
+        (error) => {
+          console.log('error' + error.message);
+        }
+      );
+  }
   updateRankUser(rankId, groupId, userId) {
       return this.groupSubscription = this.httpClient
           .put<any>('http://localhost:80/projet-fin-formation/api/group/members/put.php', {rankId, groupId, userId})
@@ -281,6 +310,7 @@ export class GroupsService {
               }
           );
   }
+  // Unsubscribe to group subscription
   groupClean() {
     if (this.groupSubscription) {
       this.groupSubscription.unsubscribe();

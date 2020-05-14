@@ -24,14 +24,13 @@ export class ArticlesService {
   }
 
   getArticles(id) {
-    // console.log('http://localhost:80/projet-fin-formation/api/article/get.php?id=' + id);
     return this.articleSubscription = this.httpClient
       .get<any>('http://localhost:80/projet-fin-formation/api/article/get.php?id=' + id)
       .subscribe(
         (res) => {
           this.articles = res;
           this.articles.edit = false;
-          console.log(res);
+          // console.log(res);
         },
         (error) => {
           console.log('error' + error);
@@ -83,6 +82,7 @@ export class ArticlesService {
   resetArticlesForm(form) {
     form.reset();
   }
+  // Unsubscribe to article subscription
   articleClean() {
     if (this.articleSubscription) {
       this.articleSubscription.unsubscribe();

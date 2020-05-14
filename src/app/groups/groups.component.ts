@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit, OnDestroy {
+
   articles: boolean;
   members: boolean;
   invite: boolean;
@@ -35,12 +36,12 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.articles = true;
-    // récupère l'id du groupe dans l'url et l'injecte dans l'objet groups de type Group du GroupsService
+    // retrieve the groupID in url and injects in groups Object of type Group
     this.groupsService.groups.id = this.route.snapshot.params.id;
 
     this.authService.updateCurrentUserRank(this.groupsService.groups.id);
 
-    // appel la méthode getGroup afin d'afficher les informations du groupe que l'utilisateur visite
+    // call getGroup method for displaying groups information visiting by currentUser
     this.groupsService.getGroup(this.groupsService.groups.id);
 
     this.groupId = this.groupsService.groups.id;
@@ -88,6 +89,20 @@ export class GroupsComponent implements OnInit, OnDestroy {
     const data = this.updateDescriptionGroupForm.controls.description.value;
     this.groupsService.updateDescriptionGroup(this.groupId, data);
     this.editDescription = false;
+    setTimeout(() => {
+      this.groupsService.getGroup(this.groupId);
+    }, 2000);
+  }
+  onUpdateGroupSecurity(security) {
+    // const data = this.updateNameGroupForm.controls.name.value;
+    console.log(security);
+    this.groupsService.updateGroupSecurity(this.groupId, security);
+    setTimeout(() => {
+      this.groupsService.getGroup(this.groupId);
+    }, 2000);
+  }
+  onUpdateGroupVisibility(visibility) {
+    this.groupsService.updateGroupVisibility(this.groupId, visibility);
     setTimeout(() => {
       this.groupsService.getGroup(this.groupId);
     }, 2000);

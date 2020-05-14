@@ -3,6 +3,7 @@
 
 class Article
 {
+
   use Db;
 
   /**

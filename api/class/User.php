@@ -23,6 +23,10 @@ class User
    */
   private $rank;
 
+  /**
+   * User constructor.
+   * @param $pseudo string
+   */
   public function __construct($pseudo)
   {
     $this->pseudo = $pseudo;
@@ -159,18 +163,15 @@ class User
     $sql->closeCursor();
 
     if($this->getPseudo() === $row['username'] && password_verify($this->password, $row['password'])) {
-//      $_SESSION['id'] = $row['id'];
-//      $_SESSION['username'] = $this->getPseudo();
-//      $_SESSION['rank'] = $row['rank_id'];
 
       return $row;
     }
     return false;
   }
 
-  public function logout() {
-    session_unset();
-
-    session_destroy();
-  }
+//  public function logout() {
+//    session_unset();
+//
+//    session_destroy();
+//  }
 }
