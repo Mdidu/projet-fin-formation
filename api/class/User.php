@@ -145,12 +145,10 @@ class User
   }
 
   /**
-   * @param $pseudo string
    * @param $password string
    * @return bool | mixed
    */
-  public function log($pseudo, $password){
-    $this->setPseudo($pseudo);
+  public function log($password){
     $this->setPassword($password);
 
     $sql = $this->getDB()->prepare('SELECT id, pseudo AS username, password, rank_id FROM user WHERE pseudo = :pseudo');

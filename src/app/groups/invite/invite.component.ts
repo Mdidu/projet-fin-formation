@@ -22,7 +22,6 @@ export class InviteComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.groupsComponent.invite = true;
     this.inviteForm = this.formBuilder.group({
       pseudo: ['', Validators.required]
     });
@@ -35,7 +34,6 @@ export class InviteComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.groupsService.error = '';
     this.groupsService.success = '';
-    this.groupsComponent.invite = false;
     this.groupsService.groupClean();
   }
 }

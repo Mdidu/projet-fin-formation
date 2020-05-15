@@ -25,7 +25,6 @@ export class MembersListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.groupsComponent.members = true;
     this.groupsService.getMembers(this.groupId);
   }
   initForm(id) {
@@ -40,7 +39,6 @@ export class MembersListComponent implements OnInit, OnDestroy {
     this.groupsService.updateRankUser(rankId, this.groupId, userId);
   }
   ngOnDestroy() {
-    this.groupsComponent.members = false;
     this.groupsService.groupClean();
   }
 }

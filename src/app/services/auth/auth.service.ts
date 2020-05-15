@@ -50,7 +50,6 @@ export class AuthService {
       );
   }
   login(pseudo, password) {
-
     return this.userSubscription = this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/user/get.php', {pseudo, password})
       .subscribe(
@@ -61,7 +60,6 @@ export class AuthService {
           localStorage.setItem('currentUser', JSON.stringify(res));
           this.userSubject.next(res);
           this.router.navigate(['groups']);
-
           // console.log(res);
         },
         (error) => {
@@ -78,8 +76,9 @@ export class AuthService {
       .get<any>('http://localhost:80/projet-fin-formation/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)
       .subscribe(
         (res) => {
+          console.log(res);
           this.currentUser.currentGroupRank = res;
-          // console.log(this.currentUser.currentGroupRank);
+          console.log(this.currentUser.currentGroupRank);
         },
         (error) => {
           console.log('error' + error);

@@ -11,5 +11,5 @@ if(!empty(isset($data['rankId'])) && !empty(isset($data['groupId'])) && !empty(i
   echo $json;
   return $json;
 } else {
-  return false;
+  return json_encode(false);
 }

@@ -1,8 +1,7 @@
 <!--<li> routerLink="">Groupes récents</li>-->
-
-<li routerLink="groups">Tous les groupes</li>
-<li routerLink="users/{{this.authService.currentUser.id}}/groups">Vos groupes</li>
-<li routerLink="group/new-group">Créer un groupe</li>
-<li routerLink="users/{{this.authService.currentUser.id}}/invitations">Invitations</li>
+<li [ngClass]="{'focus': this.groupsService.focus === true }" routerLink="groups">Tous les groupes</li>
+<li routerLinkActive="focus" routerLink="users/{{this.authService.currentUser.id}}/groups">Vos groupes</li>
+<li routerLinkActive="focus" routerLink="group/new-group">Créer un groupe</li>
+<li routerLinkActive="focus" routerLink="users/{{this.authService.currentUser.id}}/invitations">Invitations</li>
 <!--<li> routerLink="users/{{this.authService.currentUser.id}}/notifications">Notifications</li>-->
 <li (click)="authService.logout()">Déconnexion</li>

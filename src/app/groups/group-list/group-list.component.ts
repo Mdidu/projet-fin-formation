@@ -9,15 +9,19 @@ import {GroupsService} from '../../services/group/groups.service';
 })
 export class GroupListComponent implements OnInit, OnDestroy {
 
+  public focus: boolean;
+
   constructor(
     public authService: AuthService,
     public groupsService: GroupsService) { }
 
   ngOnInit() {
+    this.groupsService.focus = true;
     this.groupsService.getListAllGroups();
   }
 
   ngOnDestroy() {
+    this.groupsService.focus = false;
     this.groupsService.groupClean();
   }
 

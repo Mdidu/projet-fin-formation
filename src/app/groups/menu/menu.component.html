@@ -3,24 +3,24 @@
 <nav id="blocLeft">
   <ul *ngIf="this.authService.currentUser.currentGroupRank > 0">
 
-    <li [ngClass]="{'focus': this.groupsComponent.articles === true }"
+    <li [ngClass]="{'focus': this.groupsComponent.focus === true }"
       routerLink="/groups/{{groupId}}">
       Article
     </li>
 
-    <li [ngClass]="{'focus': this.groupsComponent.invite === true}"
+    <li routerLinkActive="focus"
       routerLink="/groups/{{groupId}}/invite">
       Inviter
     </li>
 
     <li *ngIf="this.authService.currentUser.currentGroupRank === 1 ||
               this.authService.currentUser.currentGroupRank === 2"
-        [ngClass]="{'focus': this.groupsComponent.apply === true }"
+        routerLinkActive="focus"
       routerLink="/groups/{{groupId}}/apply">
       Candidatures
     </li>
 
-    <li [ngClass]="{'focus': this.groupsComponent.members === true }"
+    <li routerLinkActive="focus"
       routerLink="/groups/{{groupId}}/members">
       Membres
     </li>

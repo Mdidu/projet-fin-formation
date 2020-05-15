@@ -233,10 +233,10 @@ class Group
     $row = $sql->fetch(PDO::FETCH_ASSOC);
     if($row['user_id'] === $this->getUserId()) {
       $sql->closeCursor();
-      return false;
+      return true;
     }
     $sql->closeCursor();
-    return true;
+    return false;
   }
 
   /**
@@ -371,7 +371,7 @@ class Group
     // 3 = rank user
     $this->setRankUser(3);
 
-    if($this->searchAlreadyMember()) {
+    if(!$this->searchAlreadyMember()) {
       $sql = $this->getDB()->prepare('INSERT INTO group_rank (group_id, user_id, rank_id) VALUES (:group_id, :user_id, :rank_id)');
 
       $sql->bindValue(':group_id', $this->getId());
@@ -400,7 +400,6 @@ class Group
     $sql->execute();
 
     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-//      var_dump($row);
       if ($row['group_id'] == $this->getId() && $row['user_id'] == $this->getUserId()) {
         $id = intval($row['id']);
         $sql->closeCursor();
@@ -506,7 +505,7 @@ class Group
     $this->setId($groupId);
     $this->setUserId($userId);
 
-    if(!$this->searchAlreadyMember()) {
+    if($this->searchAlreadyMember()) {
       $sql = $this->getDB()->prepare('DELETE FROM group_rank WHERE group_id = :group_id && user_id = :user_id');
 
       $sql->bindValue(':group_id', $this->getId());

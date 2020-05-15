@@ -11,10 +11,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class GroupsComponent implements OnInit, OnDestroy {
 
-  articles: boolean;
-  members: boolean;
-  invite: boolean;
-  apply: boolean;
+  focus: boolean;
   editName: boolean;
   editDescription: boolean;
 
@@ -35,7 +32,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.articles = true;
+    this.focus = true;
     // retrieve the groupID in url and injects in groups Object of type Group
     this.groupsService.groups.id = this.route.snapshot.params.id;
 
@@ -108,7 +105,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
     }, 2000);
   }
   ngOnDestroy() {
-    this.articles = false;
+    this.focus = false;
     this.groupsService.groupClean();
   }
 }

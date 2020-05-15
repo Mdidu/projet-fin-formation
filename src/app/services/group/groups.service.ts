@@ -16,6 +16,7 @@ export class GroupsService {
   private groupSubscription: Subscription;
   public error: string;
   public success: string;
+  focus: boolean;
 
   constructor(
     private httpClient: HttpClient,
@@ -27,6 +28,7 @@ export class GroupsService {
     this.members = new User();
     this.error = '';
     this.success = '';
+    this.focus = true;
   }
 
   // retrieve user's groups list for displaying

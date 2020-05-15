@@ -5,7 +5,7 @@ require_once __DIR__.'/../config/configUser.php';
 $data = json_decode(file_get_contents("php://input"), true);
 
 if(!empty(isset($data['pseudo'])) && !empty(isset($data['password'])) &&
-  !empty(isset($data['checkedPassword'])) && ($data['password'] == $data['checkedPassword']))
+  !empty(isset($data['checkedPassword'])) && ($data['password'] === $data['checkedPassword']))
 {
   $user = new User($data['pseudo']);
   $response = $user->addUser(password_hash($data['password'], PASSWORD_DEFAULT));

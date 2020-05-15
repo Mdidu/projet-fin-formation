@@ -71,6 +71,11 @@ button {
   animation-name: error;
   animation-duration: 2s;
 }
+.focus {
+  background: #fff7d8;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
+}
 @keyframes success {
   from {
     font-size: 1px;
