@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable, Subject, Subscription} from 'rxjs';
@@ -22,6 +22,9 @@ export class AuthService {
     // propriétés permettant d'accéder à l'utilisateur connecté  / property allowing access to auth user
     this.userSubject = new Subject<User>();
     this.user = this.userSubject.asObservable();
+    // TODO : des bugs surviennent avec le maintien de la connexion dans les groupes + refresh par exemple
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    // this.currentUser.username = localStorage.getItem('currentUser');
 
     // Permet de changer la valeur de currentUser via l'observable user lorsque l'utilisateur se connecte ou déconnecte
     this.user.subscribe(value => this.currentUser = value);
@@ -58,6 +61,8 @@ export class AuthService {
             this.error = 'Identifiant incorrect !';
           }
           localStorage.setItem('currentUser', JSON.stringify(res));
+          // console.log(localStorage);
+          // localStorage.setItem('currentUser', res.username);
           this.userSubject.next(res);
           this.router.navigate(['groups']);
           // console.log(res);
