@@ -22,9 +22,8 @@ export class AuthService {
     // propriétés permettant d'accéder à l'utilisateur connecté  / property allowing access to auth user
     this.userSubject = new Subject<User>();
     this.user = this.userSubject.asObservable();
-    // TODO : des bugs surviennent avec le maintien de la connexion dans les groupes + refresh par exemple
+    // Allows you to set values currentUser from localStorage values
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    // this.currentUser.username = localStorage.getItem('currentUser');
 
     // Permet de changer la valeur de currentUser via l'observable user lorsque l'utilisateur se connecte ou déconnecte
     this.user.subscribe(value => this.currentUser = value);
@@ -61,8 +60,8 @@ export class AuthService {
             this.error = 'Identifiant incorrect !';
           }
           localStorage.setItem('currentUser', JSON.stringify(res));
-          console.log(localStorage);
-          // localStorage.setItem('currentUser', res.username);
+          // console.log(localStorage);
+
           this.userSubject.next(res);
           this.router.navigate(['groups']);
           // console.log(res);
@@ -91,17 +90,10 @@ export class AuthService {
       );
   }
   logout() {
-    return this.userSubscription = this.httpClient
-      .get<any>('http://localhost:80/projet-fin-formation/api/user/getLogout.php?pseudo=' + this.currentUser.username)
-      .subscribe(
-        () => {
-          localStorage.removeItem('currentUser');
-          this.userSubject.next(null);
-          // console.log(res);
-          this.authClean();
-          this.router.navigate(['']);
-        }
-      );
+    localStorage.removeItem('currentUser');
+    this.userSubject.next(null);
+    this.authClean();
+    this.router.navigate(['']);
   }
   // Unsubscribe to user subscription
   authClean() {
