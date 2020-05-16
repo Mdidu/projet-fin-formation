@@ -1,6 +1,6 @@
 export class User {
   id: number;
   username: string;
-  rank: number;
+  // rank: number;
   currentGroupRank: number;
 }

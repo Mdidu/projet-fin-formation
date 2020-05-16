@@ -20,6 +20,11 @@ export class MenuComponent implements OnInit, OnDestroy {
     public groupsComponent: GroupsComponent
   ) {
     this.groupId = this.route.snapshot.params.id;
+
+    if (this.authService.currentUser.currentGroupRank === undefined) {
+      this.authService.updateCurrentUserRank(this.groupId);
+      this.groupsService.focus = false;
+    }
   }
 
   ngOnInit() {

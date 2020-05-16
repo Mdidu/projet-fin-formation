@@ -157,11 +157,12 @@ class User
 
     $sql->execute();
 
-    $row = $sql->fetch(PDO::FETCH_ASSOC);
+    $rows = $sql->fetch(PDO::FETCH_ASSOC);
     $sql->closeCursor();
 
-    if($this->getPseudo() === $row['username'] && password_verify($this->password, $row['password'])) {
-
+    if($this->getPseudo() === $rows['username'] && password_verify($this->password, $rows['password'])) {
+      $row['id'] = $rows['id'];
+      $row['username'] = $rows['username'];
       return $row;
     }
     return false;

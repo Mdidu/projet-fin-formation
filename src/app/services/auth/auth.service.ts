@@ -61,7 +61,7 @@ export class AuthService {
             this.error = 'Identifiant incorrect !';
           }
           localStorage.setItem('currentUser', JSON.stringify(res));
-          // console.log(localStorage);
+          console.log(localStorage);
           // localStorage.setItem('currentUser', res.username);
           this.userSubject.next(res);
           this.router.navigate(['groups']);
