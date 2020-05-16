@@ -56,6 +56,7 @@ export class AuthService {
       .post<any>('http://localhost:80/projet-fin-formation/api/user/get.php', {pseudo, password})
       .subscribe(
         (res) => {
+          console.log(res);
           if (res === false) {
             this.error = 'Identifiant incorrect !';
           }
@@ -80,9 +81,9 @@ export class AuthService {
       .get<any>('http://localhost:80/projet-fin-formation/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)
       .subscribe(
         (res) => {
-          console.log(res);
+          // console.log(res);
           this.currentUser.currentGroupRank = res;
-          console.log(this.currentUser.currentGroupRank);
+          // console.log(this.currentUser.currentGroupRank);
         },
         (error) => {
           console.log('error' + error);

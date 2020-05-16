@@ -161,7 +161,7 @@ class User
     $sql->closeCursor();
 
     if($this->getPseudo() === $rows['username'] && password_verify($this->password, $rows['password'])) {
-      $row['id'] = $rows['id'];
+      $row['id'] = intval($rows['id']);
       $row['username'] = $rows['username'];
       return $row;
     }

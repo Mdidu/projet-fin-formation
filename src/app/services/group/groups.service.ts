@@ -191,14 +191,15 @@ export class GroupsService {
     return this.groupSubscription = this.httpClient
       .post<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/post.php', {pseudo, groupId})
       .subscribe((res) => {
-          if (res) {
-            this.error = '';
-            this.success = 'L\'invitation à bien été envoyé !';
-          } else {
-            this.success = '';
-            this.error = 'L\'invitation n\'a pas pu être envoyé !';
-          }
-        },
+        console.log(res);
+        if (res) {
+          this.error = '';
+          this.success = 'L\'invitation à bien été envoyé !';
+        } else {
+          this.success = '';
+          this.error = 'L\'invitation n\'a pas pu être envoyé !';
+        }
+      },
         (error) => {
           console.log('error' + error.message);
         }
