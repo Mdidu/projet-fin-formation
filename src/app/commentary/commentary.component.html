@@ -23,7 +23,7 @@
     <button *ngIf="this.authService.currentUser.currentGroupRank === 1 ||
             this.authService.currentUser.currentGroupRank === 2 ||
             this.authService.currentUser.id === commentary.authorId"
-            (dblclick)="this.onRemoveCommentary(commentary.id)">
+            (click)="this.onRemoveCommentary(commentary.id)">
       Supprimer
     </button>
   </div>

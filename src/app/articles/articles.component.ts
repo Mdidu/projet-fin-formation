@@ -45,10 +45,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   }
 
   onRemoveArticle(id) {
-    this.articlesService.removeArticle(id);
-    setTimeout(() => {
-      this.articlesService.getArticles(this.groupsService.groups.id);
-    }, 1000);
+    if (confirm('Voulez-vous vraiment supprimer cette article ?')) {
+      this.articlesService.removeArticle(id);
+      setTimeout(() => {
+        this.articlesService.getArticles(this.groupsService.groups.id);
+      }, 1000);
+    }
   }
   ngOnDestroy() {
     this.commentaryService.success = '';

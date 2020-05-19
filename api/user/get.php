@@ -7,7 +7,7 @@ if(!empty(isset($data['pseudo'])) && !empty(isset($data['password'])))
 {
   $user = new User($data['pseudo']);
   $response = $user->log($data['password']);
-  
+
   $json = json_encode($response);
   echo $json;
   return $json;

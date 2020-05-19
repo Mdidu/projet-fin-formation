@@ -20,6 +20,7 @@ export class ArticlesService {
     private authService: AuthService,
     private groupsService: GroupsService) {
     this.articlesSubject = new Subject<Article>();
+    this.articlesSubject.subscribe(value => this.articles = value);
     this.success = '';
   }
 
@@ -28,7 +29,7 @@ export class ArticlesService {
       .get<any>('http://localhost:80/projet-fin-formation/api/article/get.php?id=' + id)
       .subscribe(
         (res) => {
-          this.articles = res;
+          this.emitArticlesSubject(res);
           this.articles.edit = false;
           // console.log(res);
         },
@@ -78,7 +79,9 @@ export class ArticlesService {
         }
       );
   }
-
+  emitArticlesSubject(value) {
+    this.articlesSubject.next(value);
+  }
   resetArticlesForm(form) {
     form.reset();
   }

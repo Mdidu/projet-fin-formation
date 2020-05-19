@@ -25,6 +25,7 @@ export class GroupsService {
     private router: Router) {
     this.groupsSubject = new Subject<Group>();
     this.groups = new Group();
+    this.groupsSubject.subscribe(value => this.groups = value);
     this.members = new User();
     this.error = '';
     this.success = '';
@@ -39,7 +40,7 @@ export class GroupsService {
       .get<any>('http://localhost:80/projet-fin-formation/api/group/list-group/get.php?id=' + data)
       .subscribe(
         (res) => {
-          this.groups = res;
+          this.emitGroupsSubject(res);
           // console.log(res);
         },
         (error) => {
@@ -52,7 +53,7 @@ export class GroupsService {
       .get<any>('http://localhost:80/projet-fin-formation/api/group/list-group/getAllGroup.php')
       .subscribe(
         (res) => {
-          this.groups = res;
+          this.emitGroupsSubject(res);
           // console.log(res);
         },
         (error) => {
@@ -68,7 +69,7 @@ export class GroupsService {
       .get<any>('http://localhost:80/projet-fin-formation/api/group/get.php?id=' + id )
       .subscribe(
         (res) => {
-          this.groups = res;
+          this.emitGroupsSubject(res);
         },
         (error) => {
           console.log('error' + error.message);
@@ -210,7 +211,7 @@ export class GroupsService {
       .get<any>('http://localhost:80/projet-fin-formation/api/group/inviteGroup/get.php?userId=' + userId)
       .subscribe(
         (res) => {
-          this.groups = res;
+          this.emitGroupsSubject(res);
           // console.log(res);
         },
         (error) => {
@@ -312,6 +313,9 @@ export class GroupsService {
                   console.log('error' + error.message);
               }
           );
+  }
+  emitGroupsSubject(value) {
+    this.groupsSubject.next(value);
   }
   // Unsubscribe to group subscription
   groupClean() {

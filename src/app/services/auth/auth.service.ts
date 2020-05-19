@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Observable, Subject, Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 
 import {User} from '../../models/user';
 
@@ -12,21 +12,18 @@ export class AuthService {
 
   private userSubject: Subject<User>;
   public currentUser: User;
-  private user: Observable<User>;
   private userSubscription: Subscription;
   public error: string;
 
   constructor(
     private httpClient: HttpClient,
     private router: Router) {
-    // propriétés permettant d'accéder à l'utilisateur connecté  / property allowing access to auth user
     this.userSubject = new Subject<User>();
-    this.user = this.userSubject.asObservable();
-    // Allows you to set values currentUser from localStorage values
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    // Permet de changer la valeur de currentUser via l'observable user lorsque l'utilisateur se connecte ou déconnecte
-    this.user.subscribe(value => this.currentUser = value);
+    this.userSubject.subscribe(value => this.currentUser = value);
+    // Allows you to set values currentUser from localStorage values
+    this.emitUserSubject(JSON.parse(localStorage.getItem('currentUser')));
+
     this.error = '';
   }
 
@@ -56,14 +53,14 @@ export class AuthService {
       .post<any>('http://localhost:80/projet-fin-formation/api/user/get.php', {pseudo, password})
       .subscribe(
         (res) => {
-          console.log(res);
+          // console.log(res);
           if (res === false) {
             this.error = 'Identifiant incorrect !';
           }
           localStorage.setItem('currentUser', JSON.stringify(res));
           // console.log(localStorage);
 
-          this.userSubject.next(res);
+          this.emitUserSubject(res);
           this.router.navigate(['groups']);
           // console.log(res);
         },
@@ -92,9 +89,12 @@ export class AuthService {
   }
   logout() {
     localStorage.removeItem('currentUser');
-    this.userSubject.next(null);
+    this.emitUserSubject(null);
     this.authClean();
     this.router.navigate(['']);
+  }
+  emitUserSubject(value) {
+    this.userSubject.next(value);
   }
   // Unsubscribe to user subscription
   authClean() {

@@ -47,11 +47,13 @@ export class CommentaryComponent implements OnInit, OnDestroy {
     }, 1000);
   }
   onRemoveCommentary(id) {
-    this.commentaryService.removeCommentary(id);
-    setTimeout(() => {
-      this.commentaryService.commentarySubscription = this.commentaryService.getCommentary(this.articleId)
-        .subscribe(value => this.comment = value);
-    }, 1000);
+    if (confirm('Voulez-vous vraiment supprimer ce commentaire ?')) {
+      this.commentaryService.removeCommentary(id);
+      setTimeout(() => {
+        this.commentaryService.commentarySubscription = this.commentaryService.getCommentary(this.articleId)
+          .subscribe(value => this.comment = value);
+      }, 1000);
+    }
   }
   ngOnDestroy() {
     this.commentaryService.commentaryClean();
