@@ -22,14 +22,16 @@ export class AuthService {
 
     this.userSubject.subscribe(value => this.currentUser = value);
     // Allows you to set values currentUser from localStorage values
+    // setTimeout(() => {
     this.emitUserSubject(JSON.parse(localStorage.getItem('currentUser')));
+    // }, 1000);
 
     this.error = '';
   }
 
   register(data) {
     return this.userSubscription = this.httpClient
-      .post('http://localhost:80/projet-fin-formation/api/user/post.php', data)
+      .post('https://ameddas.ovh/api/user/post.php', data)
       .subscribe(
         (res) => {
           if (res === true) {
@@ -50,7 +52,7 @@ export class AuthService {
   }
   login(pseudo, password) {
     return this.userSubscription = this.httpClient
-      .post<any>('http://localhost:80/projet-fin-formation/api/user/get.php', {pseudo, password})
+      .post<any>('https://ameddas.ovh/api/user/get.php', {pseudo, password})
       .subscribe(
         (res) => {
           // console.log(res);
@@ -75,7 +77,7 @@ export class AuthService {
     const userId = this.currentUser.id;
 
     return this.userSubscription = this.httpClient
-      .get<any>('http://localhost:80/projet-fin-formation/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)
+      .get<any>('https://ameddas.ovh/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)
       .subscribe(
         (res) => {
           // console.log(res);

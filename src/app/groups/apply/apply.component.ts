@@ -12,6 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 export class ApplyComponent implements OnInit, OnDestroy {
 
   groupId: number;
+  members: any;
 
   constructor(
     private groupsComponent: GroupsComponent,
@@ -19,6 +20,9 @@ export class ApplyComponent implements OnInit, OnDestroy {
     public groupsService: GroupsService,
     private route: ActivatedRoute) {
     this.groupId = this.route.snapshot.params.id;
+    setTimeout(() => {
+      this.members = this.groupsService.members;
+    }, 700);
   }
 
   ngOnInit() {

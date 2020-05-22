@@ -22,13 +22,13 @@
     <button *ngIf="this.authService.currentUser.currentGroupRank === 1 &&
                    !this.editDescription"
             (click)="onUpdateDescriptionGroupForm(this.groupsService.groups.description)">
-      Modifier le nom du groupe
+      Modifier la description du groupe
     </button>
 
     <form *ngIf="this.editDescription" [formGroup]="updateDescriptionGroupForm" (ngSubmit)="onUpdateDescriptionGroup()">
       <textarea formControlName="description" cols="30" rows="10"></textarea>
 
-      <button (click)="onUpdateDescriptionGroup()" [disabled]="updateDescriptionGroupForm.invalid">Modifier le nom du groupe</button>
+      <button (click)="onUpdateDescriptionGroup()" [disabled]="updateDescriptionGroupForm.invalid">Modifier la description du groupe</button>
     </form>
   </div>
 
@@ -42,6 +42,7 @@
           (click)="onUpdateGroupSecurity('privé')">
     Rendre le groupe privé
   </button>
+
   <button *ngIf="this.authService.currentUser.currentGroupRank === 1 &&
                 this.groupsService.groups.visibility === 'invisible'"
           (click)="onUpdateGroupVisibility('visible')">

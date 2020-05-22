@@ -1,4 +1,5 @@
 <?php
+//require_once 'checkedSess.php.php';
 require_once 'configHeader.php';
 //session_start();
 

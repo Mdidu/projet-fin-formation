@@ -9,9 +9,15 @@ import {GroupsService} from '../../services/group/groups.service';
 })
 export class GroupListUserComponent implements OnInit, OnDestroy {
 
+  groups: any;
+
   constructor(
     public authService: AuthService,
-    public groupsService: GroupsService) { }
+    public groupsService: GroupsService) {
+    setTimeout(() => {
+      this.groups = this.groupsService.groups;
+    }, 700);
+  }
 
   ngOnInit() {
     this.groupsService.getListUserGroups();

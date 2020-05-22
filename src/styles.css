@@ -4,6 +4,14 @@ body {
   margin: 0;
   padding: 0;
 }
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+app-home, app-signin, app-signup, app-new-group, app-invitations, app-group-list-user, app-group-list {
+  flex: 1;
+}
 app-header, app-footer {
   margin: 0;
   padding: 0;
@@ -17,8 +25,11 @@ app-fourohfour {
 app-groups, app-apply, app-invite, app-members-list {
   display: flex;
   flex-direction: row;
-  margin-top: -1.9%;
+  flex: 1;
   width: 100%;
+}
+app-apply main, app-invite main, app-members-list main, app-groups main {
+  justify-content: start;
 }
 app-menu {
   width: 15%;

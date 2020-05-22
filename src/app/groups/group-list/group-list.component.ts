@@ -1,6 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {GroupsService} from '../../services/group/groups.service';
+import {Observable} from "rxjs";
+import {Group} from "../../models/group";
 
 @Component({
   selector: 'app-group-list',
@@ -9,11 +11,16 @@ import {GroupsService} from '../../services/group/groups.service';
 })
 export class GroupListComponent implements OnInit, OnDestroy {
 
-  public focus: boolean;
+  // public focus: boolean;
+  groups: any;
 
   constructor(
     public authService: AuthService,
-    public groupsService: GroupsService) { }
+    public groupsService: GroupsService) {
+    setTimeout(() => {
+      this.groups = this.groupsService.groups;
+    }, 700);
+  }
 
   ngOnInit() {
     this.groupsService.focus = true;

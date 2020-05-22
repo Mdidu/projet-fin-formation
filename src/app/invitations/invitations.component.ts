@@ -10,12 +10,16 @@ import {ActivatedRoute} from '@angular/router';
 export class InvitationsComponent implements OnInit, OnDestroy {
 
   userId: number;
+  groups: any;
 
   constructor(
     public groupsService: GroupsService,
     private route: ActivatedRoute
   ) {
     this.userId = this.route.snapshot.params.id;
+    setTimeout(() => {
+      this.groups = this.groupsService.groups;
+    }, 700);
   }
 
   ngOnInit() {
