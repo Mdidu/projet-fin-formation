@@ -1,10 +1,9 @@
 <?php
 
-//namespace Mdidu\Api;
-
 class User
 {
-  use DB;
+
+  use Token;
 
   /**
    * @var int
@@ -161,8 +160,10 @@ class User
     $sql->closeCursor();
 
     if($this->getPseudo() === $rows['username'] && password_verify($this->password, $rows['password'])) {
+      $this->createToken($rows['id'], $rows['username']);
       $row['id'] = intval($rows['id']);
       $row['username'] = $rows['username'];
+      $row['token'] = $this->getToken();
       return $row;
     }
     return false;

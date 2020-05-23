@@ -37,7 +37,7 @@ export class GroupsService {
     const data = this.authService.currentUser.id;
 
     return this.groupSubscription = this.httpClient
-      .get<any>('https://ameddas.ovh/api/group/list-group/get.php?id=' + data)
+      .get<any>('https://www.ameddas.ovh/api/group/list-group/get.php?id=' + data)
       .subscribe(
         (res) => {
           this.emitGroupsSubject(res);
@@ -50,7 +50,7 @@ export class GroupsService {
   // retrieve all group list for displaying
   getListAllGroups() {
     return this.groupSubscription = this.httpClient
-      .get<any>('https://ameddas.ovh/api/group/list-group/getAllGroup.php')
+      .get<any>('https://www.ameddas.ovh/api/group/list-group/getAllGroup.php')
       .subscribe(
         (res) => {
           this.emitGroupsSubject(res);
@@ -66,7 +66,7 @@ export class GroupsService {
     // console.log(id);
 
     return this.groupSubscription = this.httpClient
-      .get<any>('https://ameddas.ovh/api/group/get.php?id=' + id )
+      .get<any>('https://www.ameddas.ovh/api/group/get.php?id=' + id )
       .subscribe(
         (res) => {
           this.emitGroupsSubject(res);
@@ -79,7 +79,7 @@ export class GroupsService {
   // retrieve member's list of group for displaying
   getMembers(id) {
     return this.groupSubscription = this.httpClient
-      .get<any>('https://ameddas.ovh/api/group/getMembers.php?id=' + id )
+      .get<any>('https://www.ameddas.ovh/api/group/getMembers.php?id=' + id )
       .subscribe(
         (res) => {
           this.members = res;
@@ -93,7 +93,7 @@ export class GroupsService {
   // retrieve apply list of group for displaying
   getApply(groupId) {
     return this.groupSubscription = this.httpClient
-      .get<any>('https://ameddas.ovh/api/group/applyGroup/get.php?groupId=' + groupId)
+      .get<any>('https://www.ameddas.ovh/api/group/applyGroup/get.php?groupId=' + groupId)
       .subscribe(
         (res) => {
           this.members = res;
@@ -106,7 +106,7 @@ export class GroupsService {
   }
   addGroup(data) {
     return this.groupSubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/group/post.php', data)
+      .post<any>('https://www.ameddas.ovh/api/group/post.php', data)
       .subscribe(
         (res) => {
           if (res === false) {
@@ -123,7 +123,7 @@ export class GroupsService {
   }
   joinGroup(groupId, userId) {
     return this.groupSubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/group/joinGroup/post.php', {groupId, userId})
+      .post<any>('https://www.ameddas.ovh/api/group/joinGroup/post.php', {groupId, userId})
       .subscribe(
         () => {
           this.authService.updateCurrentUserRank(groupId);
@@ -135,7 +135,7 @@ export class GroupsService {
   }
   applyGroup(groupId, userId) {
     return this.groupSubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/group/applyGroup/post.php', {groupId, userId})
+      .post<any>('https://www.ameddas.ovh/api/group/applyGroup/post.php', {groupId, userId})
       .subscribe(
         (res) => {
           // console.log(res);
@@ -154,7 +154,7 @@ export class GroupsService {
   }
   leaveGroup(groupId, userId) {
     return this.groupSubscription = this.httpClient
-      .delete<any>('https://ameddas.ovh/api/group/leaveGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
+      .delete<any>('https://www.ameddas.ovh/api/group/leaveGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
       .subscribe(
         () => {
           console.log('yes');
@@ -167,7 +167,7 @@ export class GroupsService {
   }
   acceptApply(groupId, userId) {
     return this.groupSubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/group/applyGroup/postAccept.php', {groupId, userId})
+      .post<any>('https://www.ameddas.ovh/api/group/applyGroup/postAccept.php', {groupId, userId})
       .subscribe(() => {
           console.log('yes ');
         },
@@ -178,7 +178,7 @@ export class GroupsService {
   }
   rejectApply(groupId, userId) {
     return this.groupSubscription = this.httpClient
-      .delete<any>('https://ameddas.ovh/api/group/applyGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
+      .delete<any>('https://www.ameddas.ovh/api/group/applyGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
       .subscribe(
         () => {
           console.log('yes ');
@@ -190,7 +190,7 @@ export class GroupsService {
   }
   sendInvite(pseudo, groupId) {
     return this.groupSubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/group/inviteGroup/post.php', {pseudo, groupId})
+      .post<any>('https://www.ameddas.ovh/api/group/inviteGroup/post.php', {pseudo, groupId})
       .subscribe((res) => {
         console.log(res);
         if (res) {
@@ -208,7 +208,7 @@ export class GroupsService {
   }
   getInvite(userId) {
     return this.groupSubscription = this.httpClient
-      .get<any>('https://ameddas.ovh/api/group/inviteGroup/get.php?userId=' + userId)
+      .get<any>('https://www.ameddas.ovh/api/group/inviteGroup/get.php?userId=' + userId)
       .subscribe(
         (res) => {
           this.emitGroupsSubject(res);
@@ -221,7 +221,7 @@ export class GroupsService {
   }
   acceptInvite(groupId, userId) {
     return this.groupSubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/group/inviteGroup/postAccept.php', {groupId, userId})
+      .post<any>('https://www.ameddas.ovh/api/group/inviteGroup/postAccept.php', {groupId, userId})
       .subscribe(() => {
           console.log('yes ');
         },
@@ -233,7 +233,7 @@ export class GroupsService {
   rejectInvite(groupId, userId) {
     // devra détruire la ligne dans la table apply et ajouter dans la futur table event pour informer l'utilisateur?
     return this.groupSubscription = this.httpClient
-      .delete<any>('https://ameddas.ovh/api/group/inviteGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
+      .delete<any>('https://www.ameddas.ovh/api/group/inviteGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
       .subscribe(
         () => {
           console.log('yes ');
@@ -246,7 +246,7 @@ export class GroupsService {
   updateNameGroup(groupId, content) {
 
     return this.groupSubscription = this.httpClient
-      .put<any>('https://ameddas.ovh/api/group/updateName.php', {groupId, content})
+      .put<any>('https://www.ameddas.ovh/api/group/updateName.php', {groupId, content})
       .subscribe(
         () => {
           console.log('yes');
@@ -259,7 +259,7 @@ export class GroupsService {
   updateDescriptionGroup(groupId, content) {
     console.log(groupId + content);
     return this.groupSubscription = this.httpClient
-      .put<any>('https://ameddas.ovh/api/group/updateDescription.php', {groupId, content})
+      .put<any>('https://www.ameddas.ovh/api/group/updateDescription.php', {groupId, content})
       .subscribe(
         () => {
           console.log('yes');
@@ -272,7 +272,7 @@ export class GroupsService {
   // Makes the group private or public
   updateGroupSecurity(groupId, security) {
     return this.groupSubscription = this.httpClient
-      .put<any>('https://ameddas.ovh/api/group/updateSecurity.php', {groupId, security})
+      .put<any>('https://www.ameddas.ovh/api/group/updateSecurity.php', {groupId, security})
       .subscribe(
         () => {
           console.log('yes');
@@ -285,7 +285,7 @@ export class GroupsService {
   // Makes the groupe visible or invisible
   updateGroupVisibility(groupId, visibility) {
     return this.groupSubscription = this.httpClient
-      .put<any>('https://ameddas.ovh/api/group/updateVisibility.php', {groupId, visibility})
+      .put<any>('https://www.ameddas.ovh/api/group/updateVisibility.php', {groupId, visibility})
       .subscribe(
         () => {
           console.log('yes');
@@ -297,7 +297,7 @@ export class GroupsService {
   }
   updateRankUser(rankId, groupId, userId) {
       return this.groupSubscription = this.httpClient
-          .put<any>('https://ameddas.ovh/api/group/members/put.php', {rankId, groupId, userId})
+          .put<any>('https://www.ameddas.ovh/api/group/members/put.php', {rankId, groupId, userId})
           .subscribe(
               (res) => {
                   // console.log(res);

@@ -4,7 +4,7 @@
 class Group
 {
 
-  use Db;
+  use Token;
 
   /**
    * @var int
@@ -40,9 +40,8 @@ class Group
    */
   private $rankUser;
 
-  public function __construct(/*$name*/)
+  public function __construct()
   {
-    /*$this->name = $name;*/
   }
 
   /**

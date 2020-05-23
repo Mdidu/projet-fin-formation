@@ -26,7 +26,7 @@ export class ArticlesService {
 
   getArticles(id) {
     return this.articleSubscription = this.httpClient
-      .get<any>('https://ameddas.ovh/api/article/get.php?id=' + id)
+      .get<any>('https://www.ameddas.ovh/api/article/get.php?id=' + id)
       .subscribe(
         (res) => {
           this.emitArticlesSubject(res);
@@ -40,7 +40,7 @@ export class ArticlesService {
   }
   addArticle(data) {
     return this.articleSubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/article/post.php', data)
+      .post<any>('https://www.ameddas.ovh/api/article/post.php', data)
       .subscribe(
         (res) => {
           if (res === true) {
@@ -57,7 +57,7 @@ export class ArticlesService {
   updateArticle(data) {
     console.log(data);
     return this.articleSubscription = this.httpClient
-      .put<any>('https://ameddas.ovh/api/article/put.php', data)
+      .put<any>('https://www.ameddas.ovh/api/article/put.php', data)
       .subscribe(
         () => {
           console.log('yes');
@@ -69,7 +69,7 @@ export class ArticlesService {
   }
   removeArticle(id) {
     return this.articleSubscription = this.httpClient
-      .delete<any>('https://ameddas.ovh/api/article/delete.php?id=' + id)
+      .delete<any>('https://www.ameddas.ovh/api/article/delete.php?id=' + id)
       .subscribe(
         () => {
           console.log('yes');

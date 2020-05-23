@@ -4,7 +4,7 @@
 class Article
 {
 
-  use Db;
+  use Token;
 
   /**
    * @var int

@@ -4,7 +4,7 @@
 class Commentary
 {
 
-  use Db;
+  use Token;
 
   /**
    * @var int

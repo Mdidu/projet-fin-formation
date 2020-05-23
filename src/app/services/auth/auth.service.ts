@@ -31,7 +31,7 @@ export class AuthService {
 
   register(data) {
     return this.userSubscription = this.httpClient
-      .post('https://ameddas.ovh/api/user/post.php', data)
+      .post('https://www.ameddas.ovh/api/user/post.php', data)
       .subscribe(
         (res) => {
           if (res === true) {
@@ -52,7 +52,7 @@ export class AuthService {
   }
   login(pseudo, password) {
     return this.userSubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/user/get.php', {pseudo, password})
+      .put<any>('https://www.ameddas.ovh/api/user/get.php', {pseudo, password})
       .subscribe(
         (res) => {
           // console.log(res);
@@ -77,7 +77,7 @@ export class AuthService {
     const userId = this.currentUser.id;
 
     return this.userSubscription = this.httpClient
-      .get<any>('https://ameddas.ovh/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)
+      .get<any>('https://www.ameddas.ovh/api/group/getCurrentGroupUserRank.php?id=' + userId + '&groupId=' + groupId)
       .subscribe(
         (res) => {
           // console.log(res);

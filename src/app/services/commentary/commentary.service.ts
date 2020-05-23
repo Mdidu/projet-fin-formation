@@ -23,11 +23,11 @@ export class CommentaryService {
   //  return Observable<Commentary> because javascript is ASYNC and else only the last coments were displayed
   getCommentary(id): Observable<Commentary> {
     return this.httpClient
-      .get<any>('https://ameddas.ovh/api/commentary/get.php?id=' + id) as Observable<Commentary>;
+      .get<any>('https://www.ameddas.ovh/api/commentary/get.php?id=' + id) as Observable<Commentary>;
   }
   addCommentary(data) {
     return this.commentarySubscription = this.httpClient
-      .post<any>('https://ameddas.ovh/api/commentary/post.php', data)
+      .post<any>('https://www.ameddas.ovh/api/commentary/post.php', data)
       .subscribe(
         () => {
           this.getCommentary(data.articleId);
@@ -42,7 +42,7 @@ export class CommentaryService {
     console.log(data);
 
     return this.commentarySubscription = this.httpClient
-      .put<any>('https://ameddas.ovh/api/commentary/put.php', data)
+      .put<any>('https://www.ameddas.ovh/api/commentary/put.php', data)
       .subscribe(
         () => {
           // console.log('yes');
@@ -55,7 +55,7 @@ export class CommentaryService {
 
   removeCommentary(id) {
     return this.commentarySubscription = this.httpClient
-      .delete<any>('https://ameddas.ovh/api/commentary/delete.php?id=' + id)
+      .delete<any>('https://www.ameddas.ovh/api/commentary/delete.php?id=' + id)
       .subscribe(
         () => {
           // console.log('yes');
