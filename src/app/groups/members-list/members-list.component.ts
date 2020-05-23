@@ -14,6 +14,7 @@ export class MembersListComponent implements OnInit, OnDestroy {
 
   userRankForm: FormGroup;
   public groupId: number;
+  members: any;
 
   constructor(
     private groupsComponent: GroupsComponent,
@@ -22,6 +23,9 @@ export class MembersListComponent implements OnInit, OnDestroy {
     public groupsService: GroupsService,
     private formBuilder: FormBuilder) {
     this.groupId = this.route.snapshot.params.id;
+    setTimeout(() => {
+      this.members = this.groupsService.members;
+    }, 700);
   }
 
   ngOnInit() {

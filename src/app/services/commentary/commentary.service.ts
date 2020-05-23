@@ -3,6 +3,7 @@ import {Observable, Subject, Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 
 import {Commentary} from '../../models/commentary';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CommentaryService {
   public commentarySubscription: Subscription;
   public success: string;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private authService: AuthService) {
     this.commentarySubject = new Subject<Commentary>();
     this.success = '';
   }
@@ -39,7 +40,7 @@ export class CommentaryService {
       );
   }
   updateCommentary(data) {
-    console.log(data);
+    // console.log(data);
 
     return this.commentarySubscription = this.httpClient
       .put<any>('https://www.ameddas.ovh/api/commentary/put.php', data)

@@ -1,8 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {GroupsService} from '../../services/group/groups.service';
-import {Observable} from "rxjs";
-import {Group} from "../../models/group";
 
 @Component({
   selector: 'app-group-list',
@@ -24,6 +22,8 @@ export class GroupListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.groupsService.focus = true;
+    // const storage = JSON.parse(localStorage.getItem('currentUser')).id;
+    // console.log(storage);
     this.groupsService.getListAllGroups();
   }
 

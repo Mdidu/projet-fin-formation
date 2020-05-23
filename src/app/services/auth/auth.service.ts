@@ -22,13 +22,26 @@ export class AuthService {
 
     this.userSubject.subscribe(value => this.currentUser = value);
     // Allows you to set values currentUser from localStorage values
-    // setTimeout(() => {
     this.emitUserSubject(JSON.parse(localStorage.getItem('currentUser')));
-    // }, 1000);
 
     this.error = '';
   }
-
+  checkedLog() {
+    return this.userSubscription = this.httpClient
+      .get('https://www.ameddas.ovh/api/user/getLog.php?id=' + JSON.parse(localStorage.getItem('currentUser')).id + '&egt=' +
+        JSON.parse(localStorage.getItem('currentUser')).token)
+      .subscribe(
+        (res) => {
+          // console.log(res);
+          if (!res) {
+            this.logout();
+          }
+        },
+        (error) => {
+          console.log('error : ' + error.message);
+        }
+      );
+  }
   register(data) {
     return this.userSubscription = this.httpClient
       .post('https://www.ameddas.ovh/api/user/post.php', data)

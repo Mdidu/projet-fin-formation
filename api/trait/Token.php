@@ -54,13 +54,20 @@ trait Token
     return $this->usernameToken;
   }
 
+  /**
+   * @param $id int
+   * @param $username string
+   */
   private function createToken($id, $username) {
     $this->setId($id);
     $this->setUsernameToken($username);
 
-    $this->setToken(hash("sha512", session_id().microtime().rand(0, 999999999999999999999)));
+    $this->setToken(hash("sha256", session_id().microtime().rand(0, 999999999999999999999)));
 
-    $sql = $this->getDb()->prepare('UPDATE user SET token = :token WHERE id = :id AND pseudo = :pseudo');
+    $sql = $this->getDb()->prepare('
+            UPDATE user SET token = :token
+            WHERE id = :id
+            AND pseudo = :pseudo');
 
     $sql->bindValue(':token', $this->getToken());
     $sql->bindValue(':id', $this->getId());
@@ -70,21 +77,32 @@ trait Token
 
     $sql->closeCursor();
   }
-  public function checkedToken() {
+
+  /**
+   * @param $id int
+   * @param $token string
+   * @return bool
+   */
+  public function checkedToken($id, $token) {
+    $this->setId($id);
+    $this->setToken($token);
     $sql = $this->getDB()->prepare('
         SELECT id, pseudo AS username, token
         FROM user
         WHERE id = :id
-        AND pseudo = :pseudo
         AND token = :token');
 
     $sql->bindValue(':token', $this->getToken());
     $sql->bindValue(':id', $this->getId());
-    $sql->bindValue(':pseudo', $this->getUsernameToken());
 
     $sql->execute();
 
     $rows = $sql->fetch(PDO::FETCH_ASSOC);
     $sql->closeCursor();
+
+    if($this->getToken() === $rows['token'] && $this->getId() === $rows['id']) {
+      return true;
+    }
+    return false;
   }
 }

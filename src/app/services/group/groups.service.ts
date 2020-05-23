@@ -11,6 +11,7 @@ import {User} from '../../models/user';
 })
 export class GroupsService {
   private groupsSubject: Subject<Group>;
+  private membersSubject: Subject<User>;
   public groups: Group;
   public members: User;
   private groupSubscription: Subscription;
@@ -26,12 +27,15 @@ export class GroupsService {
     this.groupsSubject = new Subject<Group>();
     this.groups = new Group();
     this.groupsSubject.subscribe(value => this.groups = value);
+
+    this.membersSubject = new Subject<User>();
     this.members = new User();
+    this.membersSubject.subscribe(value => this.members = value);
+
     this.error = '';
     this.success = '';
     this.focus = true;
   }
-
   // retrieve user's groups list for displaying
   getListUserGroups() {
     const data = this.authService.currentUser.id;
@@ -49,12 +53,13 @@ export class GroupsService {
   }
   // retrieve all group list for displaying
   getListAllGroups() {
+
     return this.groupSubscription = this.httpClient
       .get<any>('https://www.ameddas.ovh/api/group/list-group/getAllGroup.php')
       .subscribe(
         (res) => {
-          this.emitGroupsSubject(res);
           // console.log(res);
+          this.emitGroupsSubject(res);
         },
         (error) => {
           console.log('error' + error.message);
@@ -82,6 +87,7 @@ export class GroupsService {
       .get<any>('https://www.ameddas.ovh/api/group/getMembers.php?id=' + id )
       .subscribe(
         (res) => {
+          this.emitMembersSubject(res);
           this.members = res;
           // console.log(res);
         },
@@ -231,7 +237,6 @@ export class GroupsService {
       );
   }
   rejectInvite(groupId, userId) {
-    // devra détruire la ligne dans la table apply et ajouter dans la futur table event pour informer l'utilisateur?
     return this.groupSubscription = this.httpClient
       .delete<any>('https://www.ameddas.ovh/api/group/inviteGroup/delete.php?groupId=' + groupId + '&userId=' + userId)
       .subscribe(
@@ -257,7 +262,7 @@ export class GroupsService {
       );
   }
   updateDescriptionGroup(groupId, content) {
-    console.log(groupId + content);
+    // console.log(groupId + content);
     return this.groupSubscription = this.httpClient
       .put<any>('https://www.ameddas.ovh/api/group/updateDescription.php', {groupId, content})
       .subscribe(
@@ -296,26 +301,29 @@ export class GroupsService {
       );
   }
   updateRankUser(rankId, groupId, userId) {
-      return this.groupSubscription = this.httpClient
-          .put<any>('https://www.ameddas.ovh/api/group/members/put.php', {rankId, groupId, userId})
-          .subscribe(
-              (res) => {
-                  // console.log(res);
-                  if (res) {
-                      this.error = '';
-                      this.success = 'Vous avez bien changé le rang de l\'utilisateur !';
-                  } else {
-                      this.success = '';
-                      this.error = 'Vous n\'avez pas changé le rang de l\'utilisateur !';
-                  }
-              },
-              (error) => {
-                  console.log('error' + error.message);
-              }
-          );
+    return this.groupSubscription = this.httpClient
+        .put<any>('https://www.ameddas.ovh/api/group/members/put.php', {rankId, groupId, userId})
+        .subscribe(
+            (res) => {
+                // console.log(res);
+                if (res) {
+                    this.error = '';
+                    this.success = 'Vous avez bien changé le rang de l\'utilisateur !';
+                } else {
+                    this.success = '';
+                    this.error = 'Vous n\'avez pas changé le rang de l\'utilisateur !';
+                }
+            },
+            (error) => {
+                console.log('error' + error.message);
+            }
+        );
   }
   emitGroupsSubject(value) {
     this.groupsSubject.next(value);
+  }
+  emitMembersSubject(value) {
+    this.membersSubject.next(value);
   }
   // Unsubscribe to group subscription
   groupClean() {

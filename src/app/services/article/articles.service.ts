@@ -55,7 +55,7 @@ export class ArticlesService {
       );
   }
   updateArticle(data) {
-    console.log(data);
+    // console.log(data);
     return this.articleSubscription = this.httpClient
       .put<any>('https://www.ameddas.ovh/api/article/put.php', data)
       .subscribe(

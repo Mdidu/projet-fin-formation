@@ -8,3 +8,4 @@ $listGroup = $group->searchAllGroup();
 $json = json_encode($listGroup);
 echo $json;
 return $json;
+

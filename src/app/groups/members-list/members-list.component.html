@@ -11,7 +11,7 @@
     {{this.groupsService.success}}
   </div>
 
-  <div class="publication" *ngFor="let member of this.groupsService.members; let i = index" >
+  <div class="publication" *ngFor="let member of this.members; let i = index" >
     <div>{{member.username}}</div>
     <button *ngIf="!member.display &&
                  this.authService.currentUser.currentGroupRank === 1"
