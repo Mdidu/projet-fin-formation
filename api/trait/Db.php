@@ -11,19 +11,19 @@ trait Db
   /**
    * @var string
    */
-  private $servername = 'ameddabmangroup.mysql.db';
+  private $servername = 'localhost';
   /**
    * @var string
    */
-  private $username = 'ameddabmangroup';
+  private $username = 'root';
   /**
    * @var string
    */
-  private $passwordDB = 'LQz9aT530';
+  private $passwordDB = '';
   /**
    * @var string
    */
-  private $dbname = 'ameddabmangroup';
+  private $dbname = 'mangroup';
 
   /**
    * @return PDO
