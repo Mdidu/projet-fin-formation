@@ -16,16 +16,16 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.signinForm = this.formBuilder.group({
-      pseudo: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
   onSubmit() {
-    const pseudo = this.signinForm.controls.pseudo.value;
+    const email = this.signinForm.controls.email.value;
     const password = this.signinForm.controls.password.value;
 
-    this.authService.login(pseudo, password);
+    this.authService.login(email, password);
   }
   ngOnDestroy() {
     this.authService.error = '';

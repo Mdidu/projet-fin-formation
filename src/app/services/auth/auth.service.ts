@@ -14,6 +14,7 @@ export class AuthService {
   public currentUser: User;
   private userSubscription: Subscription;
   public error: string;
+  public success: string;
 
   constructor(
     private httpClient: HttpClient,
@@ -48,27 +49,29 @@ export class AuthService {
       .subscribe(
         (res) => {
           if (res === true) {
-            this.error = 'Le pseudo existe déjà ! ';
+            this.error = 'Le pseudo et/ou le mail existe déjà ! ';
           } else if (res === false) {
             this.error = 'Les mot de passe ne sont pas identique !';
+          } else {
+            this.success = 'Un mail vous à été envoyé sur votre adresse mail !';
           }
         },
         (error) => {
           console.log('error : ' + error);
-        },
+        }/*,
         () => {
           if (this.error === '') {
             this.router.navigate(['auth/signin']);
           }
-        }
+        }*/
       );
   }
-  login(pseudo, password) {
+  login(email, password) {
     return this.userSubscription = this.httpClient
-      .put<any>('https://www.ameddas.ovh/api/user/get.php', {pseudo, password})
+      .put<any>('https://www.ameddas.ovh/api/user/get.php', {email, password})
       .subscribe(
         (res) => {
-          // console.log(res);
+          console.log(res);
           if (res === false) {
             this.error = 'Identifiant incorrect !';
           }
@@ -99,6 +102,17 @@ export class AuthService {
         },
         (error) => {
           console.log('error' + error);
+        }
+      );
+  }
+  validateAuth(pseudo, token) {
+    return this.userSubscription = this.httpClient
+      .put<any>('https://www.ameddas.ovh/api/user/validate/update.php', {pseudo, token})
+      .subscribe(
+        (res) => {
+          if (res) {
+            this.router.navigate(['auth/signin']);
+          }
         }
       );
   }

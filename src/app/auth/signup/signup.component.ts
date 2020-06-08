@@ -16,9 +16,10 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
-      pseudo: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      checkedPassword: ['', [Validators.required]]
+      pseudo: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      checkedPassword: ['', Validators.required]
     });
   }
 
@@ -29,5 +30,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.authService.error = '';
+    this.authService.success = '';
   }
 }

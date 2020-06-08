@@ -4,6 +4,9 @@
     <label> Pseudo (*) : </label>
     <input type="text" formControlName="pseudo">
 
+    <label> Email (*) : </label>
+    <input type="text" formControlName="email">
+
     <label> Mot de passe (*) : </label>
     <input type="password" formControlName="password">
 
@@ -14,4 +17,5 @@
   </form>
 
   <div id="errorRegister" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
+  <div id="successRegister" *ngIf="this.authService.success !== ''">{{this.authService.success}}</div>
 </main>

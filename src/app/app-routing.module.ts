@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import {ValidateComponent} from './auth/validate/validate.component';
 import {GroupListUserComponent} from './groups/group-list-user/group-list-user.component';
 import {InvitationsComponent} from './invitations/invitations.component';
 import {NotificationComponent} from './notification/notification.component';
@@ -20,6 +21,7 @@ import {AuthGuardService} from './services/auth-guard/auth-guard.service';
 const routes: Routes = [
   { path: 'auth/signup', component: SignupComponent},
   { path: 'auth/signin', component: SigninComponent},
+  { path: 'auth/:pseudo/:token', component: ValidateComponent},
   { path: 'users/:id/groups', canActivate: [AuthGuardService], component: GroupListUserComponent},
   { path: 'users/:id/invitations', canActivate: [AuthGuardService], component: InvitationsComponent},
   { path: 'users/:id/notifications', canActivate: [AuthGuardService], component: NotificationComponent},

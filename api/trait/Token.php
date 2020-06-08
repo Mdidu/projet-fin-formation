@@ -54,15 +54,19 @@ trait Token
     return $this->usernameToken;
   }
 
+  public function createToken() {
+    $this->setToken(hash("sha256", session_id().microtime().rand(0, 999999999999999999999)));
+  }
   /**
    * @param $id int
    * @param $username string
    */
-  private function createToken($id, $username) {
+  private function addToken($id, $username) {
     $this->setId($id);
     $this->setUsernameToken($username);
 
-    $this->setToken(hash("sha256", session_id().microtime().rand(0, 999999999999999999999)));
+    $this->createToken();
+//    $this->setToken(hash("sha256", session_id().microtime().rand(0, 999999999999999999999)));
 
     $sql = $this->getDb()->prepare('
             UPDATE user SET token = :token

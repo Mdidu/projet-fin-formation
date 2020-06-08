@@ -70,7 +70,7 @@ button {
 .groupList li {
   cursor: default;
 }
-.success, .succesAddArticle {
+.success, #successRegister, .succesAddArticle {
   color: green;
   font-size: 20px;
   animation-name: success;
