@@ -13,7 +13,7 @@ if(!empty(isset($data['pseudo'])) && !empty(isset($data['email'])) && !empty(iss
 
 
   mail($data['email'], "Mail de validation, ManGroup",
-    'Afin de valider votre inscription, merci de clicker sur le lien ci-dessous:
+    'Afin de valider votre inscription, merci de cliquer sur le lien ci-dessous:
     https://www.ameddas.ovh/#/auth/'.$data['pseudo'].'/'.$user->getToken());
 
   // if user not create : return true for indicate that username is already in use !

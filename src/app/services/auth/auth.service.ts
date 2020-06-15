@@ -49,21 +49,19 @@ export class AuthService {
       .subscribe(
         (res) => {
           if (res === true) {
+            this.success = '';
             this.error = 'Le pseudo et/ou le mail existe déjà ! ';
           } else if (res === false) {
+            this.success = '';
             this.error = 'Les mot de passe ne sont pas identique !';
           } else {
+            this.error = '';
             this.success = 'Un mail vous à été envoyé sur votre adresse mail !';
           }
         },
         (error) => {
           console.log('error : ' + error);
-        }/*,
-        () => {
-          if (this.error === '') {
-            this.router.navigate(['auth/signin']);
-          }
-        }*/
+        }
       );
   }
   login(email, password) {
@@ -105,6 +103,21 @@ export class AuthService {
         }
       );
   }
+  updatePassword(email, password) {
+    return this.userSubscription = this.httpClient
+      .put<any>('https://www.ameddas.ovh/api/user/update.php', {email, password})
+      .subscribe(
+        (res) => {
+          if(res) {
+          this.router.navigate(['auth/signin']);
+          }
+          this.error = "Les mots de passe ne sont pas identiques !";
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }
   validateAuth(pseudo, token) {
     return this.userSubscription = this.httpClient
       .put<any>('https://www.ameddas.ovh/api/user/validate/update.php', {pseudo, token})
@@ -115,6 +128,25 @@ export class AuthService {
           }
         }
       );
+  }
+  sendMail(mail){
+      return this.userSubscription = this.httpClient
+        .get<any>('https://www.ameddas.ovh/api/user/getMail.php?email=' + mail)
+        .subscribe(
+          (res) => {
+            // console.log(res);
+            if(res) {
+              this.error = '';
+              this.success = "Un mail à été envoyé à votre adresse mail !";
+            } else {
+              this.success = '';
+              this.error = "Adresse mail ne correspondant à aucun compte !";
+            }
+          },
+          (error) => {
+            console.log(error.message);
+          }
+        );
   }
   logout() {
     localStorage.removeItem('currentUser');

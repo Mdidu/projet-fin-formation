@@ -9,7 +9,7 @@ app-root {
   flex-direction: column;
   min-height: 100vh;
 }
-app-home, app-signin, app-signup, app-new-group, app-invitations, app-group-list-user, app-group-list {
+app-home, app-signin, app-signup, app-new-group, app-invitations, app-group-list-user, app-group-list, app-mail, app-update-password {
   flex: 1;
 }
 app-header, app-footer {

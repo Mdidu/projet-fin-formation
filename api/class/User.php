@@ -140,6 +140,27 @@ class User
 
   /**
    * @param $email string
+   * @return bool
+   */
+  public function checkedEmail($email) {
+    $this->setEmail($email);
+
+    $sql = $this->getDB()->prepare('SELECT email FROM user WHERE email = :email');
+    $sql->bindValue(':email', $this->getEmail());
+    $sql->execute();
+
+    $row = $sql->fetch(PDO::FETCH_ASSOC);
+    
+    $sql->closeCursor();
+
+    if($row['email'] === $this->getEmail()) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * @param $email string
    * @param $password int
    * @return bool
    */
@@ -195,6 +216,24 @@ class User
       return $row;
     }
     return false;
+  }
+
+  /**
+   * @param $email string
+   * @param $password string
+   * @return bool
+   */
+  public function updatePassword($email, $password) {
+    $this->setEmail($email);
+    $this->setPassword($password);
+
+    $sql = $this->getDB()->prepare('UPDATE user SET password = :password WHERE email = :email');
+    $sql->bindValue(':password', $this->getPassword());
+    $sql->bindValue(':email', $this->getEmail());
+    $sql->execute();
+    $sql->closeCursor();
+
+    return true;
   }
 
   /**

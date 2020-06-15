@@ -10,6 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { MailComponent } from './auth/mail/mail.component';
+import { UpdatePasswordComponent } from './auth/update-password/update-password.component';
 import { NewGroupComponent } from './groups/new-group/new-group.component';
 import { NavLogComponent } from './header/nav-log/nav-log.component';
 import { NavNoLogComponent } from './header/nav-no-log/nav-no-log.component';
@@ -37,6 +39,7 @@ import {ArticlesService} from './services/article/articles.service';
 import {AuthGuardService} from './services/auth-guard/auth-guard.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +64,9 @@ import {AuthGuardService} from './services/auth-guard/auth-guard.service';
     NotificationComponent,
     InvitationsComponent,
     HomeComponent,
-    FourohfourComponent
+    FourohfourComponent,
+    UpdatePasswordComponent,
+    MailComponent
   ],
   imports: [
     BrowserModule,

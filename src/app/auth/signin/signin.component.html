@@ -9,5 +9,6 @@
 
     <button type="submit" [disabled]="signinForm.invalid">Connexion</button>
   </form>
+  <a routerLink="/auth/email">Mot de passe oublié ?</a>
   <div id="errorLog" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
 </main>

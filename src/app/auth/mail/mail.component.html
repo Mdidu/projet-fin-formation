@@ -1,0 +1,9 @@
+<main>
+    <form [formGroup]="sendMailForm" (ngSubmit)="onSubmit()">
+        <label>Entrez votre mail : (*)</label>
+        <input type="text" formControlName="email">
+        <button type="submit" [disabled]="sendMailForm.invalid">Envoyer</button>
+    </form>
+    <div class="error" *ngIf="this.authService.error !== ''">{{this.authService.error}}</div>
+    <div class="success" *ngIf="this.authService.success !== ''">{{this.authService.success}}</div>
+</main>
